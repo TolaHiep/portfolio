@@ -1,0 +1,9 @@
+# infra / local tooling — not part of the site
+cloudflared.exe
+cloudflared-config.yml
+*.log
+
+# editor/agent tooling
+.claude/
+.agents/
+skills-lock.json

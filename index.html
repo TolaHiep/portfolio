@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nguyễn Mạnh Hiệp — Kỹ sư phần mềm</title>
+<meta name="description" content="Kỹ sư phần mềm full-stack. Mô hình hoá bài toán nghiệp vụ, rồi dựng cả hệ thống tới production.">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+/* ═══ Dark techy / interactive ════════════════════════════════
+   ink-black · neon cyan/violet · Archivo + mono · heavy GSAP    */
+:root{
+  --bg:#0a0a0f;
+  --panel:#101018;
+  --ink:#f3f4f8;
+  --muted:#a2a2b0;     /* AA on --bg */
+  --faint:#5c5c6b;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.18);
+  --accent:#22d3ee;    /* cyan */
+  --accent2:#a78bfa;   /* violet */
+
+  --sans:'Archivo',Helvetica,system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  --u:8px;
+  --t-xs:12px; --t-sm:14px; --t-base:16px; --t-md:20px; --t-lg:26px;
+  --cols:12; --gap:20px;
+  --tap:44px;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:var(--t-base);line-height:1.6;
+  letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+::selection{background:var(--accent);color:#04121a}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+section{scroll-margin-top:96px}
+
+/* animated background: drifting neon blobs + faded tech grid */
+.bg,.bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.bg{overflow:hidden}
+.bg span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.30}
+.bg .b1{width:62vw;height:62vw;background:radial-gradient(circle,#155e75,transparent 62%);top:-14vw;left:-12vw;animation:drift1 20s ease-in-out infinite alternate}
+.bg .b2{width:54vw;height:54vw;background:radial-gradient(circle,#5b21b6,transparent 62%);bottom:-16vw;right:-14vw;animation:drift2 26s ease-in-out infinite alternate}
+.bg .b3{width:40vw;height:40vw;background:radial-gradient(circle,#0e7490,transparent 62%);top:40%;left:55%;opacity:.18;animation:drift1 30s ease-in-out infinite alternate}
+.bg-grid{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 72%);opacity:.5}
+@keyframes drift1{to{transform:translate(8vw,6vw) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-8vw,-5vw) scale(1.1)}}
+
+/* cursor glow (pointer:fine only, toggled by JS) */
+#glow{position:fixed;top:0;left:0;width:440px;height:440px;margin:-220px 0 0 -220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(34,211,238,.16),rgba(167,139,250,.08) 40%,transparent 62%);
+  pointer-events:none;z-index:2;mix-blend-mode:screen;will-change:transform;opacity:0;transition:opacity .4s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  #glow{display:none}
+}
+
+/* ─── grid ─────────────────────────────────────────────────── */
+.wrap{max-width:1290px;margin:0 auto;padding:0 calc(var(--u)*3);position:relative;z-index:3}
+.grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:var(--gap)}
+@media (max-width:900px){:root{--cols:6}}
+@media (max-width:600px){:root{--cols:4;--gap:14px}}
+
+/* ─── bar ──────────────────────────────────────────────────── */
+.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 72%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar__in{max-width:1290px;margin:0 auto;padding:0 calc(var(--u)*3);
+  display:flex;justify-content:space-between;align-items:center;gap:var(--gap);height:64px}
+.bar__id{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.bar__id i{color:var(--accent);font-style:normal}
+.bar__nav{display:flex;align-items:center;gap:calc(var(--u)*3)}
+.bar__link{display:inline-flex;align-items:center;min-height:var(--tap);
+  font-family:var(--mono);font-size:var(--t-sm);color:var(--muted);
+  border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.bar__link:hover{color:var(--accent);border-color:var(--accent)}
+.lang{display:flex;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
+.lang button{min-height:36px;min-width:40px;padding:0 12px;border:0;cursor:pointer;
+  background:transparent;color:var(--muted);
+  font-family:var(--mono);font-size:var(--t-xs);font-weight:600;transition:background .2s,color .2s}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed=true]{background:var(--accent);color:#04121a}
+@media (max-width:600px){.bar__role{display:none}.bar__nav{gap:var(--u)}.bar__link{font-size:var(--t-xs)}}
+
+/* ─── hero ─────────────────────────────────────────────────── */
+.hero{padding:calc(var(--u)*12) 0 calc(var(--u)*9);align-items:end}
+.hero__lead{grid-column:span 8}
+.hero__aside{grid-column:9 / span 4;display:flex;flex-direction:column;gap:calc(var(--u)*3);padding-bottom:calc(var(--u)*1)}
+@media (max-width:900px){.hero__lead{grid-column:1/-1}.hero__aside{grid-column:1/-1;margin-top:calc(var(--u)*5);flex-direction:row;align-items:flex-end;gap:calc(var(--u)*4)}.hero__aside .hero__contact{flex:1}}
+@media (max-width:600px){.hero__aside{flex-direction:column;align-items:stretch}}
+.hero__eyebrow{font-family:var(--mono);font-size:var(--t-sm);font-weight:500;letter-spacing:.08em;
+  color:var(--accent);margin-bottom:calc(var(--u)*3);min-height:1.4em}
+.caret{color:var(--accent)}
+.hero__name{font-size:clamp(46px,8.4vw,116px);font-weight:900;line-height:1.04;letter-spacing:-.03em;
+  text-transform:uppercase;margin:0;perspective:600px}
+.hero__name .wd{display:inline-block}
+.hero__name .ch{display:inline-block;will-change:transform}
+.hero__tagline{font-size:clamp(20px,2.8vw,32px);font-weight:600;line-height:1.2;letter-spacing:-.02em;
+  color:var(--muted);margin:calc(var(--u)*4) 0 0;max-width:26ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:var(--u);margin-top:calc(var(--u)*4)}
+.stats{display:flex;flex-wrap:wrap;gap:calc(var(--u)*5);margin-top:calc(var(--u)*6);
+  padding-top:calc(var(--u)*3);border-top:1px solid var(--line)}
+.stat__n{font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1;
+  background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat__l{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:calc(var(--u)*1);text-transform:uppercase;letter-spacing:.08em}
+.portrait-box{position:relative;width:100%;max-width:300px;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);
+  background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 0 0 1px rgba(34,211,238,.05),0 24px 60px -24px rgba(34,211,238,.25)}
+.portrait-box img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s ease}
+.portrait-box:hover img{transform:scale(1.04)}
+.hero__contact{display:flex;flex-direction:column;font-family:var(--mono);font-size:var(--t-sm)}
+.hero__contact a,.hero__contact span{display:flex;align-items:center;min-height:var(--tap);
+  border-bottom:1px solid var(--line);color:var(--muted);transition:color .2s,padding-left .2s}
+.hero__contact a:hover{color:var(--accent);padding-left:6px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:var(--tap);padding:0 calc(var(--u)*3);cursor:pointer;border-radius:999px;
+  font-family:var(--mono);font-size:var(--t-sm);font-weight:600;will-change:transform;
+  border:1px solid var(--line-strong);transition:background .25s,color .25s,border-color .25s,box-shadow .25s}
+.btn--solid{background:var(--accent);color:#04121a;border-color:var(--accent)}
+.btn--solid:hover{box-shadow:0 0 24px -2px rgba(34,211,238,.6)}
+.btn--line{background:transparent;color:var(--ink)}
+.btn--line:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ─── marquee ──────────────────────────────────────────────── */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:calc(var(--u)*3) 0;overflow:hidden;white-space:nowrap;margin-top:calc(var(--u)*4)}
+.marquee__track{display:inline-flex;gap:calc(var(--u)*5);will-change:transform;animation:marquee 30s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__item{font-family:var(--mono);font-size:var(--t-sm);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.marquee__item::after{content:"◆";margin-left:calc(var(--u)*5);color:var(--accent)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ─── statement ────────────────────────────────────────────── */
+.statement{max-width:1000px;margin:0 auto;padding:calc(var(--u)*18) calc(var(--u)*3)}
+.statement p{font-size:clamp(24px,3.6vw,44px);font-weight:600;line-height:1.22;letter-spacing:-.02em;margin:0}
+.statement .w{opacity:.16}
+
+/* ─── section heads ────────────────────────────────────────── */
+.section{padding:calc(var(--u)*12) 0}
+.head{display:flex;align-items:baseline;gap:calc(var(--u)*2);
+  padding-bottom:calc(var(--u)*2);border-bottom:1px solid var(--line-strong);margin-bottom:calc(var(--u)*6)}
+.head__num{font-family:var(--mono);font-size:var(--t-sm);font-weight:600;
+  background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.head h2{font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-.03em;margin:0;flex:1;line-height:.95}
+.head__count{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted)}
+
+/* ─── projects ─────────────────────────────────────────────── */
+.proj{padding:calc(var(--u)*7) 0;border-bottom:1px solid var(--line)}
+.proj:last-child{border-bottom:0}
+.proj__media{grid-column:span 7}
+.proj__body{grid-column:span 5}
+@media (max-width:900px){.proj__media,.proj__body{grid-column:1/-1}}
+.shot-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--line-strong);background:var(--panel);transition:box-shadow .3s,border-color .3s}
+.shot-wrap:hover{border-color:rgba(34,211,238,.5);box-shadow:0 0 40px -8px rgba(34,211,238,.4)}
+.shot{aspect-ratio:36/25;width:100%;object-fit:contain;transition:transform .7s ease}
+.shot-wrap:hover .shot{transform:scale(1.03)}
+.thumbs{display:flex;flex-wrap:wrap;gap:var(--u);margin-top:var(--u)}
+.thumb{padding:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer;
+  width:74px;height:52px;overflow:hidden;transition:border-color .2s,transform .2s}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top left;opacity:.85;transition:opacity .2s}
+.thumb:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.thumb:hover img{opacity:1}
+.thumb[aria-current=true]{border-color:var(--accent);border-width:2px}
+.thumb[aria-current=true] img{opacity:1}
+.shot__cap{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:var(--u);min-height:16px}
+.proj__noshot{aspect-ratio:36/25;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);text-align:center;padding:var(--u)}
+.proj__top{display:flex;justify-content:space-between;align-items:baseline;gap:var(--u);margin-bottom:calc(var(--u)*.5)}
+.proj__name{font-size:clamp(24px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;margin:0}
+.proj__year{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted)}
+.proj__tagline{font-size:var(--t-base);color:var(--muted);margin:0 0 calc(var(--u)*3)}
+.psr__row{padding:calc(var(--u)*2) 0;border-top:1px solid var(--line)}
+.psr__lbl{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:calc(var(--u)*.5)}
+.psr__txt{font-size:var(--t-base);line-height:1.65;margin:0;color:#d7d8e0}
+.stack{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75);margin-top:calc(var(--u)*2)}
+.chip{font-family:var(--mono);font-size:var(--t-xs);padding:5px 10px;border-radius:999px;
+  background:var(--panel);color:var(--muted);border:1px solid var(--line);transition:border-color .2s,color .2s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.proj__src{display:inline-flex;align-items:center;gap:6px;min-height:var(--tap);margin-top:var(--u);
+  font-family:var(--mono);font-size:var(--t-sm);font-weight:600;color:var(--accent);
+  border-bottom:1px solid transparent;transition:border-color .2s}
+.proj__src:hover{border-color:var(--accent)}
+.proj__private{display:inline-flex;align-items:center;min-height:var(--tap);margin-top:var(--u);
+  font-family:var(--mono);font-size:var(--t-sm);color:var(--muted)}
+
+/* ─── skills ───────────────────────────────────────────────── */
+.key{grid-column:span 4}
+@media (max-width:900px){.key{grid-column:span 3}}
+@media (max-width:600px){.key{grid-column:1/-1}}
+.key__lbl{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);padding-bottom:calc(var(--u)*1);margin-bottom:calc(var(--u)*2);
+  border-bottom:1px solid var(--line-strong)}
+.key__set{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75)}
+.key__set .chip{font-family:var(--sans);font-size:var(--t-sm);padding:6px 12px}
+
+/* ─── education ────────────────────────────────────────────── */
+.edu__row{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:var(--u);flex-wrap:wrap}
+.edu__school{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.02em}
+.edu__degree{font-size:var(--t-sm);color:var(--muted);margin-top:6px}
+.edu__years{font-family:var(--mono);font-size:var(--t-sm);color:var(--muted)}
+
+/* ─── contact ──────────────────────────────────────────────── */
+.contact{margin-top:calc(var(--u)*6);padding:calc(var(--u)*13) 0 calc(var(--u)*8);border-top:1px solid var(--line-strong)}
+.contact__body{grid-column:span 7}
+.contact__side{grid-column:9 / span 4}
+@media (max-width:900px){.contact__body,.contact__side{grid-column:1 / -1}}
+.contact__title{font-size:clamp(34px,6vw,72px);font-weight:900;line-height:.98;letter-spacing:-.035em;margin:0 0 calc(var(--u)*3);max-width:14ch}
+.contact__sub{font-size:var(--t-base);line-height:1.7;color:var(--muted);margin:0 0 calc(var(--u)*4);max-width:52ch}
+.contact__cta{display:flex;flex-wrap:wrap;gap:var(--u)}
+.contact__list{display:flex;flex-direction:column;font-family:var(--mono);font-size:var(--t-sm)}
+.contact__list a,.contact__list span{display:flex;align-items:center;min-height:var(--tap);
+  border-bottom:1px solid var(--line);color:var(--muted);transition:color .2s,padding-left .2s}
+.contact__list a:hover{color:var(--accent);padding-left:6px}
+.foot{padding:calc(var(--u)*4) 0;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--u)}
+.foot a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+<div class="bg-grid" aria-hidden="true"></div>
+<div id="glow" aria-hidden="true"></div>
+
+<header class="bar">
+  <div class="bar__in">
+    <span class="bar__id">NMH <i>/</i> <span class="bar__role" data-t="barRole"></span></span>
+    <nav class="bar__nav">
+      <a class="bar__link" href="#work" data-t="navWork"></a>
+      <a class="bar__link" href="#skills" data-t="navSkills"></a>
+      <a class="bar__link" href="#contact" data-t="navContact"></a>
+      <div class="lang">
+        <button data-lang="vi">VI</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero grid">
+    <div class="hero__lead">
+      <div class="hero__eyebrow"><span id="typed"></span><span class="caret">_</span></div>
+      <h1 class="hero__name" id="hero-name"></h1>
+      <p class="hero__tagline" data-t="tagline"></p>
+      <div class="hero__cta">
+        <a class="btn btn--solid" data-magnet href="#work" data-t="ctaWork"></a>
+        <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_SE_CV.pdf" download data-t="downloadCv"></a>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="hero__aside">
+      <div class="portrait-box">
+        <img src="assets/portrait/nguyen-manh-hiep-portrait.jpg" alt="Nguyễn Mạnh Hiệp" width="1200" height="1800">
+      </div>
+      <div class="hero__contact">
+        <span data-t="location"></span>
+        <a href="tel:+84978618337" data-t="phone"></a>
+        <a href="mailto:Hiep.work@outlook.com" data-t="email"></a>
+        <a href="https://linkedin.com/in/hiepnm2003" target="_blank" rel="noopener" data-t="linkedin"></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marquee"></div>
+  </div>
+
+  <section class="statement" data-reveal>
+    <p id="statement"></p>
+  </section>
+
+  <section id="work" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">01</span>
+      <h2 data-t="workTitle"></h2>
+      <span class="head__count" id="work-count"></span>
+    </div>
+    <div id="projects"></div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">02</span>
+      <h2 data-t="skillsTitle"></h2>
+    </div>
+    <div class="grid" id="keys"></div>
+  </section>
+
+  <section id="edu" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">03</span>
+      <h2 data-t="eduTitle"></h2>
+    </div>
+    <div class="grid">
+      <div class="edu__row" data-reveal>
+        <div>
+          <div class="edu__school" data-t="eduSchool"></div>
+          <div class="edu__degree" data-t="eduDegree"></div>
+        </div>
+        <span class="edu__years" data-t="eduYears"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="grid">
+      <div class="contact__body" data-reveal>
+        <div class="hero__eyebrow" style="color:var(--accent)">04 / <span data-t="navContact"></span></div>
+        <h2 class="contact__title" data-t="contactCta"></h2>
+        <p class="contact__sub" data-t="contactSub"></p>
+        <div class="contact__cta">
+          <a class="btn btn--solid" data-magnet href="mailto:Hiep.work@outlook.com" data-t="email"></a>
+          <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_SE_CV.pdf" download data-t="downloadCv"></a>
+        </div>
+      </div>
+      <div class="contact__side" data-reveal>
+        <div class="contact__list">
+          <span data-t="location"></span>
+          <a href="tel:+84978618337" data-t="phone"></a>
+          <a href="mailto:Hiep.work@outlook.com" data-t="email"></a>
+          <a href="https://linkedin.com/in/hiepnm2003" target="_blank" rel="noopener" data-t="linkedin"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span data-t="name"></span> · 2026
+    <a href="#" data-t="barRole"></a>
+  </div>
+</main>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script>
+/* screenshots live outside the language objects so the paths aren't duplicated */
+const SHOTS = {
+  notarex: [
+    {src:'assets/screenshots/Notarex/e25-admin-dashboard.png',    vi:'Bảng điều khiển admin',        en:'Admin dashboard'},
+    {src:'assets/screenshots/Notarex/e25-document-templates.png', vi:'Quản lý biểu mẫu',             en:'Document templates'},
+    {src:'assets/screenshots/Notarex/e25-employee-dashboard.png', vi:'Bảng điều khiển nhân viên',    en:'Employee dashboard'},
+    {src:'assets/screenshots/Notarex/e25-employee-dossiers.png',  vi:'Danh sách hồ sơ',              en:'Dossier list'},
+    {src:'assets/screenshots/Notarex/e25-employee-documents.png', vi:'Tài liệu của nhân viên',       en:'Employee documents'},
+    {src:'assets/screenshots/Notarex/e25-employee-templates.png', vi:'Biểu mẫu của nhân viên',       en:'Employee templates'}
+  ],
+  easysale: [
+    {src:'assets/screenshots/easysale/easysale-admin-dashboard.png',  vi:'Bảng điều khiển admin',            en:'Admin dashboard'},
+    {src:'assets/screenshots/easysale/easysale-zalo-bulk-sender.png', vi:'Gửi hàng loạt đa kênh (Zalo + email)', en:'Omni-channel bulk sender (Zalo + email)'},
+    {src:'assets/screenshots/easysale/easysale-care-email-sender.png',vi:'Gửi email chăm sóc',               en:'Care email sender'},
+    {src:'assets/screenshots/easysale/easysale-zalo-templates.png',   vi:'Mẫu ZNS của Zalo OA',              en:'Zalo OA ZNS templates'},
+    {src:'assets/screenshots/easysale/easysale-admin-users.png',      vi:'Quản lý người dùng',               en:'User management'},
+    {src:'assets/screenshots/easysale/easysale-admin-keywords.png',   vi:'Gợi ý từ khoá',                    en:'Keyword suggestions'},
+    {src:'assets/screenshots/easysale/easysale-admin-logs.png',       vi:'Nhật ký hệ thống',                 en:'System logs'}
+  ],
+  akf: [
+    {src:'assets/screenshots/akf-farm/akf-farm-heatmap.png',       vi:'Bản đồ nhiệt ảnh vệ tinh',    en:'Satellite heatmap'},
+    {src:'assets/screenshots/akf-farm/akf-farm-dashboard.png',     vi:'Bảng điều khiển',             en:'Dashboard'},
+    {src:'assets/screenshots/akf-farm/akf-farm-zones.png',         vi:'Vùng & lô',                   en:'Zones & plots'},
+    {src:'assets/screenshots/akf-farm/akf-farm-processes.png',     vi:'Quy trình sản xuất',          en:'Production processes'},
+    {src:'assets/screenshots/akf-farm/akf-farm-calendar.png',      vi:'Lịch công việc',              en:'Task calendar'},
+    {src:'assets/screenshots/akf-farm/akf-farm-kpi.png',           vi:'KPI tổ trưởng',               en:'Team-lead KPI'},
+    {src:'assets/screenshots/akf-farm/akf-farm-notifications.png', vi:'Thông báo',                   en:'Notifications'},
+    {src:'assets/screenshots/akf-farm/akf-farm-settings.png',      vi:'Cài đặt',                     en:'Settings'},
+    {src:'assets/screenshots/akf-farm/akf-farm-mobile-tasks.png',  vi:'Mobile PWA — danh sách việc', en:'Mobile PWA — task list'}
+  ]
+};
+
+const MARQUEE = ['TypeScript','React','Next.js','FastAPI','PostgreSQL','Docker','Redis','Celery','MinIO','Frappe','Spring Boot','Node.js','SOLID','System Design'];
+
+const STATS = {
+  vi:[{n:3,label:'Dự án'},{n:132,label:'Test tự động'},{n:25,suffix:'+',label:'Công nghệ'}],
+  en:[{n:3,label:'Projects'},{n:132,label:'Automated tests'},{n:25,suffix:'+',label:'Technologies'}]
+};
+
+const CONTENT = {
+  vi: {
+    name:'Nguyễn Mạnh Hiệp',
+    barRole:'Kỹ sư phần mềm',
+    navWork:'Dự án', navSkills:'Kỹ năng', navContact:'Liên hệ',
+    heroKicker:'Kỹ sư phần mềm · Full-stack',
+    tagline:'Mô hình hoá bài toán trước, rồi mới dựng hệ thống.',
+    intro:'Kỹ sư phần mềm với tư duy hệ thống và gốc phân tích nghiệp vụ. Tôi lắng nghe vấn đề thật, mô hình hoá bằng UML/ERD, rồi tự dựng cả hệ thống — RESTful API, cơ sở dữ liệu, giao diện React — cho tới lúc chạy production, theo OOP, SOLID và design pattern để hệ thống đủ tin cậy, dễ bảo trì và dễ bàn giao.',
+    location:'Hoàng Mai, Hà Nội',
+    email:'Hiep.work@outlook.com',
+    phone:'0978 618 337',
+    linkedin:'linkedin.com/in/hiepnm2003',
+    ctaWork:'Xem dự án', downloadCv:'Tải CV', viewCode:'Xem mã nguồn',
+    workTitle:'Dự án tiêu biểu', skillsTitle:'Kỹ năng', eduTitle:'Học vấn',
+    lblProblem:'Vấn đề', lblSolution:'Giải pháp', lblResult:'Kết quả',
+    noShot:'Chưa có ảnh chụp màn hình',
+    privateRepo:'Mã nguồn riêng tư',
+    countFmt:n => n + ' dự án',
+    eduSchool:'Đại học Bách khoa Hà Nội (HUST)',
+    eduDegree:'Cử nhân Khoa học Máy tính',
+    eduYears:'2021 – 2026',
+    contactCta:'Cùng xây một hệ thống đáng tin cậy?',
+    contactSub:'Tôi luôn sẵn sàng cho những bài toán nghiệp vụ phức tạp cần một kỹ sư đi từ phân tích đến production. Liên hệ với tôi qua email hoặc LinkedIn.',
+    projects:[
+      {id:'notarex', name:'Notarex (E25 OCR)', year:'2025',
+       tagline:'Nền tảng OCR & số hoá hồ sơ công chứng',
+       problem:'Văn phòng công chứng xử lý hồ sơ giấy thủ công: dễ sai sót, khó phân quyền theo vai trò và không truy vết được luồng tài liệu.',
+       solution:'Full-stack + điều phối AI: cấu hình biểu mẫu linh hoạt, OCR AI trích xuất giấy tờ, chỉnh–lưu–tải trực tiếp qua OnlyOffice (JWT), phân quyền 3 vai trò (admin/director/employee) theo văn phòng, sinh DOCX tự động bằng docxtpl. Hàng đợi Celery + Redis với ZSET pending queue, atomic active-counter và heartbeat reconcile xử lý job zombie.',
+       result:'Hệ thống chạy production ổn định, lưu file trên MinIO (S3) với CI/CD qua GitHub Actions — số hoá và bàn giao hồ sơ đáng tin cậy.',
+       stack:['Next.js 14','TypeScript','Ant Design','Zustand','TanStack Query','FastAPI','SQLAlchemy 2.0 async','PostgreSQL 16','MinIO','OnlyOffice','Nginx','Docker'],
+       github:null},
+      {id:'easysale', name:'EasySale', year:'2025',
+       tagline:'Quản lý & tự động hoá lead bán hàng',
+       problem:'Đội bán hàng thu thập lead thủ công từ Google Maps rồi chăm sóc rời rạc qua nhiều kênh, khó theo dõi và dễ bỏ sót khách.',
+       solution:'Hệ tự động hoá bán hàng kèm Chrome Extension tự thu thập lead từ Google Maps, gửi tin nhắn chăm sóc qua Zalo OA và email qua SendGrid; tách cổng admin và cổng khách hàng riêng với đăng nhập hợp nhất.',
+       result:'Quy trình từ thu thập đến chăm sóc lead được tự động hoá, giảm mạnh thao tác thủ công cho đội bán hàng.',
+       stack:['FastAPI','PostgreSQL','Chrome Extension','Zalo OA API','SendGrid','Docker','Nginx'],
+       github:'https://github.com/TolaHiep/eazysales'},
+      {id:'akf', name:'AKF Farm', year:'2025',
+       tagline:'Quản lý sản xuất nông trại (web admin + mobile PWA)',
+       problem:'Sản xuất nông trại gồm nhiều bước phụ thuộc nhau, lại thường ở nơi kết nối yếu: khó giao đúng người, theo dõi tiến độ và chống gian lận khi báo cáo hoàn thành.',
+       solution:'Backend Frappe v15 headless với engine sinh việc event-driven theo bước/tần suất/tiên quyết, tính trạng thái 3 màu (worst-of), cân tải giao tổ trưởng, REST API và auth 2 vai trò (132 test xanh). Ảnh hoàn thành chống gian lận (camera in-app + GPS + watermark), offline queue idempotent, bản đồ nhiệt ảnh vệ tinh (Leaflet + Esri), lịch/thông báo/SOP theo bước.',
+       result:'Web admin và mobile PWA vận hành song song, chạy tốt cả khi kết nối yếu; dữ liệu tin cậy nhờ 132 test xanh và cơ chế chống gian lận đầy đủ.',
+       stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
+       github:'https://github.com/TolaHiep/afk-farm'}
+    ],
+    skills:[
+      {label:'Lập trình', items:['TypeScript / JavaScript','Java','Python','C / C++']},
+      {label:'Framework', items:['React','Next.js','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
+      {label:'Dữ liệu & Backend', items:['PostgreSQL','MySQL','MariaDB','RESTful API','Celery','Redis','MinIO','Frappe']},
+      {label:'Hạ tầng & Tích hợp', items:['Docker','Nginx','CI/CD (GitHub Actions)','OnlyOffice','Zalo OA','SendGrid','Chrome Extension']},
+      {label:'Thiết kế hệ thống', items:['Tư duy hệ thống','Kiến trúc phần mềm','SOLID','OOP','Design pattern','Xử lý lỗi']},
+      {label:'Phân tích nghiệp vụ', items:['Thu thập yêu cầu','Trao đổi stakeholder','Tài liệu SRS','Use Case','Activity Diagram','ERD']}
+    ]
+  },
+  en: {
+    name:'Nguyen Manh Hiep',
+    barRole:'Software Engineer',
+    navWork:'Work', navSkills:'Skills', navContact:'Contact',
+    heroKicker:'Software Engineer · Full-stack',
+    tagline:'Model the problem first, then build the system.',
+    intro:'A software engineer with systems thinking and a business-analysis background. I listen to the real problem, model it with UML/ERD, then build the whole system — RESTful APIs, databases, React front-ends — all the way to production, guided by OOP, SOLID and design patterns so the system is reliable, maintainable, and easy to hand over.',
+    location:'Hoang Mai, Hanoi',
+    email:'Hiep.work@outlook.com',
+    phone:'+84 978 618 337',
+    linkedin:'linkedin.com/in/hiepnm2003',
+    ctaWork:'View work', downloadCv:'Download CV', viewCode:'View source',
+    workTitle:'Selected work', skillsTitle:'Skills', eduTitle:'Education',
+    lblProblem:'Problem', lblSolution:'Solution', lblResult:'Result',
+    noShot:'No screenshots yet',
+    privateRepo:'Private repository',
+    countFmt:n => n + ' projects',
+    eduSchool:'Hanoi University of Science and Technology (HUST)',
+    eduDegree:'B.Sc. in Computer Science',
+    eduYears:'2021 – 2026',
+    contactCta:'Let’s build a system you can trust.',
+    contactSub:'I’m always open to complex business problems that need an engineer who goes from analysis all the way to production. Reach me by email or on LinkedIn.',
+    projects:[
+      {id:'notarex', name:'Notarex (E25 OCR)', year:'2025',
+       tagline:'OCR & digitization platform for notary records',
+       problem:'Notary offices processed paper records by hand: error-prone, hard to control by role, and impossible to audit the document flow.',
+       solution:'Full-stack + AI orchestration: flexible form config, AI OCR extraction, edit–save–download straight through OnlyOffice (JWT), 3-role access control (admin/director/employee) per office, and automatic DOCX generation with docxtpl. A Celery + Redis queue with a ZSET pending queue, an atomic active-counter and heartbeat reconcile handles zombie jobs.',
+       result:'Runs reliably in production with files on MinIO (S3) and CI/CD via GitHub Actions — dependable digitization and handover of records.',
+       stack:['Next.js 14','TypeScript','Ant Design','Zustand','TanStack Query','FastAPI','SQLAlchemy 2.0 async','PostgreSQL 16','MinIO','OnlyOffice','Nginx','Docker'],
+       github:null},
+      {id:'easysale', name:'EasySale', year:'2025',
+       tagline:'Sales-lead management & automation',
+       problem:'Sales teams collected leads from Google Maps by hand, then nurtured them across scattered channels — hard to track and easy to drop customers.',
+       solution:'A sales-automation system with a Chrome Extension that auto-collects leads from Google Maps and sends nurture messages via Zalo OA and email through SendGrid; separate admin and customer portals with unified sign-in.',
+       result:'The full path from lead capture to nurturing is automated, sharply cutting manual work for the sales team.',
+       stack:['FastAPI','PostgreSQL','Chrome Extension','Zalo OA API','SendGrid','Docker','Nginx'],
+       github:'https://github.com/TolaHiep/eazysales'},
+      {id:'akf', name:'AKF Farm', year:'2025',
+       tagline:'Farm production management (web admin + mobile PWA)',
+       problem:'Farm production spans many dependent steps and often runs in low-connectivity areas: hard to assign the right person, track progress, and prevent fraud in completion reports.',
+       solution:'A headless Frappe v15 backend with an event-driven task engine by step/frequency/prerequisite, a 3-color worst-of status calc, load-balanced assignment to team leads, a REST API and 2-role auth (132 passing tests). Anti-fraud completion photos (in-app camera + GPS + watermark), an idempotent offline queue, a satellite-imagery heatmap (Leaflet + Esri), and per-step calendar/notifications/SOPs.',
+       result:'Web admin and a mobile PWA run in parallel and work even on weak connections, with data you can trust thanks to 132 passing tests and full anti-fraud measures.',
+       stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
+       github:'https://github.com/TolaHiep/afk-farm'}
+    ],
+    skills:[
+      {label:'Programming', items:['TypeScript / JavaScript','Java','Python','C / C++']},
+      {label:'Frameworks', items:['React','Next.js','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
+      {label:'Databases & Backend', items:['PostgreSQL','MySQL','MariaDB','RESTful API','Celery','Redis','MinIO','Frappe']},
+      {label:'Infrastructure & Integration', items:['Docker','Nginx','CI/CD (GitHub Actions)','OnlyOffice','Zalo OA','SendGrid','Chrome Extension']},
+      {label:'System Design', items:['Systems thinking','Software architecture','SOLID','OOP','Design patterns','Error handling']},
+      {label:'Business Analysis', items:['Requirements gathering','Stakeholder communication','SRS documentation','Use Case','Activity Diagram','ERD']}
+    ]
+  }
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
+
+// split into words (wrap, inline-block) then per-char spans for stagger animation
+const splitChars = text => text.split(' ')
+  .map(w => `<span class="wd">${w.split('').map(c => `<span class="ch">${esc(c)}</span>`).join('')}</span>`)
+  .join(' ');
+
+const media = (p, c) => {
+  const shots = SHOTS[p.id] || [];
+  if (!shots.length) return `<div class="proj__noshot">${esc(c.noShot)}</div>`;
+  return `
+    <div class="shot-wrap"><img class="shot" id="shot-${p.id}" src="${esc(shots[0].src)}"
+         alt="${esc(p.name)} — ${esc(shots[0][lang])}" width="1440" height="1000" loading="lazy"></div>
+    <div class="shot__cap" id="cap-${p.id}">${esc(shots[0][lang])}</div>
+    ${shots.length > 1 ? `<div class="thumbs" data-gallery="${esc(p.id)}">${shots.map((s, i) => `
+      <button class="thumb" type="button" data-i="${i}" aria-current="${i === 0}"
+              aria-label="${esc(s[lang])}">
+        <img src="${esc(s.src)}" alt="" loading="lazy">
+      </button>`).join('')}</div>` : ''}`;
+};
+
+const psr = (lbl, txt) => `
+  <div class="psr__row">
+    <div class="psr__lbl">${esc(lbl)}</div>
+    <p class="psr__txt">${esc(txt)}</p>
+  </div>`;
+
+function render() {
+  const c = CONTENT[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = c[el.dataset.t]; });
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+  document.getElementById('work-count').textContent = c.countFmt(c.projects.length);
+
+  document.getElementById('hero-name').innerHTML = splitChars(c.name);
+
+  document.getElementById('statement').innerHTML = c.intro.split(' ')
+    .map(w => `<span class="w">${esc(w)} </span>`).join('');
+
+  document.getElementById('marquee').innerHTML =
+    (MARQUEE.concat(MARQUEE)).map(t => `<span class="marquee__item">${esc(t)}</span>`).join('');
+
+  document.getElementById('stats').innerHTML = STATS[lang].map(s => `
+    <div class="stat">
+      <div class="stat__n"><span data-count="${s.n}">0</span>${s.suffix || ''}</div>
+      <div class="stat__l">${esc(s.label)}</div>
+    </div>`).join('');
+
+  document.getElementById('projects').innerHTML = c.projects.map(p => `
+    <article class="proj grid" data-reveal>
+      <div class="proj__media">${media(p, c)}</div>
+      <div class="proj__body">
+        <div class="proj__top">
+          <h3 class="proj__name">${esc(p.name)}</h3>
+          <span class="proj__year">${esc(p.year)}</span>
+        </div>
+        <p class="proj__tagline">${esc(p.tagline)}</p>
+        <div class="psr">
+          ${psr(c.lblProblem, p.problem)}
+          ${psr(c.lblSolution, p.solution)}
+          ${psr(c.lblResult, p.result)}
+        </div>
+        <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+        ${p.github
+          ? `<a class="proj__src" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(c.viewCode)} →</a>`
+          : `<span class="proj__private">${esc(c.privateRepo)}</span>`}
+      </div>
+    </article>`).join('');
+
+  document.getElementById('keys').innerHTML = c.skills.map(g => `
+    <div class="key" data-reveal>
+      <div class="key__lbl">${esc(g.label)}</div>
+      <div class="key__set">${g.items.map(i => `<span class="chip">${esc(i)}</span>`).join('')}</div>
+    </div>`).join('');
+
+  animateName();
+  typeEyebrow(c.heroKicker);
+  initMotion();
+}
+
+// one delegated listener survives every re-render
+document.addEventListener('click', e => {
+  const langBtn = e.target.closest('.lang button');
+  if (langBtn) { lang = langBtn.dataset.lang; localStorage.setItem('lang', lang); render(); return; }
+
+  const thumb = e.target.closest('.thumb');
+  if (!thumb) return;
+  const gallery = thumb.closest('[data-gallery]');
+  const id = gallery.dataset.gallery;
+  const shot = SHOTS[id][+thumb.dataset.i];
+  const img = document.getElementById('shot-' + id);
+  img.src = shot.src;
+  img.alt = img.alt.split(' — ')[0] + ' — ' + shot[lang];
+  document.getElementById('cap-' + id).textContent = shot[lang];
+  gallery.querySelectorAll('.thumb').forEach(t => t.setAttribute('aria-current', t === thumb));
+});
+
+/* ─── GSAP motion ──────────────────────────────────────────── */
+const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE = window.matchMedia('(pointer: fine)').matches;
+const hasGSAP = typeof gsap !== 'undefined';
+let heroPlayed = false, typeGen = 0, motionTriggers = [];
+
+if (hasGSAP && !REDUCE) gsap.registerPlugin(ScrollTrigger);
+
+// terminal-style typing for the eyebrow; cancels itself on re-render via generation token
+function typeEyebrow(text) {
+  const el = document.getElementById('typed');
+  typeGen++; const g = typeGen;
+  if (!hasGSAP || REDUCE) { el.textContent = text; return; }
+  el.textContent = ''; let i = 0;
+  (function step() {
+    if (g !== typeGen) return;
+    el.textContent = text.slice(0, i);
+    if (i++ <= text.length) setTimeout(step, 42);
+  })();
+}
+
+// name chars fly in — re-runs each render (nice on language toggle)
+function animateName() {
+  if (!hasGSAP || REDUCE) return;
+  gsap.from('#hero-name .ch', {
+    autoAlpha: 0, y: 36, rotateX: -55, transformOrigin: '50% 100%',
+    stagger: { each: 0.018, from: 'start' }, duration: 0.6, ease: 'back.out(1.4)'
+  });
+}
+
+function heroIntro() {
+  if (heroPlayed || !hasGSAP || REDUCE) return;
+  heroPlayed = true;
+  gsap.timeline({ defaults: { ease: 'power3.out' } })
+    .from('.hero__eyebrow', { autoAlpha: 0, y: 12, duration: 0.6 }, 0.2)
+    .from('.hero__tagline', { autoAlpha: 0, y: 16, duration: 0.7 }, 0.45)
+    .from('.hero__cta > *', { autoAlpha: 0, y: 16, duration: 0.6, stagger: 0.1 }, 0.55)
+    .from('.stats', { autoAlpha: 0, y: 16, duration: 0.6 }, 0.7)
+    .from('.hero__aside', { autoAlpha: 0, y: 24, duration: 0.8 }, 0.6);
+}
+
+// interactions bound once (glow + magnetic buttons are on static markup)
+function initInteractions() {
+  if (!hasGSAP || REDUCE) return;
+  if (FINE) {
+    const glow = document.getElementById('glow');
+    glow.style.opacity = 1;
+    const xTo = gsap.quickTo(glow, 'x', { duration: 0.5, ease: 'power3' });
+    const yTo = gsap.quickTo(glow, 'y', { duration: 0.5, ease: 'power3' });
+    window.addEventListener('pointermove', e => { xTo(e.clientX); yTo(e.clientY); });
+
+    document.querySelectorAll('[data-magnet]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * 0.4, y: (e.clientY - r.top - r.height / 2) * 0.5, duration: 0.4, ease: 'power2.out' });
+      });
+      el.addEventListener('pointerleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' }));
+    });
+  }
+}
+
+function initMotion() {
+  if (!hasGSAP || REDUCE) return;
+  motionTriggers.forEach(t => t.kill());
+  motionTriggers = [];
+
+  // scroll reveal — replays each time an element enters (onLeaveBack re-hides)
+  gsap.set('[data-reveal]', { autoAlpha: 0, y: 60 });
+  motionTriggers.push(...ScrollTrigger.batch('[data-reveal]', {
+    start: 'top 90%',
+    onEnter: b => gsap.to(b, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out', overwrite: true }),
+    onLeaveBack: b => gsap.set(b, { autoAlpha: 0, y: 60, overwrite: true })
+  }));
+
+  // statement: words light up from faint to solid, scrubbed to scroll
+  const words = gsap.utils.toArray('#statement .w');
+  if (words.length) {
+    const tw = gsap.to(words, {
+      opacity: 1, stagger: 0.5, ease: 'none',
+      scrollTrigger: { trigger: '#statement', start: 'top 78%', end: 'bottom 60%', scrub: true }
+    });
+    motionTriggers.push(tw.scrollTrigger);
+  }
+
+  // parallax — project screenshots drift as you scroll
+  gsap.utils.toArray('.proj__media').forEach(el => {
+    const tw = gsap.fromTo(el, { yPercent: -10 }, {
+      yPercent: 10, ease: 'none',
+      scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+    motionTriggers.push(tw.scrollTrigger);
+  });
+
+  // count-up stats
+  gsap.utils.toArray('[data-count]').forEach(el => {
+    const end = +el.dataset.count, obj = { v: 0 };
+    const st = ScrollTrigger.create({
+      trigger: el, start: 'top 92%',
+      onEnter: () => gsap.to(obj, { v: end, duration: 1.4, ease: 'power2.out', onUpdate: () => el.textContent = Math.round(obj.v) }),
+      onLeaveBack: () => { gsap.killTweensOf(obj); obj.v = 0; el.textContent = '0'; }
+    });
+    motionTriggers.push(st);
+  });
+
+  ScrollTrigger.refresh();
+}
+
+render();
+heroIntro();
+initInteractions();
+if (hasGSAP && !REDUCE && document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
+</script>
+</body>
+</html>
