@@ -7,3 +7,6 @@ cloudflared-config.yml
 .claude/
 .agents/
 skills-lock.json
+
+# rendercv build output — source of truth is cv.yaml
+rendercv_output/

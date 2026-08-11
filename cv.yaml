@@ -1,0 +1,182 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+# Source of truth for assets/NguyenManhHiep_AI_Native_Dev_CV.pdf
+# Render: python -m rendercv render cv.yaml
+# ponytail: no " - " inside any text — rendercv/typst turns it into a new bullet. Use "—" or ";".
+cv:
+  name: Nguyen Manh Hiep
+  headline: AI-Native Full-Stack Developer
+  location: Hoang Mai, Ha Noi (Remote-ready)
+  email: Hiep.work@outlook.com
+  phone: "+84-978618337"
+  social_networks:
+    - network: LinkedIn
+      username: hiepnm2003
+    - network: GitHub
+      username: TolaHiep
+
+  sections:
+    summary:
+      - AI-native full-stack developer who ships complete products, not prototypes. I drive the whole
+        lifecycle (requirements, architecture, frontend, backend, database, tests, deployment) with an
+        AI-first workflow — Claude Code, Cursor, ChatGPT, Gemini and Copilot as the primary build engine,
+        not an autocomplete helper. Latest proof is **SenAI**, a real-time Vietnamese–English meeting
+        interpreter — **~29k LOC in 336 commits over 3 weeks**, led across frontend, backend and
+        infrastructure, live in production at [app.senai.online](https://app.senai.online), **3rd Prize +
+        Vietnam AI Stars at the Vietnam AI Innovation Challenge 2026 (AI Singapore)**.
+
+    Career Objective:
+      - Own products end-to-end as an AI-Native Full-Stack Developer — business document to deployed MVP
+        in weeks — and push the team's AI development workflow (prompt & context engineering, MCP, agent
+        guardrails) into something measurably faster and safer than hand-written delivery. Next, I am
+        deepening scalable real-time architecture and production LLM/ML integration (routing, evaluation,
+        cost and latency budgets), aiming to lead a small cross-functional team that turns AI-native
+        delivery into a repeatable engineering standard rather than a one-off experiment.
+
+    Selected Achievements:
+      - bullet: "**3rd Prize + Vietnam AI Stars**, Vietnam AI Innovation Challenge 2026 (AI Singapore),
+          for SenAI — a real-time Vietnamese–English meeting interpreter shipped to public production."
+      - bullet: "**4 production systems delivered end-to-end** in ~12 months (SenAI, Notarex, EasySale,
+          AKF Farm) — **~155,000 LOC across 859 commits** on the three repositories I own."
+      - bullet: "**Blank repo to live production in 3 weeks** on SenAI (336 commits) — full stack,
+          database, security and deployment, with the AI workflow doing the bulk of the typing."
+      - bullet: "**1,000+ automated / UAT test cases authored** across the four products (418 Notarex,
+          347 EasySale, 147 SenAI real non-mocked, 132 AKF Farm) — every AI-generated feature ships
+          behind a real test."
+      - bullet: "**Sub-400 ms live translation** (~75 ms ASR + ~295 ms MT measured end-to-end) with zero
+          errors up to concurrency 8, and runtime provider switching with no restart and no downtime."
+
+    AI-Native Development Workflow:
+      - label: Toolchain
+        details: Claude Code (primary agent, subagents, custom skills), Cursor, ChatGPT, Gemini, GitHub
+          Copilot; MCP servers (GitNexus code intelligence, browser automation) wired into the coding loop
+      - label: Context engineering
+        details: Repo-level agent context (`CLAUDE.md` / `AGENTS.md`) pinning architecture, conventions,
+          protocol source-of-truth and branch policy, so agents produce merge-ready code without re-briefing
+      - label: Spec-driven loop
+        details: Brainstorm → versioned design spec (`docs/specs/`) → implementation plan (`docs/plans/`)
+          → AI implementation → real test run; one canonical spec per system, never parallel versions
+      - label: AI guardrails
+        details: Every AI-written feature lands behind real no-mock UAT (live API/WebSocket/LiveKit calls),
+          call-graph impact analysis before editing a symbol, and CI on every push
+
+    projects:
+      - name: "SenAI — Real-time Vietnamese–English Meeting Interpreter ([app.senai.online](https://app.senai.online))"
+        date: 2026
+        summary: AI-native platform for live bilingual meetings — per-speaker ASR, translation and voice
+          cloning, automatic minutes, on-prem or commercial model routing. Built for the Vietnam AI
+          Innovation Challenge 2026 (AI Singapore) — **3rd Prize + Vietnam AI Stars**. Lead developer,
+          298 of 336 commits across frontend, backend and infrastructure.
+        highlights:
+          - "**AI-native delivery:** ~29,000 LOC in 336 commits over 3 weeks, built with Claude Code on a
+            spec-driven loop (design spec → plan → agent implementation → real UAT), from a blank repo to a
+            public production deployment."
+          - "**Full-stack ownership:** Next.js 16 / React 19 / Tailwind v4 app with bilingual VI–EN i18n
+            (~370 keys); layered FastAPI backend (routers / engine / store / model router); PostgreSQL 16 +
+            pgvector for meetings, transcripts, glossaries and 1024-dim embeddings, auto-migrated on boot."
+          - "**Real-time AI pipeline:** one independent ASR+MT pipeline per LiveKit mic track (no shared
+            buffers), 2-lane fast→refine subtitles and a streaming *Cabin* mode that translates while the
+            speaker is still talking. Measured **~75 ms ASR + ~295 ms MT (<400 ms end-to-end)**, zero errors
+            up to concurrency 8."
+          - "**Pluggable Model Router:** one capability contract (`asr`/`mt_fast`/`mt_refine`/`tts`/`llm`)
+            behind self-hosted models (Qwen3, F5-TTS on vLLM) or commercial APIs (Google, Deepgram, OpenAI,
+            ElevenLabs); pipeline, provider and keys switch at runtime from an admin UI with auto-fallback."
+          - "**RAG & prompt engineering:** glossaries and uploaded documents chunked into pgvector embeddings,
+            LLM term extraction, ASR phonetic correction, bilingual LLM summaries; prompt-injection defenses
+            covered by a pentest suite."
+          - "**Auth, security & integrations:** Google OAuth + email sign-in, JWT access/refresh rotation,
+            rate limiting, per-meeting RBAC and audit logs; an on-prem-only mode blocking every cloud call
+            for data residency; a public AI Gateway (`/ai/*`) with API keys; Amazon SES PDF minutes."
+          - "**Deployment & QA:** VPS on Nginx + systemd + TLS with pull-based CI/CD, GitHub Actions CI on
+            every push, Docker for LiveKit and PostgreSQL; **37 UAT suites / 147 real (non-mocked) tests**."
+
+      - name: "Notarex — Notary Document OCR & Digitization"
+        date: 2026
+        summary: Digitizes notarial records — AI OCR from scanned papers, online editing, automatic Word
+          generation. Role — full-stack, AI orchestration and infrastructure.
+        highlights:
+          - Built configurable form templates, the AI OCR extraction flow and an edit/save/download workflow
+            through JWT-secured OnlyOffice, with automatic DOCX generation via docxtpl.
+          - Designed a 3-role permission model (admin / director / employee) scoped per notary office for
+            tenant isolation.
+          - Built a Celery + Redis job queue (ZSET pending queue, atomic active-counter, heartbeat
+            reconciliation) that detects and recovers zombie OCR jobs under load; MinIO (S3) storage,
+            Dockerized behind Nginx with GitHub Actions CI/CD.
+          - "Scale of delivery — **387 commits and ~55,000 LOC over 3.5 months**, covered by **43 test
+            modules / 418 automated test cases**."
+
+      - name: "EasySale — Sales Lead Management & Automation"
+        date: 2026
+        summary: Automation platform that collects leads and nurtures them without manual follow-up.
+        highlights:
+          - Built a Chrome Extension that scrapes business leads from Google Maps straight into the system.
+          - Integrated the Zalo OA API for automated care messages and SendGrid for email campaigns.
+          - Delivered separate admin and customer portals behind a unified login, deployed with Docker + Nginx.
+          - "Scale of delivery — **136 commits and ~71,000 LOC**, covered by **19 test modules / 347
+            automated test cases**."
+
+      - name: "AKF Farm — Agricultural Production Management (Web Admin + Mobile PWA)"
+        date: 2026
+        summary: Production management for agriculture, built to stay reliable in low-connectivity fields.
+        highlights:
+          - Built a headless Frappe v15 backend with an event-driven task engine (step / frequency /
+            prerequisite), a worst-of status model, load-balanced assignment, REST API and 2-role auth —
+            **verified by 132 passing tests**.
+          - Anti-fraud completion photos (in-app camera, GPS, watermark) plus an idempotent offline queue so
+            field data is never lost or duplicated.
+          - Delivered a satellite heatmap (Leaflet + Esri), work calendar, notifications and step-by-step SOPs.
+
+    education:
+      - institution: Hanoi University of Science and Technology (HUST)
+        area: Computer Science
+        degree: BSc
+        start_date: 2021
+        end_date: 2026
+        highlights:
+          # TODO(Hiep): điền GPA thật + môn học/đồ án liên quan, rồi bỏ comment 2 dòng dưới.
+          # - "GPA: x.xx / 4.0"
+          - Coursework applied directly in production work — data structures & algorithms, databases,
+            software engineering, computer networks, operating systems, machine learning.
+
+    skills:
+      - label: AI-assisted development
+        details: Claude Code (agents, skills, hooks), Cursor, ChatGPT, Gemini, GitHub Copilot, MCP servers,
+          prompt & context engineering, spec-driven AI workflows, RAG, LLM orchestration, vLLM self-hosting
+      - label: Frontend
+        details: React 19, Next.js 16/14, TypeScript, Tailwind v4, Ant Design, Zustand, TanStack Query,
+          PWA / offline-first, i18n
+      - label: Backend
+        details: FastAPI, Node.js, NestJS / ExpressJS, Spring Boot, Python, Java, REST, WebSocket, WebRTC
+          (LiveKit), Celery, Redis, JWT / OAuth, RBAC
+      - label: Data
+        details: PostgreSQL 16 (+ pgvector), MySQL, MariaDB, SQLAlchemy 2.0 async, schema migrations,
+          vector search & embeddings, MinIO (S3)
+      - label: DevOps & Cloud
+        details: Docker & Docker Compose, Nginx, systemd, TLS, VPS deployment, GitHub Actions CI/CD,
+          Cloudflare, Amazon SES
+      - label: Engineering practice
+        details: Systems thinking, software architecture, SOLID, OOP, design patterns, real (non-mocked)
+          integration & security testing, requirements analysis, SRS / Use Case / ERD
+      - label: Languages
+        details: Vietnamese (native), English (technical reading, writing and documentation)
+
+design:
+  theme: engineeringresumes
+  page:
+    size: a4
+    top_margin: 1.1cm
+    bottom_margin: 1.1cm
+    left_margin: 1.25cm
+    right_margin: 1.25cm
+  colors:
+    name: rgb(17, 24, 39)
+    section_titles: rgb(17, 24, 39)
+    links: rgb(13, 110, 139)
+  typography:
+    line_spacing: 0.5em
+    font_size:
+      body: 9.2pt
+  entries:
+    allow_page_break: true
+  sections:
+    space_between_regular_entries: 0.9em
+    space_between_text_based_entries: 0.25em

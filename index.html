@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nguyễn Mạnh Hiệp — Kỹ sư phần mềm</title>
-<meta name="description" content="Kỹ sư phần mềm full-stack. Mô hình hoá bài toán nghiệp vụ, rồi dựng cả hệ thống tới production.">
+<title>Nguyễn Mạnh Hiệp — AI-Native Full-stack Developer</title>
+<meta name="description" content="AI-Native full-stack developer. Dùng Claude Code, Cursor và các AI coding tool để đi từ ý tưởng tới sản phẩm chạy production.">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
 /* ═══ Dark techy / interactive ════════════════════════════════
@@ -193,6 +193,7 @@ section{scroll-margin-top:96px}
 .proj__src:hover{border-color:var(--accent)}
 .proj__private{display:inline-flex;align-items:center;min-height:var(--tap);margin-top:var(--u);
   font-family:var(--mono);font-size:var(--t-sm);color:var(--muted)}
+.proj__links{display:flex;flex-wrap:wrap;gap:calc(var(--u)*3)}
 
 /* ─── skills ───────────────────────────────────────────────── */
 .key{grid-column:span 4}
@@ -258,7 +259,7 @@ section{scroll-margin-top:96px}
       <p class="hero__tagline" data-t="tagline"></p>
       <div class="hero__cta">
         <a class="btn btn--solid" data-magnet href="#work" data-t="ctaWork"></a>
-        <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_SE_CV.pdf" download data-t="downloadCv"></a>
+        <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_AI_Native_Dev_CV.pdf" download data-t="downloadCv"></a>
       </div>
       <div class="stats" id="stats"></div>
     </div>
@@ -324,7 +325,7 @@ section{scroll-margin-top:96px}
         <p class="contact__sub" data-t="contactSub"></p>
         <div class="contact__cta">
           <a class="btn btn--solid" data-magnet href="mailto:Hiep.work@outlook.com" data-t="email"></a>
-          <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_SE_CV.pdf" download data-t="downloadCv"></a>
+          <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_AI_Native_Dev_CV.pdf" download data-t="downloadCv"></a>
         </div>
       </div>
       <div class="contact__side" data-reveal>
@@ -349,6 +350,11 @@ section{scroll-margin-top:96px}
 <script>
 /* screenshots live outside the language objects so the paths aren't duplicated */
 const SHOTS = {
+  senai: [
+    {src:'assets/screenshots/senai/all-awards.jpg',  vi:'Vietnam AI Innovation Challenge 2026 — giải thưởng chung cuộc', en:'Vietnam AI Innovation Challenge 2026 — final awards'},
+    {src:'assets/screenshots/senai/third-prize.jpg', vi:'Giải Ba chung cuộc',       en:'3rd Prize, final round'},
+    {src:'assets/screenshots/senai/ai-stars.jpg',    vi:'Vietnam AI Stars',         en:'Vietnam AI Stars'}
+  ],
   notarex: [
     {src:'assets/screenshots/Notarex/e25-admin-dashboard.png',    vi:'Bảng điều khiển admin',        en:'Admin dashboard'},
     {src:'assets/screenshots/Notarex/e25-document-templates.png', vi:'Quản lý biểu mẫu',             en:'Document templates'},
@@ -379,26 +385,26 @@ const SHOTS = {
   ]
 };
 
-const MARQUEE = ['TypeScript','React','Next.js','FastAPI','PostgreSQL','Docker','Redis','Celery','MinIO','Frappe','Spring Boot','Node.js','SOLID','System Design'];
+const MARQUEE = ['Claude Code','Cursor','MCP','Context Engineering','RAG','TypeScript','React 19','Next.js 16','FastAPI','PostgreSQL + pgvector','LiveKit / WebRTC','vLLM','Docker','Nginx','CI/CD','System Design'];
 
 const STATS = {
-  vi:[{n:3,label:'Dự án'},{n:132,label:'Test tự động'},{n:25,suffix:'+',label:'Công nghệ'}],
-  en:[{n:3,label:'Projects'},{n:132,label:'Automated tests'},{n:25,suffix:'+',label:'Technologies'}]
+  vi:[{n:4,label:'Sản phẩm production'},{n:155,suffix:'k',label:'Dòng code / 859 commit'},{n:1000,suffix:'+',label:'Test tự động đã viết'}],
+  en:[{n:4,label:'Production products'},{n:155,suffix:'k',label:'LOC / 859 commits'},{n:1000,suffix:'+',label:'Automated tests written'}]
 };
 
 const CONTENT = {
   vi: {
     name:'Nguyễn Mạnh Hiệp',
-    barRole:'Kỹ sư phần mềm',
+    barRole:'AI-Native Full-stack Dev',
     navWork:'Dự án', navSkills:'Kỹ năng', navContact:'Liên hệ',
-    heroKicker:'Kỹ sư phần mềm · Full-stack',
-    tagline:'Mô hình hoá bài toán trước, rồi mới dựng hệ thống.',
-    intro:'Kỹ sư phần mềm với tư duy hệ thống và gốc phân tích nghiệp vụ. Tôi lắng nghe vấn đề thật, mô hình hoá bằng UML/ERD, rồi tự dựng cả hệ thống — RESTful API, cơ sở dữ liệu, giao diện React — cho tới lúc chạy production, theo OOP, SOLID và design pattern để hệ thống đủ tin cậy, dễ bảo trì và dễ bàn giao.',
+    heroKicker:'AI-Native Full-stack Developer · Vibe Coding',
+    tagline:'Dùng AI làm động cơ xây sản phẩm, không phải trợ lý gõ code.',
+    intro:'Lập trình viên full-stack làm việc theo mô hình AI-Native: từ ý tưởng đến production đều chạy qua workflow AI — brainstorm ra spec, spec ra plan, plan cho agent (Claude Code, Cursor, ChatGPT, Gemini, Copilot) hiện thực hoá, rồi chốt bằng test thật không mock. Kết quả mới nhất: SenAI — nền tảng phiên dịch cuộc họp Việt–Anh real-time, ~29k dòng code trong 336 commit chỉ 3 tuần, đã chạy production và đoạt Giải Ba + Vietnam AI Stars tại Vietnam AI Innovation Challenge 2026.',
     location:'Hoàng Mai, Hà Nội',
     email:'Hiep.work@outlook.com',
     phone:'0978 618 337',
     linkedin:'linkedin.com/in/hiepnm2003',
-    ctaWork:'Xem dự án', downloadCv:'Tải CV', viewCode:'Xem mã nguồn',
+    ctaWork:'Xem dự án', downloadCv:'Tải CV', viewCode:'Xem mã nguồn', liveDemo:'Xem bản chạy thật',
     workTitle:'Dự án tiêu biểu', skillsTitle:'Kỹ năng', eduTitle:'Học vấn',
     lblProblem:'Vấn đề', lblSolution:'Giải pháp', lblResult:'Kết quả',
     noShot:'Chưa có ảnh chụp màn hình',
@@ -407,24 +413,32 @@ const CONTENT = {
     eduSchool:'Đại học Bách khoa Hà Nội (HUST)',
     eduDegree:'Cử nhân Khoa học Máy tính',
     eduYears:'2021 – 2026',
-    contactCta:'Cùng xây một hệ thống đáng tin cậy?',
-    contactSub:'Tôi luôn sẵn sàng cho những bài toán nghiệp vụ phức tạp cần một kỹ sư đi từ phân tích đến production. Liên hệ với tôi qua email hoặc LinkedIn.',
+    contactCta:'Cần một MVP chạy thật trong vài tuần?',
+    contactSub:'Tôi nhận những bài toán cần đi từ tài liệu nghiệp vụ tới sản phẩm chạy production — làm độc lập, tốc độ AI-native, có test thật và deploy thật. Liên hệ qua email hoặc LinkedIn.',
     projects:[
-      {id:'notarex', name:'Notarex (E25 OCR)', year:'2025',
+      {id:'senai', name:'SenAI', year:'2026',
+       tagline:'Phiên dịch cuộc họp Việt–Anh real-time (Giải Ba + Vietnam AI Stars — Vietnam AI Innovation Challenge 2026)',
+       problem:'Cuộc họp song ngữ Việt–Anh phải chờ phiên dịch viên, độ trễ cao, biên bản làm tay; nhiều tổ chức lại không được phép đẩy nội dung họp lên cloud.',
+       solution:'Dựng end-to-end theo workflow AI-Native (Claude Code + spec → plan → agent → UAT thật): web app Next.js 16/React 19 song ngữ, backend FastAPI phân tầng router/engine/store, PostgreSQL 16 + pgvector. Mỗi mic LiveKit chạy một pipeline ASR+MT độc lập, phụ đề 2-lane fast→refine và chế độ Cabin dịch ngay khi đang nói. Model Router cắm-thay cho phép đổi giữa model self-host (Qwen3-ASR, Qwen3-8B, F5-TTS trên vLLM) và API thương mại ngay lúc chạy, có fallback tự động. Kèm RAG thuật ngữ, tóm tắt LLM, OAuth + JWT + RBAC + audit log, AI Gateway công khai.',
+       result:'~29.000 dòng code trong 336 commit chỉ 3 tuần, chạy production tại app.senai.online (Nginx + systemd + TLS, CI/CD pull-based); đo thật ~75ms ASR + ~295ms MT (<400ms/câu), 0 lỗi tới concurrency 8; 37 bộ UAT / 147 test chạy thật không mock. Đoạt Giải Ba chung cuộc + Vietnam AI Stars.',
+       stack:['Claude Code','Next.js 16','React 19','TypeScript','Tailwind v4','FastAPI','PostgreSQL + pgvector','LiveKit / WebRTC','vLLM','RAG','Docker','Nginx','GitHub Actions'],
+       demo:'https://app.senai.online',
+       github:null},
+      {id:'notarex', name:'Notarex (E25 OCR)', year:'2026',
        tagline:'Nền tảng OCR & số hoá hồ sơ công chứng',
        problem:'Văn phòng công chứng xử lý hồ sơ giấy thủ công: dễ sai sót, khó phân quyền theo vai trò và không truy vết được luồng tài liệu.',
        solution:'Full-stack + điều phối AI: cấu hình biểu mẫu linh hoạt, OCR AI trích xuất giấy tờ, chỉnh–lưu–tải trực tiếp qua OnlyOffice (JWT), phân quyền 3 vai trò (admin/director/employee) theo văn phòng, sinh DOCX tự động bằng docxtpl. Hàng đợi Celery + Redis với ZSET pending queue, atomic active-counter và heartbeat reconcile xử lý job zombie.',
-       result:'Hệ thống chạy production ổn định, lưu file trên MinIO (S3) với CI/CD qua GitHub Actions — số hoá và bàn giao hồ sơ đáng tin cậy.',
+       result:'387 commit / ~55.000 dòng code trong 3,5 tháng, phủ bởi 43 module test / 418 test case tự động. Chạy production ổn định, lưu file trên MinIO (S3), CI/CD qua GitHub Actions.',
        stack:['Next.js 14','TypeScript','Ant Design','Zustand','TanStack Query','FastAPI','SQLAlchemy 2.0 async','PostgreSQL 16','MinIO','OnlyOffice','Nginx','Docker'],
        github:null},
-      {id:'easysale', name:'EasySale', year:'2025',
+      {id:'easysale', name:'EasySale', year:'2026',
        tagline:'Quản lý & tự động hoá lead bán hàng',
        problem:'Đội bán hàng thu thập lead thủ công từ Google Maps rồi chăm sóc rời rạc qua nhiều kênh, khó theo dõi và dễ bỏ sót khách.',
        solution:'Hệ tự động hoá bán hàng kèm Chrome Extension tự thu thập lead từ Google Maps, gửi tin nhắn chăm sóc qua Zalo OA và email qua SendGrid; tách cổng admin và cổng khách hàng riêng với đăng nhập hợp nhất.',
-       result:'Quy trình từ thu thập đến chăm sóc lead được tự động hoá, giảm mạnh thao tác thủ công cho đội bán hàng.',
+       result:'136 commit / ~71.000 dòng code, phủ bởi 19 module test / 347 test case tự động. Toàn bộ đường từ thu thập tới chăm sóc lead chạy tự động, gần như bỏ hẳn thao tác tay của đội bán hàng.',
        stack:['FastAPI','PostgreSQL','Chrome Extension','Zalo OA API','SendGrid','Docker','Nginx'],
        github:'https://github.com/TolaHiep/eazysales'},
-      {id:'akf', name:'AKF Farm', year:'2025',
+      {id:'akf', name:'AKF Farm', year:'2026',
        tagline:'Quản lý sản xuất nông trại (web admin + mobile PWA)',
        problem:'Sản xuất nông trại gồm nhiều bước phụ thuộc nhau, lại thường ở nơi kết nối yếu: khó giao đúng người, theo dõi tiến độ và chống gian lận khi báo cáo hoàn thành.',
        solution:'Backend Frappe v15 headless với engine sinh việc event-driven theo bước/tần suất/tiên quyết, tính trạng thái 3 màu (worst-of), cân tải giao tổ trưởng, REST API và auth 2 vai trò (132 test xanh). Ảnh hoàn thành chống gian lận (camera in-app + GPS + watermark), offline queue idempotent, bản đồ nhiệt ảnh vệ tinh (Leaflet + Esri), lịch/thông báo/SOP theo bước.',
@@ -433,26 +447,27 @@ const CONTENT = {
        github:'https://github.com/TolaHiep/afk-farm'}
     ],
     skills:[
+      {label:'AI-Native workflow', items:['Claude Code (agent · skill · hook)','Cursor','ChatGPT','Gemini','GitHub Copilot','MCP server','Prompt & context engineering','Spec-driven development','RAG','LLM orchestration','vLLM self-host']},
       {label:'Lập trình', items:['TypeScript / JavaScript','Java','Python','C / C++']},
-      {label:'Framework', items:['React','Next.js','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
-      {label:'Dữ liệu & Backend', items:['PostgreSQL','MySQL','MariaDB','RESTful API','Celery','Redis','MinIO','Frappe']},
-      {label:'Hạ tầng & Tích hợp', items:['Docker','Nginx','CI/CD (GitHub Actions)','OnlyOffice','Zalo OA','SendGrid','Chrome Extension']},
+      {label:'Framework', items:['React 19','Next.js 16','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
+      {label:'Dữ liệu & Backend', items:['PostgreSQL + pgvector','MySQL','MariaDB','RESTful API','WebSocket','WebRTC (LiveKit)','Celery','Redis','MinIO','Frappe']},
+      {label:'Hạ tầng & Tích hợp', items:['Docker','Nginx','systemd + TLS','CI/CD (GitHub Actions)','Cloudflare','Amazon SES','OAuth / JWT','OnlyOffice','Zalo OA','Chrome Extension']},
       {label:'Thiết kế hệ thống', items:['Tư duy hệ thống','Kiến trúc phần mềm','SOLID','OOP','Design pattern','Xử lý lỗi']},
       {label:'Phân tích nghiệp vụ', items:['Thu thập yêu cầu','Trao đổi stakeholder','Tài liệu SRS','Use Case','Activity Diagram','ERD']}
     ]
   },
   en: {
     name:'Nguyen Manh Hiep',
-    barRole:'Software Engineer',
+    barRole:'AI-Native Full-stack Dev',
     navWork:'Work', navSkills:'Skills', navContact:'Contact',
-    heroKicker:'Software Engineer · Full-stack',
-    tagline:'Model the problem first, then build the system.',
-    intro:'A software engineer with systems thinking and a business-analysis background. I listen to the real problem, model it with UML/ERD, then build the whole system — RESTful APIs, databases, React front-ends — all the way to production, guided by OOP, SOLID and design patterns so the system is reliable, maintainable, and easy to hand over.',
+    heroKicker:'AI-Native Full-stack Developer · Vibe Coding',
+    tagline:'AI as the build engine, not an autocomplete helper.',
+    intro:'A full-stack developer working AI-native: idea to production runs through an AI workflow — brainstorm into a spec, spec into a plan, plan into agent implementation (Claude Code, Cursor, ChatGPT, Gemini, Copilot), then locked down with real, non-mocked tests. Latest proof: SenAI — a real-time Vietnamese–English meeting interpreter, ~29k lines of code across 336 commits in 3 weeks, live in production and winner of 3rd Prize + Vietnam AI Stars at the Vietnam AI Innovation Challenge 2026.',
     location:'Hoang Mai, Hanoi',
     email:'Hiep.work@outlook.com',
     phone:'+84 978 618 337',
     linkedin:'linkedin.com/in/hiepnm2003',
-    ctaWork:'View work', downloadCv:'Download CV', viewCode:'View source',
+    ctaWork:'View work', downloadCv:'Download CV', viewCode:'View source', liveDemo:'See it live',
     workTitle:'Selected work', skillsTitle:'Skills', eduTitle:'Education',
     lblProblem:'Problem', lblSolution:'Solution', lblResult:'Result',
     noShot:'No screenshots yet',
@@ -461,24 +476,32 @@ const CONTENT = {
     eduSchool:'Hanoi University of Science and Technology (HUST)',
     eduDegree:'B.Sc. in Computer Science',
     eduYears:'2021 – 2026',
-    contactCta:'Let’s build a system you can trust.',
-    contactSub:'I’m always open to complex business problems that need an engineer who goes from analysis all the way to production. Reach me by email or on LinkedIn.',
+    contactCta:'Need a real MVP in weeks, not quarters?',
+    contactSub:'I take on problems that have to travel from a business document to a system running in production — worked independently, at AI-native speed, with real tests and a real deployment. Reach me by email or on LinkedIn.',
     projects:[
-      {id:'notarex', name:'Notarex (E25 OCR)', year:'2025',
+      {id:'senai', name:'SenAI', year:'2026',
+       tagline:'Real-time Vietnamese–English meeting interpreter (3rd Prize + Vietnam AI Stars — Vietnam AI Innovation Challenge 2026)',
+       problem:'Bilingual VI–EN meetings wait on human interpreters, run with high latency and produce minutes by hand — while many organisations are not allowed to push meeting content to the cloud at all.',
+       solution:'Built end-to-end on an AI-native workflow (Claude Code with spec → plan → agent → real UAT): a bilingual Next.js 16 / React 19 web app, a layered FastAPI backend (routers / engine / store), PostgreSQL 16 + pgvector. Every LiveKit mic track gets its own independent ASR+MT pipeline, with 2-lane fast→refine subtitles and a Cabin mode that translates while the speaker is still talking. A pluggable Model Router swaps self-hosted models (Qwen3-ASR, Qwen3-8B, F5-TTS on vLLM) and commercial APIs at runtime with automatic fallback. Plus glossary RAG, LLM summaries, OAuth + JWT + RBAC + audit logs and a public AI Gateway.',
+       result:'~29,000 lines of code across 336 commits in 3 weeks, live in production at app.senai.online (Nginx + systemd + TLS, pull-based CI/CD); measured ~75 ms ASR + ~295 ms MT (<400 ms per turn), zero errors up to concurrency 8; 37 UAT suites / 147 real non-mocked tests. Awarded 3rd Prize + Vietnam AI Stars.',
+       stack:['Claude Code','Next.js 16','React 19','TypeScript','Tailwind v4','FastAPI','PostgreSQL + pgvector','LiveKit / WebRTC','vLLM','RAG','Docker','Nginx','GitHub Actions'],
+       demo:'https://app.senai.online',
+       github:null},
+      {id:'notarex', name:'Notarex (E25 OCR)', year:'2026',
        tagline:'OCR & digitization platform for notary records',
        problem:'Notary offices processed paper records by hand: error-prone, hard to control by role, and impossible to audit the document flow.',
        solution:'Full-stack + AI orchestration: flexible form config, AI OCR extraction, edit–save–download straight through OnlyOffice (JWT), 3-role access control (admin/director/employee) per office, and automatic DOCX generation with docxtpl. A Celery + Redis queue with a ZSET pending queue, an atomic active-counter and heartbeat reconcile handles zombie jobs.',
-       result:'Runs reliably in production with files on MinIO (S3) and CI/CD via GitHub Actions — dependable digitization and handover of records.',
+       result:'387 commits and ~55,000 LOC over 3.5 months, covered by 43 test modules / 418 automated test cases. Runs reliably in production with files on MinIO (S3) and CI/CD via GitHub Actions.',
        stack:['Next.js 14','TypeScript','Ant Design','Zustand','TanStack Query','FastAPI','SQLAlchemy 2.0 async','PostgreSQL 16','MinIO','OnlyOffice','Nginx','Docker'],
        github:null},
-      {id:'easysale', name:'EasySale', year:'2025',
+      {id:'easysale', name:'EasySale', year:'2026',
        tagline:'Sales-lead management & automation',
        problem:'Sales teams collected leads from Google Maps by hand, then nurtured them across scattered channels — hard to track and easy to drop customers.',
        solution:'A sales-automation system with a Chrome Extension that auto-collects leads from Google Maps and sends nurture messages via Zalo OA and email through SendGrid; separate admin and customer portals with unified sign-in.',
-       result:'The full path from lead capture to nurturing is automated, sharply cutting manual work for the sales team.',
+       result:'136 commits and ~71,000 LOC, covered by 19 test modules / 347 automated test cases. The full path from lead capture to nurturing runs automatically, all but removing manual work for the sales team.',
        stack:['FastAPI','PostgreSQL','Chrome Extension','Zalo OA API','SendGrid','Docker','Nginx'],
        github:'https://github.com/TolaHiep/eazysales'},
-      {id:'akf', name:'AKF Farm', year:'2025',
+      {id:'akf', name:'AKF Farm', year:'2026',
        tagline:'Farm production management (web admin + mobile PWA)',
        problem:'Farm production spans many dependent steps and often runs in low-connectivity areas: hard to assign the right person, track progress, and prevent fraud in completion reports.',
        solution:'A headless Frappe v15 backend with an event-driven task engine by step/frequency/prerequisite, a 3-color worst-of status calc, load-balanced assignment to team leads, a REST API and 2-role auth (132 passing tests). Anti-fraud completion photos (in-app camera + GPS + watermark), an idempotent offline queue, a satellite-imagery heatmap (Leaflet + Esri), and per-step calendar/notifications/SOPs.',
@@ -487,10 +510,11 @@ const CONTENT = {
        github:'https://github.com/TolaHiep/afk-farm'}
     ],
     skills:[
+      {label:'AI-Native workflow', items:['Claude Code (agents · skills · hooks)','Cursor','ChatGPT','Gemini','GitHub Copilot','MCP servers','Prompt & context engineering','Spec-driven development','RAG','LLM orchestration','vLLM self-hosting']},
       {label:'Programming', items:['TypeScript / JavaScript','Java','Python','C / C++']},
-      {label:'Frameworks', items:['React','Next.js','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
-      {label:'Databases & Backend', items:['PostgreSQL','MySQL','MariaDB','RESTful API','Celery','Redis','MinIO','Frappe']},
-      {label:'Infrastructure & Integration', items:['Docker','Nginx','CI/CD (GitHub Actions)','OnlyOffice','Zalo OA','SendGrid','Chrome Extension']},
+      {label:'Frameworks', items:['React 19','Next.js 16','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
+      {label:'Databases & Backend', items:['PostgreSQL + pgvector','MySQL','MariaDB','RESTful API','WebSocket','WebRTC (LiveKit)','Celery','Redis','MinIO','Frappe']},
+      {label:'Infrastructure & Integration', items:['Docker','Nginx','systemd + TLS','CI/CD (GitHub Actions)','Cloudflare','Amazon SES','OAuth / JWT','OnlyOffice','Zalo OA','Chrome Extension']},
       {label:'System Design', items:['Systems thinking','Software architecture','SOLID','OOP','Design patterns','Error handling']},
       {label:'Business Analysis', items:['Requirements gathering','Stakeholder communication','SRS documentation','Use Case','Activity Diagram','ERD']}
     ]
@@ -561,9 +585,12 @@ function render() {
           ${psr(c.lblResult, p.result)}
         </div>
         <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
-        ${p.github
-          ? `<a class="proj__src" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(c.viewCode)} →</a>`
-          : `<span class="proj__private">${esc(c.privateRepo)}</span>`}
+        <div class="proj__links">
+          ${p.demo ? `<a class="proj__src" href="${esc(p.demo)}" target="_blank" rel="noopener">${esc(c.liveDemo)} →</a>` : ''}
+          ${p.github
+            ? `<a class="proj__src" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(c.viewCode)} →</a>`
+            : `<span class="proj__private">${esc(c.privateRepo)}</span>`}
+        </div>
       </div>
     </article>`).join('');
 
