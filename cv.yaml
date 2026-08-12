@@ -20,8 +20,8 @@ cv:
         lifecycle (requirements, architecture, frontend, backend, database, tests, deployment) with an
         AI-first workflow — Claude Code, Cursor, ChatGPT, Gemini and Copilot as the primary build engine,
         not an autocomplete helper. Latest proof is **SenAI**, a real-time Vietnamese–English meeting
-        interpreter — **~29k LOC in 336 commits over 3 weeks**, led across frontend, backend and
-        infrastructure, live in production at [app.senai.online](https://app.senai.online), **3rd Prize +
+        interpreter built **in three weeks** as the main developer on the project team — frontend, backend,
+        CI/CD and deployment — live in production at [app.senai.online](https://app.senai.online), **3rd Prize +
         Vietnam AI Stars at the Vietnam AI Innovation Challenge 2026 (AI Singapore)**.
 
     Career Objective:
@@ -35,10 +35,11 @@ cv:
     Selected Achievements:
       - bullet: "**3rd Prize + Vietnam AI Stars**, Vietnam AI Innovation Challenge 2026 (AI Singapore),
           for SenAI — a real-time Vietnamese–English meeting interpreter shipped to public production."
-      - bullet: "**4 production systems delivered end-to-end** in ~12 months (SenAI, Notarex, EasySale,
-          AKF Farm) — **~155,000 LOC across 859 commits** on the three repositories I own."
-      - bullet: "**Blank repo to live production in 3 weeks** on SenAI (336 commits) — full stack,
-          database, security and deployment, with the AI workflow doing the bulk of the typing."
+      - bullet: "**4 systems delivered end-to-end** in ~12 months (SenAI, Notarex, EasySale, AKF Farm) —
+          each one carried from requirements through architecture, implementation, tests and deployment."
+      - bullet: "**Blank repo to live production in 3 weeks** on SenAI — frontend, backend, database,
+          security, CI/CD and deployment, on a spec-driven AI workflow (**16 design specs + 16 plans**
+          kept in the repo)."
       - bullet: "**1,000+ automated / UAT test cases authored** across the four products (418 Notarex,
           347 EasySale, 147 SenAI real non-mocked, 132 AKF Farm) — every AI-generated feature ships
           behind a real test."
@@ -64,15 +65,24 @@ cv:
         date: 2026
         summary: AI-native platform for live bilingual meetings — per-speaker ASR, translation and voice
           cloning, automatic minutes, on-prem or commercial model routing. Built for the Vietnam AI
-          Innovation Challenge 2026 (AI Singapore) — **3rd Prize + Vietnam AI Stars**. Lead developer,
-          298 of 336 commits across frontend, backend and infrastructure.
+          Innovation Challenge 2026 (AI Singapore) — **3rd Prize, Vietnam AI Stars Award and AI Singapore
+          Award**. Main developer on the project team — the whole frontend, most of the backend behind it,
+          the real-time meeting room, the translation pipeline, CI/CD and deployment.
         highlights:
-          - "**AI-native delivery:** ~29,000 LOC in 336 commits over 3 weeks, built with Claude Code on a
-            spec-driven loop (design spec → plan → agent implementation → real UAT), from a blank repo to a
-            public production deployment."
-          - "**Full-stack ownership:** Next.js 16 / React 19 / Tailwind v4 app with bilingual VI–EN i18n
-            (~370 keys); layered FastAPI backend (routers / engine / store / model router); PostgreSQL 16 +
-            pgvector for meetings, transcripts, glossaries and 1024-dim embeddings, auto-migrated on boot."
+          - "**AI-native delivery:** blank repo to public production deployment in **3 weeks**, on a
+            spec-driven loop (design spec → plan → agent implementation → real UAT) with 16 design specs
+            and 16 implementation plans kept in the repo."
+          - "**Frontend ownership:** the entire Next.js 16 / React 19 / Tailwind v4 app — 7 feature screens
+            (landing, auth, Live, Rooms, Notes, Reports, admin), its own design system, bilingual VI–EN i18n
+            (~370 keys) with a test guard against missing keys, in-app light/dark, PWA."
+          - "**Real-time meeting room (LiveKit):** per-mic pipelines, camera and screen share, translated
+            two-way chat, a waiting room with a host-controlled approval gate, mute/kick, speaker mode
+            (grant/revoke publish rights), QR invites, and settings editable mid-meeting — the bot reloads
+            config and restarts per-mic handlers in under a second."
+          - "**Backend & data:** layered FastAPI service (routers / engine / store / model router); migrated
+            the store from SQLite to PostgreSQL 16 + pgvector (psycopg3, pooling, migrate on boot) without
+            changing public function signatures; meeting config/token/WS auth APIs; bilingual LLM minutes
+            exported to MD/Word/PDF and emailed per recipient language via Amazon SES."
           - "**Real-time AI pipeline:** one independent ASR+MT pipeline per LiveKit mic track (no shared
             buffers), 2-lane fast→refine subtitles and a streaming *Cabin* mode that translates while the
             speaker is still talking. Measured **~75 ms ASR + ~295 ms MT (<400 ms end-to-end)**, zero errors
@@ -85,9 +95,10 @@ cv:
             covered by a pentest suite."
           - "**Auth, security & integrations:** Google OAuth + email sign-in, JWT access/refresh rotation,
             rate limiting, per-meeting RBAC and audit logs; an on-prem-only mode blocking every cloud call
-            for data residency; a public AI Gateway (`/ai/*`) with API keys; Amazon SES PDF minutes."
-          - "**Deployment & QA:** VPS on Nginx + systemd + TLS with pull-based CI/CD, GitHub Actions CI on
-            every push, Docker for LiveKit and PostgreSQL; **37 UAT suites / 147 real (non-mocked) tests**."
+            for data residency; a public AI Gateway (`/ai/*`) with API keys for third-party callers."
+          - "**CI/CD & QA (mine end-to-end):** GitHub Actions CI on every push, pull-based deploys to a VPS
+            on Nginx + systemd + TLS, Docker for LiveKit and PostgreSQL; **37 UAT suites / 147 real
+            (non-mocked) tests** plus a benchmark harness comparing commercial pipelines."
 
       - name: "Notarex — Notary Document OCR & Digitization"
         date: 2026
@@ -101,8 +112,8 @@ cv:
           - Built a Celery + Redis job queue (ZSET pending queue, atomic active-counter, heartbeat
             reconciliation) that detects and recovers zombie OCR jobs under load; MinIO (S3) storage,
             Dockerized behind Nginx with GitHub Actions CI/CD.
-          - "Scale of delivery — **387 commits and ~55,000 LOC over 3.5 months**, covered by **43 test
-            modules / 418 automated test cases**."
+          - "Delivered over 3.5 months and covered by **43 test modules / 418 automated test cases**;
+            adding a new document type became configuration rather than code."
 
       - name: "EasySale — Sales Lead Management & Automation"
         date: 2026
@@ -111,8 +122,8 @@ cv:
           - Built a Chrome Extension that scrapes business leads from Google Maps straight into the system.
           - Integrated the Zalo OA API for automated care messages and SendGrid for email campaigns.
           - Delivered separate admin and customer portals behind a unified login, deployed with Docker + Nginx.
-          - "Scale of delivery — **136 commits and ~71,000 LOC**, covered by **19 test modules / 347
-            automated test cases**."
+          - "Covered by **19 test modules / 347 automated test cases** across campaigns, the lead list
+            and access control."
 
       - name: "AKF Farm — Agricultural Production Management (Web Admin + Mobile PWA)"
         date: 2026

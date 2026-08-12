@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nguyễn Mạnh Hiệp — AI-Native Full-stack Developer</title>
-<meta name="description" content="AI-Native full-stack developer. Dùng Claude Code, Cursor và các AI coding tool để đi từ ý tưởng tới sản phẩm chạy production.">
+<meta name="description" content="AI-Native Full-stack Developer. Prompt engineering, AI workflows và phát triển sản phẩm từ bài toán nghiệp vụ đến hệ thống chạy thật.">
+<link rel="canonical" href="https://nguyenmanhhiep.info/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://nguyenmanhhiep.info/">
+<meta property="og:title" content="Nguyễn Mạnh Hiệp — AI-Native Full-stack Developer">
+<meta property="og:description" content="Prompt engineering, AI workflows, system design. Sản phẩm đi từ bài toán nghiệp vụ đến hệ thống chạy thật.">
+<meta property="og:image" content="https://nguyenmanhhiep.info/assets/portrait/nguyen-manh-hiep-portrait.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
 /* ═══ Dark techy / interactive ════════════════════════════════
@@ -78,10 +85,16 @@ section{scroll-margin-top:96px}
   display:flex;justify-content:space-between;align-items:center;gap:var(--gap);height:64px}
 .bar__id{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 .bar__id i{color:var(--accent);font-style:normal}
-.bar__nav{display:flex;align-items:center;gap:calc(var(--u)*3)}
+.bar__nav{display:flex;align-items:center;gap:calc(var(--u)*2);min-width:0;flex:1;justify-content:flex-end}
+.bar__links{display:flex;align-items:center;gap:calc(var(--u)*2.5);min-width:0;overflow-x:auto;
+  scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity}
+.bar__links::-webkit-scrollbar{display:none}
+.bar__nav .lang{flex:0 0 auto}
 .bar__link{display:inline-flex;align-items:center;min-height:var(--tap);
   font-family:var(--mono);font-size:var(--t-sm);color:var(--muted);
   border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.bar__link{white-space:nowrap;scroll-snap-align:start}
+.bar__link[aria-current="true"]{color:var(--accent);border-color:var(--accent)}
 .bar__link:hover{color:var(--accent);border-color:var(--accent)}
 .lang{display:flex;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden}
 .lang button{min-height:36px;min-width:40px;padding:0 12px;border:0;cursor:pointer;
@@ -89,13 +102,16 @@ section{scroll-margin-top:96px}
   font-family:var(--mono);font-size:var(--t-xs);font-weight:600;transition:background .2s,color .2s}
 .lang button:hover{color:var(--ink)}
 .lang button[aria-pressed=true]{background:var(--accent);color:#04121a}
-@media (max-width:600px){.bar__role{display:none}.bar__nav{gap:var(--u)}.bar__link{font-size:var(--t-xs)}}
+@media (max-width:900px){.bar__role{display:none}}
+@media (max-width:600px){.bar__nav{gap:var(--u)}.bar__links{gap:calc(var(--u)*2)}.bar__link{font-size:var(--t-xs)}
+  /* mép phải mờ dần để thấy là menu còn vuốt được */
+  .bar__links{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}}
 
 /* ─── hero ─────────────────────────────────────────────────── */
-.hero{padding:calc(var(--u)*12) 0 calc(var(--u)*9);align-items:end}
+.hero{padding:calc(var(--u)*12) 0 calc(var(--u)*9);align-items:start}
 .hero__lead{grid-column:span 8}
-.hero__aside{grid-column:9 / span 4;display:flex;flex-direction:column;gap:calc(var(--u)*3);padding-bottom:calc(var(--u)*1)}
-@media (max-width:900px){.hero__lead{grid-column:1/-1}.hero__aside{grid-column:1/-1;margin-top:calc(var(--u)*5);flex-direction:row;align-items:flex-end;gap:calc(var(--u)*4)}.hero__aside .hero__contact{flex:1}}
+.hero__aside{grid-column:9 / span 4;display:flex;flex-direction:column;gap:calc(var(--u)*3);padding-top:calc(var(--u)*4);position:sticky;top:88px}
+@media (max-width:900px){.hero__lead{grid-column:1/-1}.hero__aside{position:static;grid-column:1/-1;margin-top:calc(var(--u)*5);flex-direction:row;align-items:flex-end;gap:calc(var(--u)*4)}.hero__aside .hero__contact{flex:1}}
 @media (max-width:600px){.hero__aside{flex-direction:column;align-items:stretch}}
 .hero__eyebrow{font-family:var(--mono);font-size:var(--t-sm);font-weight:500;letter-spacing:.08em;
   color:var(--accent);margin-bottom:calc(var(--u)*3);min-height:1.4em}
@@ -106,13 +122,18 @@ section{scroll-margin-top:96px}
 .hero__name .ch{display:inline-block;will-change:transform}
 .hero__tagline{font-size:clamp(20px,2.8vw,32px);font-weight:600;line-height:1.2;letter-spacing:-.02em;
   color:var(--muted);margin:calc(var(--u)*4) 0 0;max-width:26ch}
+.hero__about{margin-top:calc(var(--u)*4);padding-top:calc(var(--u)*3);border-top:1px solid var(--line);max-width:64ch}
+.hero__about .about p{font-size:var(--t-base);line-height:1.7;margin:0 0 calc(var(--u)*1.5)}
+.hero__about .about p:last-child{margin-bottom:0}
+.hero__edu{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:calc(var(--u)*2);
+  padding-top:calc(var(--u)*1.5);border-top:1px solid var(--line)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:var(--u);margin-top:calc(var(--u)*4)}
 .stats{display:flex;flex-wrap:wrap;gap:calc(var(--u)*5);margin-top:calc(var(--u)*6);
   padding-top:calc(var(--u)*3);border-top:1px solid var(--line)}
 .stat__n{font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1;
   background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .stat__l{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:calc(var(--u)*1);text-transform:uppercase;letter-spacing:.08em}
-.portrait-box{position:relative;width:100%;max-width:300px;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);
+.portrait-box{position:relative;width:100%;max-width:340px;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);
   background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 0 0 1px rgba(34,211,238,.05),0 24px 60px -24px rgba(34,211,238,.25)}
 .portrait-box img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s ease}
 .portrait-box:hover img{transform:scale(1.04)}
@@ -130,18 +151,9 @@ section{scroll-margin-top:96px}
 .btn--line{background:transparent;color:var(--ink)}
 .btn--line:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ─── marquee ──────────────────────────────────────────────── */
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:calc(var(--u)*3) 0;overflow:hidden;white-space:nowrap;margin-top:calc(var(--u)*4)}
-.marquee__track{display:inline-flex;gap:calc(var(--u)*5);will-change:transform;animation:marquee 30s linear infinite}
-.marquee:hover .marquee__track{animation-play-state:paused}
-.marquee__item{font-family:var(--mono);font-size:var(--t-sm);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.marquee__item::after{content:"◆";margin-left:calc(var(--u)*5);color:var(--accent)}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 /* ─── statement ────────────────────────────────────────────── */
 .statement{max-width:1000px;margin:0 auto;padding:calc(var(--u)*18) calc(var(--u)*3)}
-.statement p{font-size:clamp(24px,3.6vw,44px);font-weight:600;line-height:1.22;letter-spacing:-.02em;margin:0}
+.statement p{font-size:clamp(22px,3.1vw,38px);font-weight:600;line-height:1.35;letter-spacing:-.02em;margin:0}
 .statement .w{opacity:.16}
 
 /* ─── section heads ────────────────────────────────────────── */
@@ -156,9 +168,9 @@ section{scroll-margin-top:96px}
 /* ─── projects ─────────────────────────────────────────────── */
 .proj{padding:calc(var(--u)*7) 0;border-bottom:1px solid var(--line)}
 .proj:last-child{border-bottom:0}
-.proj__media{grid-column:span 7}
-.proj__body{grid-column:span 5}
-@media (max-width:900px){.proj__media,.proj__body{grid-column:1/-1}}
+.proj__media{grid-column:span 6;position:sticky;top:88px;align-self:start}
+.proj__body{grid-column:7 / span 6}
+@media (max-width:900px){.proj__media,.proj__body{grid-column:1/-1;position:static}}
 .shot-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--line-strong);background:var(--panel);transition:box-shadow .3s,border-color .3s}
 .shot-wrap:hover{border-color:rgba(34,211,238,.5);box-shadow:0 0 40px -8px rgba(34,211,238,.4)}
 .shot{aspect-ratio:36/25;width:100%;object-fit:contain;transition:transform .7s ease}
@@ -227,6 +239,77 @@ section{scroll-margin-top:96px}
   font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--u)}
 .foot a:hover{color:var(--accent)}
+
+/* ─── hero lead paragraph ──────────────────────────────────── */
+.hero__sub{font-size:var(--t-base);line-height:1.7;color:var(--muted);margin:calc(var(--u)*2) 0 0;max-width:56ch}
+.hero__keys{font-family:var(--mono);font-size:var(--t-sm);color:var(--accent2);margin-top:calc(var(--u)*2);letter-spacing:.02em}
+
+/* ─── flow line (pipeline steps) ───────────────────────────── */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:calc(var(--u)*1.25);margin:calc(var(--u)*1.5) 0 0}
+.flow span{font-family:var(--mono);font-size:var(--t-xs);padding:5px 10px;border-radius:6px;
+  background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.25);color:#bdf3fb}
+.flow i{font-style:normal;color:var(--faint);font-size:var(--t-xs)}
+
+/* ─── role chips ───────────────────────────────────────────── */
+.roles{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75);margin-top:calc(var(--u)*.5)}
+.roles span{font-family:var(--mono);font-size:var(--t-xs);padding:4px 9px;border-radius:999px;
+  border:1px solid var(--line-strong);color:var(--muted)}
+
+/* ─── AI section: intro + capability cards ─────────────────── */
+.lead{grid-column:span 7;font-size:var(--t-md);line-height:1.55;color:#d7d8e0;margin:0 0 calc(var(--u)*2)}
+.lead-side{grid-column:9 / span 4}
+@media (max-width:900px){.lead,.lead-side{grid-column:1/-1}}
+.cap{grid-column:span 6;padding:calc(var(--u)*3) 0;border-top:1px solid var(--line)}
+@media (max-width:900px){.cap{grid-column:1/-1}}
+.cap h3{font-size:var(--t-md);font-weight:700;letter-spacing:-.02em;margin:0 0 var(--u)}
+.cap p{font-size:var(--t-base);line-height:1.65;color:var(--muted);margin:0}
+
+/* ─── case study ───────────────────────────────────────────── */
+.case{grid-column:span 7}
+.case__side{grid-column:9 / span 4}
+@media (max-width:900px){.case,.case__side{grid-column:1/-1}}
+.case h3{font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-.02em;margin:0 0 var(--u)}
+.case__block{padding:calc(var(--u)*2) 0;border-top:1px solid var(--line)}
+.case__lbl{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:var(--u)}
+.case__list{margin:0;padding-left:1.1em;color:#d7d8e0}
+.case__list li{margin-bottom:calc(var(--u)*.75);line-height:1.6}
+.case__list li:last-child{margin-bottom:0}
+.code{margin:0;padding:calc(var(--u)*2);border-radius:12px;background:var(--panel);
+  border:1px solid var(--line-strong);overflow-x:auto;
+  font-family:var(--mono);font-size:var(--t-xs);line-height:1.7;color:#cfd3e6;white-space:pre}
+.note{font-family:var(--mono);font-size:var(--t-xs);color:var(--faint);margin-top:var(--u)}
+
+/* ─── about ────────────────────────────────────────────────── */
+.about{grid-column:span 7}
+.about p{font-size:var(--t-base);line-height:1.75;color:#d7d8e0;margin:0 0 calc(var(--u)*2);max-width:62ch}
+.about p:last-child{margin-bottom:0}
+
+/* ─── mục Thành tích ───────────────────────────────────────── */
+.awards__txt{grid-column:span 5}
+.awards__pics{grid-column:7 / span 6;display:grid;grid-template-columns:1fr 1fr;gap:var(--u);align-content:start}
+.awards__pics img{width:100%;height:100%;object-fit:cover;border-radius:12px;border:1px solid var(--line-strong);
+  aspect-ratio:4/3;transition:transform .5s ease,border-color .3s}
+.awards__pics img:first-child{grid-column:1 / -1;aspect-ratio:16/9}
+.awards__pics img:hover{transform:scale(1.02);border-color:rgba(34,211,238,.5)}
+@media (max-width:900px){.awards__txt,.awards__pics{grid-column:1/-1}}
+.awards__year{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);letter-spacing:.1em}
+.awards__title{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;margin:calc(var(--u)*1) 0 calc(var(--u)*2)}
+.awards__list{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75)}
+.awards__list span{font-family:var(--mono);font-size:var(--t-xs);padding:6px 12px;border-radius:999px;
+  background:linear-gradient(120deg,rgba(34,211,238,.12),rgba(167,139,250,.12));
+  border:1px solid rgba(34,211,238,.3);color:#bdf3fb}
+
+/* ─── collapsible technical detail ─────────────────────────── */
+.more{margin-top:calc(var(--u)*1.5)}
+.more>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;
+  min-height:var(--tap);font-family:var(--mono);font-size:var(--t-xs);font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary::after{content:"+";font-size:var(--t-sm)}
+.more[open]>summary::after{content:"−"}
+.more__body{font-size:var(--t-base);line-height:1.65;color:var(--muted);margin:var(--u) 0 0;
+  padding-left:calc(var(--u)*2);border-left:1px solid var(--line-strong)}
 </style>
 </head>
 <body>
@@ -237,11 +320,17 @@ section{scroll-margin-top:96px}
 
 <header class="bar">
   <div class="bar__in">
-    <span class="bar__id">NMH <i>/</i> <span class="bar__role" data-t="barRole"></span></span>
+    <a class="bar__id" href="#top">NMH <i>/</i> <span class="bar__role" data-t="barRole"></span></a>
     <nav class="bar__nav">
-      <a class="bar__link" href="#work" data-t="navWork"></a>
-      <a class="bar__link" href="#skills" data-t="navSkills"></a>
-      <a class="bar__link" href="#contact" data-t="navContact"></a>
+      <div class="bar__links">
+        <a class="bar__link" href="#top" data-t="aboutTitle"></a>
+        <a class="bar__link" href="#awards" data-t="awardsTitle"></a>
+        <a class="bar__link" href="#work" data-t="navWork"></a>
+        <a class="bar__link" href="#ai" data-t="navAi"></a>
+        <a class="bar__link" href="#case" data-t="navCase"></a>
+        <a class="bar__link" href="#stack" data-t="navStack"></a>
+        <a class="bar__link" href="#contact" data-t="navContact"></a>
+      </div>
       <div class="lang">
         <button data-lang="vi">VI</button>
         <button data-lang="en">EN</button>
@@ -252,13 +341,22 @@ section{scroll-margin-top:96px}
 
 <main class="wrap">
 
-  <section class="hero grid">
+  <section class="hero grid" id="top">
     <div class="hero__lead">
       <div class="hero__eyebrow"><span id="typed"></span><span class="caret">_</span></div>
       <h1 class="hero__name" id="hero-name"></h1>
       <p class="hero__tagline" data-t="tagline"></p>
+      <div class="hero__keys" data-t="heroKeys"></div>
+      <div class="hero__about">
+        <div class="key__lbl" data-t="aboutTitle"></div>
+        <div class="about" id="hero-about"></div>
+        <div class="hero__edu">
+          <span data-t="eduSchool"></span> · <span data-t="eduDegree"></span> · <span data-t="eduYears"></span>
+        </div>
+      </div>
       <div class="hero__cta">
         <a class="btn btn--solid" data-magnet href="#work" data-t="ctaWork"></a>
+        <a class="btn btn--line" data-magnet href="https://github.com/TolaHiep" target="_blank" rel="noopener">GitHub</a>
         <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_AI_Native_Dev_CV.pdf" download data-t="downloadCv"></a>
       </div>
       <div class="stats" id="stats"></div>
@@ -276,51 +374,64 @@ section{scroll-margin-top:96px}
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track" id="marquee"></div>
-  </div>
-
   <section class="statement" data-reveal>
     <p id="statement"></p>
   </section>
 
-  <section id="work" class="section">
+  <section id="awards" class="section">
     <div class="head" data-reveal>
       <span class="head__num">01</span>
+      <h2 data-t="awardsTitle"></h2>
+    </div>
+    <div class="grid" id="awards-body"></div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">02</span>
       <h2 data-t="workTitle"></h2>
       <span class="head__count" id="work-count"></span>
     </div>
     <div id="projects"></div>
   </section>
 
-  <section id="skills" class="section">
-    <div class="head" data-reveal>
-      <span class="head__num">02</span>
-      <h2 data-t="skillsTitle"></h2>
-    </div>
-    <div class="grid" id="keys"></div>
-  </section>
-
-  <section id="edu" class="section">
+  <section id="ai" class="section">
     <div class="head" data-reveal>
       <span class="head__num">03</span>
-      <h2 data-t="eduTitle"></h2>
+      <h2 data-t="aiTitle"></h2>
     </div>
     <div class="grid">
-      <div class="edu__row" data-reveal>
-        <div>
-          <div class="edu__school" data-t="eduSchool"></div>
-          <div class="edu__degree" data-t="eduDegree"></div>
-        </div>
-        <span class="edu__years" data-t="eduYears"></span>
+      <div class="lead" data-reveal>
+        <p style="margin:0" data-t="aiIntro"></p>
+        <div class="flow" id="ai-flow"></div>
       </div>
     </div>
+    <div class="grid" id="caps"></div>
+  </section>
+
+  <section id="case" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">04</span>
+      <h2 data-t="caseTitle"></h2>
+    </div>
+    <div class="grid">
+      <div class="case" data-reveal id="case-body"></div>
+      <div class="case__side" data-reveal id="case-side"></div>
+    </div>
+  </section>
+
+  <section id="stack" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">05</span>
+      <h2 data-t="stackTitle"></h2>
+    </div>
+    <div class="grid" id="keys"></div>
   </section>
 
   <section id="contact" class="contact">
     <div class="grid">
       <div class="contact__body" data-reveal>
-        <div class="hero__eyebrow" style="color:var(--accent)">04 / <span data-t="navContact"></span></div>
+        <div class="hero__eyebrow" style="color:var(--accent)">06 / <span data-t="navContact"></span></div>
         <h2 class="contact__title" data-t="contactCta"></h2>
         <p class="contact__sub" data-t="contactSub"></p>
         <div class="contact__cta">
@@ -334,6 +445,7 @@ section{scroll-margin-top:96px}
           <a href="tel:+84978618337" data-t="phone"></a>
           <a href="mailto:Hiep.work@outlook.com" data-t="email"></a>
           <a href="https://linkedin.com/in/hiepnm2003" target="_blank" rel="noopener" data-t="linkedin"></a>
+          <a href="https://github.com/TolaHiep" target="_blank" rel="noopener">github.com/TolaHiep</a>
         </div>
       </div>
     </div>
@@ -351,13 +463,16 @@ section{scroll-margin-top:96px}
 /* screenshots live outside the language objects so the paths aren't duplicated */
 const SHOTS = {
   senai: [
-    {src:'assets/screenshots/senai/all-awards.jpg',  vi:'Vietnam AI Innovation Challenge 2026 — giải thưởng chung cuộc', en:'Vietnam AI Innovation Challenge 2026 — final awards'},
-    {src:'assets/screenshots/senai/third-prize.jpg', vi:'Giải Ba chung cuộc',       en:'3rd Prize, final round'},
-    {src:'assets/screenshots/senai/ai-stars.jpg',    vi:'Vietnam AI Stars',         en:'Vietnam AI Stars'}
+    {src:'assets/screenshots/senai/senai-landing.png',     vi:'Trang chủ sản phẩm',                 en:'Product landing page'},
+    {src:'assets/screenshots/senai/sec-giaiphap.png',      vi:'Ba chế độ dịch',                     en:'Three translation modes'},
+    {src:'assets/screenshots/senai/sec-cachhoatdong.png',  vi:'Đường đi của một câu nói',           en:'The path of one sentence'},
+    {src:'assets/screenshots/senai/sec-kientruc.png',      vi:'Bốn tầng kiến trúc',                 en:'Four architecture layers'},
+    {src:'assets/screenshots/senai/sec-trienkhai.png',     vi:'Lựa chọn triển khai',                en:'Deployment options'},
+    {src:'assets/screenshots/senai/senai-app-login.png',   vi:'Đăng nhập ứng dụng',                 en:'App sign-in'}
   ],
   notarex: [
     {src:'assets/screenshots/Notarex/e25-admin-dashboard.png',    vi:'Bảng điều khiển admin',        en:'Admin dashboard'},
-    {src:'assets/screenshots/Notarex/e25-document-templates.png', vi:'Quản lý biểu mẫu',             en:'Document templates'},
+    {src:'assets/screenshots/Notarex/e25-document-templates.png', vi:'Cấu hình biểu mẫu',            en:'Template configuration'},
     {src:'assets/screenshots/Notarex/e25-employee-dashboard.png', vi:'Bảng điều khiển nhân viên',    en:'Employee dashboard'},
     {src:'assets/screenshots/Notarex/e25-employee-dossiers.png',  vi:'Danh sách hồ sơ',              en:'Dossier list'},
     {src:'assets/screenshots/Notarex/e25-employee-documents.png', vi:'Tài liệu của nhân viên',       en:'Employee documents'},
@@ -365,7 +480,7 @@ const SHOTS = {
   ],
   easysale: [
     {src:'assets/screenshots/easysale/easysale-admin-dashboard.png',  vi:'Bảng điều khiển admin',            en:'Admin dashboard'},
-    {src:'assets/screenshots/easysale/easysale-zalo-bulk-sender.png', vi:'Gửi hàng loạt đa kênh (Zalo + email)', en:'Omni-channel bulk sender (Zalo + email)'},
+    {src:'assets/screenshots/easysale/easysale-zalo-bulk-sender.png', vi:'Gửi hàng loạt Zalo + email',       en:'Bulk sender (Zalo + email)'},
     {src:'assets/screenshots/easysale/easysale-care-email-sender.png',vi:'Gửi email chăm sóc',               en:'Care email sender'},
     {src:'assets/screenshots/easysale/easysale-zalo-templates.png',   vi:'Mẫu ZNS của Zalo OA',              en:'Zalo OA ZNS templates'},
     {src:'assets/screenshots/easysale/easysale-admin-users.png',      vi:'Quản lý người dùng',               en:'User management'},
@@ -385,141 +500,302 @@ const SHOTS = {
   ]
 };
 
-const MARQUEE = ['Claude Code','Cursor','MCP','Context Engineering','RAG','TypeScript','React 19','Next.js 16','FastAPI','PostgreSQL + pgvector','LiveKit / WebRTC','vLLM','Docker','Nginx','CI/CD','System Design'];
+/* Every number here has a source in a repository:
+   - 4 products: SenAI, Notarex (E25_OCR), EasySale (eazysale), AKF Farm
+   - 3 awards: Giải Ba Chung cuộc, Vietnam AI Stars, AI Singapore (app.senai.online)
+   - 1000+ tests: 147 SenAI UAT + 418 E25_OCR + 347 eazysale + 132 AKF Farm
+   TODO(Hiep): chưa có metric nghiệp vụ (số hồ sơ xử lý, thời gian nhập liệu tiết kiệm được,
+   số cuộc họp đã dùng SenAI). Nếu xin được số thật từ phía khách hàng thì thêm vào đây. */
+/* Awards are shown as an achievement band, not as project screenshots.
+   Source: the three award cards on app.senai.online (Giải Ba Chung cuộc,
+   Vietnam AI Stars Award, AI Singapore Award).
+   Số đội dự thi (300+) do chủ sở hữu portfolio xác nhận. */
+const AWARD = {
+  pics: ['assets/screenshots/senai/third-prize.jpg',
+         'assets/screenshots/senai/ai-stars.jpg',
+         'assets/screenshots/senai/all-awards.jpg'],
+  vi: {t:'Top 3 chung cuộc — Vietnam AI Innovation Challenge 2026',
+       items:['Giải Ba Chung cuộc', 'Vietnam AI Stars Award', 'AI Singapore Award']},
+  en: {t:'Top 3 overall — Vietnam AI Innovation Challenge 2026',
+       items:['Third Prize', 'Vietnam AI Stars Award', 'AI Singapore Award']}
+};
 
 const STATS = {
-  vi:[{n:4,label:'Sản phẩm production'},{n:155,suffix:'k',label:'Dòng code / 859 commit'},{n:1000,suffix:'+',label:'Test tự động đã viết'}],
-  en:[{n:4,label:'Production products'},{n:155,suffix:'k',label:'LOC / 859 commits'},{n:1000,suffix:'+',label:'Automated tests written'}]
+  vi:[{n:4,label:'Sản phẩm làm end-to-end'},{n:3,label:'Giải thưởng VAIC 2026'},{n:1000,suffix:'+',label:'Test tự động'}],
+  en:[{n:4,label:'Products built end-to-end'},{n:3,label:'Awards at VAIC 2026'},{n:1000,suffix:'+',label:'Automated tests'}]
 };
 
 const CONTENT = {
   vi: {
     name:'Nguyễn Mạnh Hiệp',
-    barRole:'AI-Native Full-stack Dev',
-    navWork:'Dự án', navSkills:'Kỹ năng', navContact:'Liên hệ',
-    heroKicker:'AI-Native Full-stack Developer · Vibe Coding',
-    tagline:'Dùng AI làm động cơ xây sản phẩm, không phải trợ lý gõ code.',
-    intro:'Lập trình viên full-stack làm việc theo mô hình AI-Native: từ ý tưởng đến production đều chạy qua workflow AI — brainstorm ra spec, spec ra plan, plan cho agent (Claude Code, Cursor, ChatGPT, Gemini, Copilot) hiện thực hoá, rồi chốt bằng test thật không mock. Kết quả mới nhất: SenAI — nền tảng phiên dịch cuộc họp Việt–Anh real-time, ~29k dòng code trong 336 commit chỉ 3 tuần, đã chạy production và đoạt Giải Ba + Vietnam AI Stars tại Vietnam AI Innovation Challenge 2026.',
+    barRole:'AI-Native Full-stack Developer',
+    navWork:'Dự án', navAi:'Dùng AI', navCase:'Case study',
+    navStack:'Tech stack', navContact:'Liên hệ',
+    heroKicker:'AI-Native Full-stack Developer',
+    tagline:'Từ bài toán nghiệp vụ đến hệ thống chạy thật.',
+    heroKeys:'Prompt Engineering · AI Workflows · System Design',
+    heroSub:'Tôi biến bài toán nghiệp vụ thành hệ thống chạy được — từ phân tích, mô hình hoá đến frontend, backend, dữ liệu, kiểm thử và triển khai. AI được sử dụng cả trong quá trình phát triển lẫn bên trong sản phẩm khi bài toán cần xử lý tài liệu, dịch hoặc trích xuất dữ liệu.',
+    statement:'Tôi thích bắt đầu từ một bài toán chưa rõ ràng, hiểu nó đủ sâu rồi biến nó thành một sản phẩm thực sự chạy được — từ ý tưởng, dữ liệu đến trải nghiệm người dùng và triển khai.',
     location:'Hoàng Mai, Hà Nội',
     email:'Hiep.work@outlook.com',
     phone:'0978 618 337',
     linkedin:'linkedin.com/in/hiepnm2003',
-    ctaWork:'Xem dự án', downloadCv:'Tải CV', viewCode:'Xem mã nguồn', liveDemo:'Xem bản chạy thật',
-    workTitle:'Dự án tiêu biểu', skillsTitle:'Kỹ năng', eduTitle:'Học vấn',
-    lblProblem:'Vấn đề', lblSolution:'Giải pháp', lblResult:'Kết quả',
+    ctaWork:'Xem dự án', downloadCv:'Tải CV', viewCode:'Mã nguồn', liveDemo:'Bản chạy thật',
+    awardsTitle:'Thành tích', workTitle:'Dự án', aiTitle:'Tôi làm việc với AI như thế nào', caseTitle:'Case study: trích xuất dữ liệu từ giấy tờ',
+    stackTitle:'Tôi làm việc với gì', aboutTitle:'Về tôi', eduTitle:'Học vấn',
+    lblMore:'Chi tiết kỹ thuật', lblProblem:'Vấn đề', lblBuilt:'Tôi đã xây gì', lblAi:'AI nằm ở đâu trong hệ thống', lblRole:'Việc tôi làm', lblResult:'Kết quả',
     noShot:'Chưa có ảnh chụp màn hình',
     privateRepo:'Mã nguồn riêng tư',
     countFmt:n => n + ' dự án',
     eduSchool:'Đại học Bách khoa Hà Nội (HUST)',
     eduDegree:'Cử nhân Khoa học Máy tính',
     eduYears:'2021 – 2026',
-    contactCta:'Cần một MVP chạy thật trong vài tuần?',
-    contactSub:'Tôi nhận những bài toán cần đi từ tài liệu nghiệp vụ tới sản phẩm chạy production — làm độc lập, tốc độ AI-native, có test thật và deploy thật. Liên hệ qua email hoặc LinkedIn.',
+    contactCta:'Có bài toán cần đi tới production?',
+    contactSub:'Tôi nhận những việc đi từ yêu cầu nghiệp vụ tới hệ thống chạy thật. Email hoặc LinkedIn đều được.',
+
     projects:[
       {id:'senai', name:'SenAI', year:'2026',
-       tagline:'Phiên dịch cuộc họp Việt–Anh real-time (Giải Ba + Vietnam AI Stars — Vietnam AI Innovation Challenge 2026)',
-       problem:'Cuộc họp song ngữ Việt–Anh phải chờ phiên dịch viên, độ trễ cao, biên bản làm tay; nhiều tổ chức lại không được phép đẩy nội dung họp lên cloud.',
-       solution:'Dựng end-to-end theo workflow AI-Native (Claude Code + spec → plan → agent → UAT thật): web app Next.js 16/React 19 song ngữ, backend FastAPI phân tầng router/engine/store, PostgreSQL 16 + pgvector. Mỗi mic LiveKit chạy một pipeline ASR+MT độc lập, phụ đề 2-lane fast→refine và chế độ Cabin dịch ngay khi đang nói. Model Router cắm-thay cho phép đổi giữa model self-host (Qwen3-ASR, Qwen3-8B, F5-TTS trên vLLM) và API thương mại ngay lúc chạy, có fallback tự động. Kèm RAG thuật ngữ, tóm tắt LLM, OAuth + JWT + RBAC + audit log, AI Gateway công khai.',
-       result:'~29.000 dòng code trong 336 commit chỉ 3 tuần, chạy production tại app.senai.online (Nginx + systemd + TLS, CI/CD pull-based); đo thật ~75ms ASR + ~295ms MT (<400ms/câu), 0 lỗi tới concurrency 8; 37 bộ UAT / 147 test chạy thật không mock. Đoạt Giải Ba chung cuộc + Vietnam AI Stars.',
-       stack:['Claude Code','Next.js 16','React 19','TypeScript','Tailwind v4','FastAPI','PostgreSQL + pgvector','LiveKit / WebRTC','vLLM','RAG','Docker','Nginx','GitHub Actions'],
-       demo:'https://app.senai.online',
-       github:null},
-      {id:'notarex', name:'Notarex (E25 OCR)', year:'2026',
-       tagline:'Nền tảng OCR & số hoá hồ sơ công chứng',
-       problem:'Văn phòng công chứng xử lý hồ sơ giấy thủ công: dễ sai sót, khó phân quyền theo vai trò và không truy vết được luồng tài liệu.',
-       solution:'Full-stack + điều phối AI: cấu hình biểu mẫu linh hoạt, OCR AI trích xuất giấy tờ, chỉnh–lưu–tải trực tiếp qua OnlyOffice (JWT), phân quyền 3 vai trò (admin/director/employee) theo văn phòng, sinh DOCX tự động bằng docxtpl. Hàng đợi Celery + Redis với ZSET pending queue, atomic active-counter và heartbeat reconcile xử lý job zombie.',
-       result:'387 commit / ~55.000 dòng code trong 3,5 tháng, phủ bởi 43 module test / 418 test case tự động. Chạy production ổn định, lưu file trên MinIO (S3), CI/CD qua GitHub Actions.',
-       stack:['Next.js 14','TypeScript','Ant Design','Zustand','TanStack Query','FastAPI','SQLAlchemy 2.0 async','PostgreSQL 16','MinIO','OnlyOffice','Nginx','Docker'],
-       github:null},
+       tagline:'Nền tảng phiên dịch cuộc họp Việt–Anh thời gian thực, chạy được on-premise hoặc qua API thương mại.',
+       problem:'Họp song ngữ phải chờ phiên dịch viên, người nghe luôn chậm hơn người nói một nhịp. Biên bản viết tay sau buổi họp. Nhiều tổ chức lại không được phép đưa nội dung họp lên dịch vụ cloud.',
+       built:'Phòng họp trực tuyến trên LiveKit: mỗi người một mic, một pipeline nhận dạng và dịch riêng nên không lẫn tiếng, phụ đề chạy ngay khi người ta còn đang nói. Sau buổi họp có transcript song ngữ, biên bản tóm tắt và bản Word/PDF gửi email. Tôi dựng toàn bộ app Next.js 16 quanh nó: 7 màn tính năng, design system riêng, song ngữ VI/EN, sáng/tối, PWA.',
+       more:'Trong phòng họp: camera, chia sẻ màn hình, chat dịch hai chiều, sảnh chờ với cổng duyệt khách bật/tắt được, host mute/kick, chế độ diễn giả cấp và thu quyền nói, mời bằng QR. Panel cấu hình sửa được giữa cuộc họp — bot đọc lại cấu hình và khởi động lại handler từng mic để áp trong khoảng một giây. Phía dữ liệu tôi chuyển store từ SQLite sang PostgreSQL + pgvector mà giữ nguyên chữ ký hàm công khai, nên phần gọi vào không phải sửa.',
+       flow:['giọng nói','ASR','dịch nhanh','LLM refine theo glossary','phụ đề + đọc lại','biên bản tóm tắt'],
+       aiNote:'Dịch chạy hai lane: bản nhanh phát ra khi người ta còn đang nói, LLM biên tập bất đồng bộ rồi thay tại chỗ đúng câu đó. Model Router tách theo năng lực nên đổi nhà cung cấp lúc đang chạy mà không sửa code; thiếu key hoặc lỗi thì tự quay về model self-host. Thuật ngữ lĩnh vực và tài liệu người dùng tải lên được nhúng vào pgvector, dùng cho cả glossary dịch lẫn sửa lỗi ASR theo phiên âm.',
+       role:['Frontend toàn bộ app','Backend & dữ liệu','Phòng họp real-time','Pipeline dịch & AI','Spec + tài liệu','CI/CD & triển khai VPS'],
+       result:'Ba tuần từ repo trắng tới bản chạy công khai tại app.senai.online, làm cùng nhóm dự án. Độ trễ đo thật trên pipeline: khoảng 220ms từ lúc dứt câu tới lúc có bản dịch. 37 bộ UAT với 147 test chạy thật, không mock. CI chạy mỗi lần push, deploy pull-based lên VPS.',
+       stack:['Next.js 16','React 19','TypeScript','FastAPI','PostgreSQL + pgvector','LiveKit','vLLM','Docker','Nginx'],
+       demo:'https://app.senai.online', github:null},
+
+      {id:'notarex', name:'Notarex', year:'2026',
+       tagline:'Hệ thống số hoá quy trình xử lý hồ sơ công chứng bằng OCR và AI.',
+       problem:'Hồ sơ đến văn phòng chủ yếu là giấy tờ scan hoặc ảnh chụp. Nhân viên gõ tay từng trường sang biểu mẫu Word, mỗi bộ hồ sơ vài chục trường, sai một chỗ là làm lại cả tờ. Hồ sơ đang nằm ở bước nào thì phải hỏi nhau mới biết.',
+       built:'Quản trị viên tải file Word mẫu lên, hệ thống đọc ra các chỗ cần điền, quản trị viên mô tả mỗi chỗ đó lấy từ loại giấy tờ nào. Nhân viên upload ảnh giấy tờ, hệ thống trích xuất, người dùng soát lại trên màn hình rồi xuất ra file Word hoàn chỉnh, sửa trực tiếp trong trình duyệt qua OnlyOffice. Ba vai trò phân quyền theo từng văn phòng, hồ sơ của văn phòng nào chỉ văn phòng đó thấy.',
+       flow:['ảnh / scan','prompt riêng theo loại giấy tờ','AI OCR','JSON đúng schema','parser + người soát','điền vào biểu mẫu Word'],
+       aiNote:'Prompt của mỗi loại giấy tờ được sinh ra từ chính cấu hình biểu mẫu — tên trường, mô tả do người dùng gõ, kiểu dữ liệu — nên thêm loại giấy tờ mới không phải sửa code. Giấy tờ có mã QR (CCCD) thì đọc thẳng QR và bỏ qua AI, vì nguồn đó chắc chắn hơn.',
+       role:['Phân tích yêu cầu','Kiến trúc','Backend','Frontend','Thiết kế prompt & luồng OCR','Hàng đợi xử lý nền','Triển khai'],
+       result:'Thêm một loại giấy tờ mới giờ là việc cấu hình, không phải việc sửa code. 418 test tự động phủ luồng OCR, phân quyền và sinh tài liệu. Hàng đợi Celery + Redis chạy job nền, tự phát hiện và chạy lại job treo. Đóng gói Docker sau Nginx, CI/CD bằng GitHub Actions.',
+       stack:['Next.js 14','TypeScript','FastAPI','SQLAlchemy async','PostgreSQL 16','Celery','Redis','MinIO','OnlyOffice','Docker'],
+       demo:null, github:null},
+
       {id:'easysale', name:'EasySale', year:'2026',
-       tagline:'Quản lý & tự động hoá lead bán hàng',
-       problem:'Đội bán hàng thu thập lead thủ công từ Google Maps rồi chăm sóc rời rạc qua nhiều kênh, khó theo dõi và dễ bỏ sót khách.',
-       solution:'Hệ tự động hoá bán hàng kèm Chrome Extension tự thu thập lead từ Google Maps, gửi tin nhắn chăm sóc qua Zalo OA và email qua SendGrid; tách cổng admin và cổng khách hàng riêng với đăng nhập hợp nhất.',
-       result:'136 commit / ~71.000 dòng code, phủ bởi 19 module test / 347 test case tự động. Toàn bộ đường từ thu thập tới chăm sóc lead chạy tự động, gần như bỏ hẳn thao tác tay của đội bán hàng.',
+       tagline:'Hệ thống thu thập và chăm sóc khách hàng tiềm năng cho đội bán hàng.',
+       problem:'Đội sale tìm khách trên Google Maps rồi copy tay vào file, sau đó nhắn tin và gửi mail từng người qua nhiều kênh. Không ai nắm được đã chăm sóc ai, đến bước nào.',
+       built:'Chrome Extension thu thập thông tin doanh nghiệp từ Google Maps và đẩy thẳng vào hệ thống. Backend quản lý danh sách khách và chạy chiến dịch gửi tin Zalo OA cùng email SendGrid. Hai cổng riêng cho quản trị và khách hàng, chung một cửa đăng nhập.',
+       flow:null, aiNote:null,
+       role:['Backend','Chrome Extension','Tích hợp Zalo OA & SendGrid','Triển khai'],
+       result:'Lead từ Google Maps vào thẳng hệ thống, chiến dịch chăm sóc chạy tự động trên hai kênh. 347 test tự động phủ luồng chiến dịch, danh sách khách và phân quyền. Chạy bằng Docker sau Nginx.',
        stack:['FastAPI','PostgreSQL','Chrome Extension','Zalo OA API','SendGrid','Docker','Nginx'],
-       github:'https://github.com/TolaHiep/eazysales'},
+       demo:null, github:'https://github.com/TolaHiep/eazysales'},
+
       {id:'akf', name:'AKF Farm', year:'2026',
-       tagline:'Quản lý sản xuất nông trại (web admin + mobile PWA)',
-       problem:'Sản xuất nông trại gồm nhiều bước phụ thuộc nhau, lại thường ở nơi kết nối yếu: khó giao đúng người, theo dõi tiến độ và chống gian lận khi báo cáo hoàn thành.',
-       solution:'Backend Frappe v15 headless với engine sinh việc event-driven theo bước/tần suất/tiên quyết, tính trạng thái 3 màu (worst-of), cân tải giao tổ trưởng, REST API và auth 2 vai trò (132 test xanh). Ảnh hoàn thành chống gian lận (camera in-app + GPS + watermark), offline queue idempotent, bản đồ nhiệt ảnh vệ tinh (Leaflet + Esri), lịch/thông báo/SOP theo bước.',
-       result:'Web admin và mobile PWA vận hành song song, chạy tốt cả khi kết nối yếu; dữ liệu tin cậy nhờ 132 test xanh và cơ chế chống gian lận đầy đủ.',
+       tagline:'Quản lý sản xuất nông trại: web cho quản lý, PWA cho người làm ngoài đồng.',
+       problem:'Việc ngoài đồng gồm nhiều bước phụ thuộc nhau và thường ở chỗ sóng yếu. Giao việc, theo dõi tiến độ và xác nhận công việc đã làm thật đều dựa vào giấy với tin nhắn.',
+       built:'Backend Frappe v15 headless sinh việc theo bước, tần suất và điều kiện tiên quyết, rồi chia cho tổ trưởng theo tải hiện có. Người làm dùng PWA: chụp ảnh hoàn thành ngay trong app kèm GPS và watermark; mất sóng thì ghi vào hàng đợi offline idempotent, có sóng đồng bộ lại, không mất và không nhân đôi. Quản lý xem bản đồ nhiệt ảnh vệ tinh, lịch, thông báo và SOP từng bước.',
+       flow:null, aiNote:null,
+       role:['Backend','Web admin','Mobile PWA','Cơ chế offline','Kiểm thử'],
+       result:'132 test tự động xanh trên engine sinh việc, mô hình trạng thái và phân quyền.',
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
-       github:'https://github.com/TolaHiep/afk-farm'}
+       demo:null, github:'https://github.com/TolaHiep/afk-farm'}
     ],
-    skills:[
-      {label:'AI-Native workflow', items:['Claude Code (agent · skill · hook)','Cursor','ChatGPT','Gemini','GitHub Copilot','MCP server','Prompt & context engineering','Spec-driven development','RAG','LLM orchestration','vLLM self-host']},
-      {label:'Lập trình', items:['TypeScript / JavaScript','Java','Python','C / C++']},
-      {label:'Framework', items:['React 19','Next.js 16','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
-      {label:'Dữ liệu & Backend', items:['PostgreSQL + pgvector','MySQL','MariaDB','RESTful API','WebSocket','WebRTC (LiveKit)','Celery','Redis','MinIO','Frappe']},
-      {label:'Hạ tầng & Tích hợp', items:['Docker','Nginx','systemd + TLS','CI/CD (GitHub Actions)','Cloudflare','Amazon SES','OAuth / JWT','OnlyOffice','Zalo OA','Chrome Extension']},
-      {label:'Thiết kế hệ thống', items:['Tư duy hệ thống','Kiến trúc phần mềm','SOLID','OOP','Design pattern','Xử lý lỗi']},
-      {label:'Phân tích nghiệp vụ', items:['Thu thập yêu cầu','Trao đổi stakeholder','Tài liệu SRS','Use Case','Activity Diagram','ERD']}
+
+    aiIntro:'Tôi không bắt đầu bằng một prompt thật dài. Tôi bắt đầu bằng bốn câu hỏi: AI cần làm đúng việc gì, đầu vào có những gì, kết quả thế nào thì coi là đúng, và hệ thống xử lý ra sao khi kết quả sai.',
+    aiFlow:['Ngữ cảnh','Chỉ dẫn','Công cụ','Output có cấu trúc','Đánh giá','Lặp lại'],
+    caps:[
+      {t:'Thiết kế prompt & ngữ cảnh',
+       d:'Chuyển yêu cầu nghiệp vụ thành ngữ cảnh, chỉ dẫn, ràng buộc và định dạng output cụ thể. Ở Notarex, prompt không viết tay cho từng loại giấy tờ mà sinh ra từ cấu hình biểu mẫu: tên trường, mô tả người dùng gõ, kiểu dữ liệu và danh sách key được phép trả về.'},
+      {t:'Output có cấu trúc',
+       d:'Model trả JSON đúng schema đã khai báo; không thấy thông tin thì trả null chứ không đoán. Phía sau vẫn có parser nhiều tầng để bóc JSON khi model kèm thêm chữ hoặc code fence, và luôn có bước người soát trước khi dữ liệu vào tài liệu chính thức.'},
+      {t:'Đánh giá & xử lý lỗi',
+       d:'Những kiểu output hỏng gặp thật được viết thành test: JSON bọc trong code fence, model nói thêm một câu trước JSON, thừa dấu phẩy, chèn comment. Một file lỗi không làm hỏng cả hồ sơ — job chuyển sang trạng thái "hoàn thành có lỗi" để người dùng sửa phần thiếu.'},
+      {t:'Dùng AI trong quá trình phát triển',
+       d:'Phân tích yêu cầu, phác kiến trúc, viết code, review, debug, viết test và tài liệu. Mỗi đợt làm bắt đầu bằng một spec ngắn trong repo và kết thúc bằng test chạy thật; ngữ cảnh dự án nằm trong CLAUDE.md / AGENTS.md của từng repo. Cái quyết định vẫn là test và hành vi thật của hệ thống, không phải cảm giác code trông ổn.'}
+    ],
+
+    awardsLead:'Vietnam AI Innovation Challenge 2026 - cuộc thi Hackathon 100% AI-native đầu tiên tại Việt Nam giải bài toán thật từ doanh nghiệp. Nhóm chúng tôi đã xuất sắc vượt qua hơn 300 đội thi giành được top 3 chung cuộc và hai giải thưởng riêng của Vietnam AI Stars và AI Singapore.',
+    awardsWhat:'Phần việc của tôi trong sản phẩm dự thi: toàn bộ frontend, phần lớn backend phía sau nó, phòng họp real-time, pipeline dịch, CI/CD và triển khai.',
+    caseIntro:'Lấy từ Notarex — phần khó nhất không phải gọi model, mà là làm cho output của model đủ ổn định để hệ thống dùng tiếp được.',
+    caseBlocks:[
+      {l:'Mục tiêu', p:'Nhận ảnh giấy tờ, trả về JSON đúng những trường mà biểu mẫu Word đang cần.'},
+      {l:'Vấn đề gặp phải', list:[
+        'Ảnh mờ hoặc thiếu thông tin thì model tự bịa giá trị thay vì bỏ trống.',
+        'Output lúc là JSON thuần, lúc bọc trong code fence, lúc kèm một câu giải thích trước JSON.',
+        'Một prompt chứa hai bộ key khác nhau — key chuẩn của QR và key placeholder của file Word — nên model trả về key không khớp bên nào.',
+        'Mỗi văn phòng dùng biểu mẫu khác nhau, không thể hard-code danh sách trường.'
+      ]},
+      {l:'Cách xử lý', list:[
+        'Prompt sinh từ cấu hình: mỗi trường vào prompt kèm nhãn, mô tả người dùng tự gõ và gợi ý kiểu dữ liệu (ngày DD/MM/YYYY, số chỉ chữ số).',
+        'Ràng buộc viết thẳng trong prompt: chỉ trả các key được liệt kê, không thấy thì null, không suy đoán, không giải thích, không code fence.',
+        'Gộp về một schema duy nhất: phần mô tả trường và khung JSON dùng chung một bộ key. Đây chính là lỗi làm output sai key trước đó.',
+        'Chỗ nào có nguồn chắc hơn thì không hỏi model: giấy tờ có QR thì đọc QR rồi bỏ qua OCR.',
+        'Nhiều giấy tờ trong một hồ sơ chạy song song, mỗi giấy tờ một prompt, kết quả ghép lại theo thứ tự.'
+      ]},
+      {l:'Đánh giá', p:'11 test cho phần sinh prompt (đúng schema, chặn key lạ, gợi ý kiểu dữ liệu, bỏ trường thiếu key) và 12 test cho parser — mỗi test là một kiểu output hỏng đã gặp thật.'},
+      {l:'Kết quả', p:'Thêm loại giấy tờ mới chỉ cần cấu hình, không đụng code. Output sai vẫn nằm trong tầm kiểm soát: bóc được thì bóc, không bóc được thì đánh dấu và chuyển cho người sửa, thay vì làm hỏng cả hồ sơ.'}
+    ],
+    caseCodeLbl:'Ràng buộc trong prompt (rút gọn từ mã nguồn)',
+    caseNote:'Nguồn: templatePrompt.ts, ocr/prompt.py, ocr/parser.py, ocr/orchestrator.py.',
+
+    stack:[
+      {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflow','RAG (pgvector)','vLLM self-host']},
+      {label:'Ứng dụng', items:['TypeScript','React','Next.js','Python','FastAPI','REST API','WebSocket']},
+      {label:'Dữ liệu', items:['PostgreSQL','pgvector','MariaDB','Redis','MinIO']},
+      {label:'Triển khai', items:['Docker','Nginx','CI/CD (GitHub Actions)','Testing (pytest / UAT)','VPS + systemd + TLS']}
+    ],
+
+    about:[
+      'Tôi xuất phát từ cả lập trình lẫn phân tích nghiệp vụ, nên thói quen là hiểu bài toán trước rồi mới code. Phần lớn thời gian đầu của một dự án tôi dành để hỏi cho rõ: ai dùng, dữ liệu vào từ đâu, thế nào là làm đúng.',
+      'Ở những dự án gần đây tôi dùng AI khá nhiều trong lúc làm — phân tích yêu cầu, thử vài hướng kiến trúc, viết code, review, debug, viết test và tài liệu. Cách làm cố định: viết spec ngắn trước, để AI hiện thực hoá, rồi chốt bằng test chạy thật chứ không chạy mock.',
+      'Tôi thích những việc đi được trọn vòng: từ yêu cầu ban đầu, thiết kế hệ thống, code, cho tới lúc deploy và có người dùng thật.'
     ]
   },
+
   en: {
     name:'Nguyen Manh Hiep',
-    barRole:'AI-Native Full-stack Dev',
-    navWork:'Work', navSkills:'Skills', navContact:'Contact',
-    heroKicker:'AI-Native Full-stack Developer · Vibe Coding',
-    tagline:'AI as the build engine, not an autocomplete helper.',
-    intro:'A full-stack developer working AI-native: idea to production runs through an AI workflow — brainstorm into a spec, spec into a plan, plan into agent implementation (Claude Code, Cursor, ChatGPT, Gemini, Copilot), then locked down with real, non-mocked tests. Latest proof: SenAI — a real-time Vietnamese–English meeting interpreter, ~29k lines of code across 336 commits in 3 weeks, live in production and winner of 3rd Prize + Vietnam AI Stars at the Vietnam AI Innovation Challenge 2026.',
+    barRole:'AI-Native Full-stack Developer',
+    navWork:'Work', navAi:'AI workflow', navCase:'Case study',
+    navStack:'Tech stack', navContact:'Contact',
+    heroKicker:'AI-Native Full-stack Developer',
+    tagline:'From business problem to a system in production.',
+    heroKeys:'Prompt Engineering · AI Workflows · System Design',
+    heroSub:'I turn business problems into systems that run — from analysis and modelling through frontend, backend, data, testing and deployment. AI is used both during development and inside the product, when the problem involves processing documents, translation or data extraction.',
+    statement:'I like starting from a problem nobody has pinned down yet, understanding it deeply enough, then turning it into a product that actually runs — from the idea and the data through to the user experience and deployment.',
     location:'Hoang Mai, Hanoi',
     email:'Hiep.work@outlook.com',
     phone:'+84 978 618 337',
     linkedin:'linkedin.com/in/hiepnm2003',
-    ctaWork:'View work', downloadCv:'Download CV', viewCode:'View source', liveDemo:'See it live',
-    workTitle:'Selected work', skillsTitle:'Skills', eduTitle:'Education',
-    lblProblem:'Problem', lblSolution:'Solution', lblResult:'Result',
+    ctaWork:'View work', downloadCv:'Download CV', viewCode:'Source', liveDemo:'Live site',
+    awardsTitle:'Achievements', workTitle:'Selected work', aiTitle:'How I work with AI', caseTitle:'Case study: structured document extraction',
+    stackTitle:'What I work with', aboutTitle:'About', eduTitle:'Education',
+    lblMore:'Technical detail', lblProblem:'Problem', lblBuilt:'What I built', lblAi:'AI in the system', lblRole:'My role', lblResult:'Result',
     noShot:'No screenshots yet',
     privateRepo:'Private repository',
     countFmt:n => n + ' projects',
     eduSchool:'Hanoi University of Science and Technology (HUST)',
     eduDegree:'B.Sc. in Computer Science',
     eduYears:'2021 – 2026',
-    contactCta:'Need a real MVP in weeks, not quarters?',
-    contactSub:'I take on problems that have to travel from a business document to a system running in production — worked independently, at AI-native speed, with real tests and a real deployment. Reach me by email or on LinkedIn.',
+    contactCta:'Got a problem that needs to reach production?',
+    contactSub:'I take on work that runs from business requirements to a system people actually use. Email or LinkedIn both work.',
+
     projects:[
       {id:'senai', name:'SenAI', year:'2026',
-       tagline:'Real-time Vietnamese–English meeting interpreter (3rd Prize + Vietnam AI Stars — Vietnam AI Innovation Challenge 2026)',
-       problem:'Bilingual VI–EN meetings wait on human interpreters, run with high latency and produce minutes by hand — while many organisations are not allowed to push meeting content to the cloud at all.',
-       solution:'Built end-to-end on an AI-native workflow (Claude Code with spec → plan → agent → real UAT): a bilingual Next.js 16 / React 19 web app, a layered FastAPI backend (routers / engine / store), PostgreSQL 16 + pgvector. Every LiveKit mic track gets its own independent ASR+MT pipeline, with 2-lane fast→refine subtitles and a Cabin mode that translates while the speaker is still talking. A pluggable Model Router swaps self-hosted models (Qwen3-ASR, Qwen3-8B, F5-TTS on vLLM) and commercial APIs at runtime with automatic fallback. Plus glossary RAG, LLM summaries, OAuth + JWT + RBAC + audit logs and a public AI Gateway.',
-       result:'~29,000 lines of code across 336 commits in 3 weeks, live in production at app.senai.online (Nginx + systemd + TLS, pull-based CI/CD); measured ~75 ms ASR + ~295 ms MT (<400 ms per turn), zero errors up to concurrency 8; 37 UAT suites / 147 real non-mocked tests. Awarded 3rd Prize + Vietnam AI Stars.',
-       stack:['Claude Code','Next.js 16','React 19','TypeScript','Tailwind v4','FastAPI','PostgreSQL + pgvector','LiveKit / WebRTC','vLLM','RAG','Docker','Nginx','GitHub Actions'],
-       demo:'https://app.senai.online',
-       github:null},
-      {id:'notarex', name:'Notarex (E25 OCR)', year:'2026',
-       tagline:'OCR & digitization platform for notary records',
-       problem:'Notary offices processed paper records by hand: error-prone, hard to control by role, and impossible to audit the document flow.',
-       solution:'Full-stack + AI orchestration: flexible form config, AI OCR extraction, edit–save–download straight through OnlyOffice (JWT), 3-role access control (admin/director/employee) per office, and automatic DOCX generation with docxtpl. A Celery + Redis queue with a ZSET pending queue, an atomic active-counter and heartbeat reconcile handles zombie jobs.',
-       result:'387 commits and ~55,000 LOC over 3.5 months, covered by 43 test modules / 418 automated test cases. Runs reliably in production with files on MinIO (S3) and CI/CD via GitHub Actions.',
-       stack:['Next.js 14','TypeScript','Ant Design','Zustand','TanStack Query','FastAPI','SQLAlchemy 2.0 async','PostgreSQL 16','MinIO','OnlyOffice','Nginx','Docker'],
-       github:null},
+       tagline:'Real-time Vietnamese–English meeting interpreter that runs on-premise or through commercial APIs.',
+       problem:'Bilingual meetings wait on a human interpreter, so listeners are always one beat behind. Minutes are written by hand afterwards. And many organisations are not allowed to send meeting content to a cloud service at all.',
+       built:'A LiveKit meeting room where every participant has their own mic and their own recognition and translation pipeline, so voices never bleed into each other and subtitles appear while a person is still speaking. Afterwards there is a bilingual transcript, a summary, and Word/PDF minutes sent by email. I built the whole Next.js 16 app around it: seven feature screens, its own design system, VI/EN localisation, light/dark, PWA.',
+       more:'Inside the room: camera, screen share, two-way translated chat, a waiting room with a host-controlled approval gate, mute/kick, a speaker mode that grants and revokes the right to talk, QR invites. The settings panel is editable mid-meeting — the bot reloads config and restarts per-mic handlers so it applies in about a second. On the data side I migrated the store from SQLite to PostgreSQL + pgvector while keeping the public function signatures intact, so nothing calling into it had to change.',
+       flow:['speech','ASR','fast translation','LLM refine with glossary','subtitles + spoken output','summary minutes'],
+       aiNote:'Translation runs in two lanes: a fast draft goes out while the person is still talking, then an LLM edits it asynchronously and replaces that exact line in place. A model router splits the system by capability, so providers swap at runtime without code changes; a missing key or a failure falls back to the self-hosted model. Domain terms and uploaded documents are embedded into pgvector and used both as the translation glossary and to correct ASR errors phonetically.',
+       role:['Whole frontend','Backend & data','Real-time meeting room','Translation & AI pipeline','Specs + docs','CI/CD & VPS deployment'],
+       result:'Three weeks from an empty repo to a public deployment at app.senai.online, built with the project team. Measured on the pipeline: about 220 ms from the end of a sentence to a translation on screen. 37 UAT suites with 147 real, non-mocked tests. CI on every push, pull-based deploys to a VPS.',
+       stack:['Next.js 16','React 19','TypeScript','FastAPI','PostgreSQL + pgvector','LiveKit','vLLM','Docker','Nginx'],
+       demo:'https://app.senai.online', github:null},
+
+      {id:'notarex', name:'Notarex', year:'2026',
+       tagline:'Digitizes the notary office document workflow with OCR and AI.',
+       problem:'Records arrive as scans or phone photos. Staff retype every field into a Word form — dozens of fields per record — and one mistake means redoing the page. Nobody can tell which step a record is currently at.',
+       built:'An admin uploads the Word template, the system reads out the placeholders, and the admin describes which document each placeholder comes from. Staff upload photos of the papers, the system extracts the values, the user checks them on screen and exports a finished Word file, editable in the browser through OnlyOffice. Three roles, scoped per office, so each office only sees its own records.',
+       flow:['photo / scan','per-document prompt','AI OCR','JSON matching the schema','parser + human check','filled Word template'],
+       aiNote:'Each document type gets a prompt generated from the template configuration itself — field names, the description the admin typed, the data type — so adding a new document type needs configuration, not code. Documents with a QR code (national ID) are read from the QR and skip the model entirely, because that source is more reliable.',
+       role:['Requirement analysis','Architecture','Backend','Frontend','Prompt & OCR flow design','Background job queue','Deployment'],
+       result:'Adding a new document type is now configuration, not code. 418 automated tests cover the OCR flow, permissions and document generation. A Celery + Redis queue runs the background jobs and detects and retries stuck ones. Dockerized behind Nginx, CI/CD through GitHub Actions.',
+       stack:['Next.js 14','TypeScript','FastAPI','SQLAlchemy async','PostgreSQL 16','Celery','Redis','MinIO','OnlyOffice','Docker'],
+       demo:null, github:null},
+
       {id:'easysale', name:'EasySale', year:'2026',
-       tagline:'Sales-lead management & automation',
-       problem:'Sales teams collected leads from Google Maps by hand, then nurtured them across scattered channels — hard to track and easy to drop customers.',
-       solution:'A sales-automation system with a Chrome Extension that auto-collects leads from Google Maps and sends nurture messages via Zalo OA and email through SendGrid; separate admin and customer portals with unified sign-in.',
-       result:'136 commits and ~71,000 LOC, covered by 19 test modules / 347 automated test cases. The full path from lead capture to nurturing runs automatically, all but removing manual work for the sales team.',
+       tagline:'Collects and nurtures sales leads for a sales team.',
+       problem:'The team found prospects on Google Maps, copied them into a spreadsheet by hand, then messaged and emailed each one across separate channels. Nobody could tell who had already been contacted, or how far along they were.',
+       built:'A Chrome Extension scrapes business details from Google Maps straight into the system. The backend keeps the lead list and runs campaigns over Zalo OA messages and SendGrid email. Separate admin and customer portals behind one sign-in.',
+       flow:null, aiNote:null,
+       role:['Backend','Chrome Extension','Zalo OA & SendGrid integration','Deployment'],
+       result:'Leads go from Google Maps straight into the system, and nurture campaigns run themselves across two channels. 347 automated tests cover campaigns, the lead list and access control. Runs on Docker behind Nginx.',
        stack:['FastAPI','PostgreSQL','Chrome Extension','Zalo OA API','SendGrid','Docker','Nginx'],
-       github:'https://github.com/TolaHiep/eazysales'},
+       demo:null, github:'https://github.com/TolaHiep/eazysales'},
+
       {id:'akf', name:'AKF Farm', year:'2026',
-       tagline:'Farm production management (web admin + mobile PWA)',
-       problem:'Farm production spans many dependent steps and often runs in low-connectivity areas: hard to assign the right person, track progress, and prevent fraud in completion reports.',
-       solution:'A headless Frappe v15 backend with an event-driven task engine by step/frequency/prerequisite, a 3-color worst-of status calc, load-balanced assignment to team leads, a REST API and 2-role auth (132 passing tests). Anti-fraud completion photos (in-app camera + GPS + watermark), an idempotent offline queue, a satellite-imagery heatmap (Leaflet + Esri), and per-step calendar/notifications/SOPs.',
-       result:'Web admin and a mobile PWA run in parallel and work even on weak connections, with data you can trust thanks to 132 passing tests and full anti-fraud measures.',
+       tagline:'Farm production management: a web app for managers, a PWA for field workers.',
+       problem:'Field work is a chain of dependent steps, usually done where the signal is weak. Assigning work, tracking progress and confirming a task was really done all ran on paper and chat messages.',
+       built:'A headless Frappe v15 backend generates tasks by step, frequency and prerequisite, then assigns them to team leads by current load. Workers use a PWA: completion photos are taken in-app with GPS and a watermark; with no signal the data goes into an idempotent offline queue and syncs later, so nothing is lost or duplicated. Managers get a satellite heatmap, a calendar, notifications and per-step SOPs.',
+       flow:null, aiNote:null,
+       role:['Backend','Web admin','Mobile PWA','Offline sync','Testing'],
+       result:'132 passing automated tests across the task engine, the status model and access control.',
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
-       github:'https://github.com/TolaHiep/afk-farm'}
+       demo:null, github:'https://github.com/TolaHiep/afk-farm'}
     ],
-    skills:[
-      {label:'AI-Native workflow', items:['Claude Code (agents · skills · hooks)','Cursor','ChatGPT','Gemini','GitHub Copilot','MCP servers','Prompt & context engineering','Spec-driven development','RAG','LLM orchestration','vLLM self-hosting']},
-      {label:'Programming', items:['TypeScript / JavaScript','Java','Python','C / C++']},
-      {label:'Frameworks', items:['React 19','Next.js 16','NestJS / ExpressJS','Spring Boot','FastAPI','Node.js']},
-      {label:'Databases & Backend', items:['PostgreSQL + pgvector','MySQL','MariaDB','RESTful API','WebSocket','WebRTC (LiveKit)','Celery','Redis','MinIO','Frappe']},
-      {label:'Infrastructure & Integration', items:['Docker','Nginx','systemd + TLS','CI/CD (GitHub Actions)','Cloudflare','Amazon SES','OAuth / JWT','OnlyOffice','Zalo OA','Chrome Extension']},
-      {label:'System Design', items:['Systems thinking','Software architecture','SOLID','OOP','Design patterns','Error handling']},
-      {label:'Business Analysis', items:['Requirements gathering','Stakeholder communication','SRS documentation','Use Case','Activity Diagram','ERD']}
+
+    aiIntro:'I do not start by writing a long prompt. I start with four questions: what exactly should the model do, what is in the input, what counts as a correct result, and what the system does when the result is wrong.',
+    aiFlow:['Context','Instructions','Tools','Structured output','Evaluation','Iteration'],
+    caps:[
+      {t:'Prompt & context design',
+       d:'Turning a business requirement into concrete context, instructions, constraints and an output format. In Notarex the prompts are not hand-written per document type — they are generated from the template configuration: field names, the description the user typed, the data type, and the exact list of keys allowed in the response.'},
+      {t:'Structured outputs',
+       d:'The model returns JSON matching the declared schema, and returns null instead of guessing when a value is not visible. Behind it a multi-tier parser still recovers the JSON when the model wraps it in prose or a code fence, and a person reviews the values before they reach an official document.'},
+      {t:'Evaluation & failure handling',
+       d:'The broken outputs I actually hit are written down as tests: JSON inside a code fence, a polite sentence before the JSON, trailing commas, injected comments. One bad file does not sink the whole record — the job moves to a "completed with errors" state and the user fills the gaps.'},
+      {t:'AI-assisted development',
+       d:'Requirement analysis, architecture exploration, implementation, review, debugging, tests and documentation. Each round starts with a short spec in the repo and ends with a real test run; project context lives in CLAUDE.md / AGENTS.md per repository. What settles it is the tests and the system behaviour, not code that looks fine.'}
+    ],
+
+    awardsLead:'Vietnam AI Innovation Challenge 2026 - the first fully AI-native hackathon in Vietnam, run on real business problems. Out of more than 300 teams, ours finished in the top 3 overall and took two separate awards from Vietnam AI Stars and AI Singapore.',
+    awardsWhat:'My part in the competing product: the whole frontend, most of the backend behind it, the real-time meeting room, the translation pipeline, CI/CD and deployment.',
+    caseIntro:'Taken from Notarex. The hard part was never calling the model — it was making the model output stable enough for the rest of the system to rely on.',
+    caseBlocks:[
+      {l:'Goal', p:'Take a photo of a document and return JSON containing exactly the fields the Word template needs.'},
+      {l:'What went wrong first', list:[
+        'On blurry or incomplete scans the model invented values instead of leaving them empty.',
+        'Output was sometimes plain JSON, sometimes fenced, sometimes preceded by an explanation.',
+        'One prompt carried two different key sets — the QR canonical keys and the Word placeholder keys — so the model returned keys that matched neither.',
+        'Every office uses different templates, so the field list cannot be hard-coded.'
+      ]},
+      {l:'Approach', list:[
+        'Prompts generated from configuration: each field enters the prompt with its label, the description the user typed and a type hint (dates as DD/MM/YYYY, numbers as digits only).',
+        'Constraints stated in the prompt: return only the listed keys, null when the value is not visible, no guessing, no explanation, no code fence.',
+        'Collapse to a single schema so the field list and the JSON skeleton share one key set. That mismatch was the actual bug behind the wrong keys.',
+        'Where a more reliable source exists, do not ask the model: documents with a QR code are read from the QR and skip OCR.',
+        'Several documents in one record run in parallel, one prompt each, and the results are stitched together in slot order.'
+      ]},
+      {l:'Evaluation', p:'11 tests on prompt generation (schema matches the declared keys, extra keys forbidden, type hints present, fields without a key dropped) and 12 tests on the parser — each one a shape of broken output that actually occurred.'},
+      {l:'Result', p:'A new document type is configuration, not code. Bad output stays contained: recoverable JSON is recovered, unrecoverable JSON is flagged and handed to a person, instead of failing the whole record.'}
+    ],
+    caseCodeLbl:'Prompt constraints (condensed from the source)',
+    caseNote:'Source: templatePrompt.ts, ocr/prompt.py, ocr/parser.py, ocr/orchestrator.py.',
+
+    stack:[
+      {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflows','RAG (pgvector)','vLLM self-hosting']},
+      {label:'Application', items:['TypeScript','React','Next.js','Python','FastAPI','REST APIs','WebSocket']},
+      {label:'Data', items:['PostgreSQL','pgvector','MariaDB','Redis','MinIO']},
+      {label:'Delivery', items:['Docker','Nginx','CI/CD (GitHub Actions)','Testing (pytest / UAT)','VPS + systemd + TLS']}
+    ],
+
+    about:[
+      'I came into this from both programming and business analysis, so my habit is to understand the problem before writing code. Early in a project most of my time goes into asking who uses this, where the data comes from, and what counts as correct.',
+      'On recent projects I use AI heavily while building — analysing requirements, sketching a couple of architectures, writing code, reviewing, debugging, writing tests and docs. The routine is fixed: a short spec first, AI does the implementation, and a real test run settles it. No mocks.',
+      'I like work that goes the full distance: requirements, system design, implementation, deployment, and real users at the end of it.'
     ]
   }
 };
+
+/* The prompt rules below are quoted (condensed) from the real source in
+   E25_OCR/frontend/lib/templatePrompt.ts — do not embellish them. */
+const CASE_CODE = `QUY TẮC BẮT BUỘC:
+1. CHỈ trả về JSON với ĐÚNG các key liệt kê bên dưới
+   — KHÔNG thêm bất kỳ key nào khác.
+2. KHÔNG bịa, KHÔNG suy đoán. Nếu không thấy rõ
+   thông tin trong ảnh, trả null cho key đó.
+3. Lấy nguyên văn giá trị từ ảnh; chỉ chuẩn hoá
+   theo type quy định cho từng trường.
+4. Trả thuần JSON, KHÔNG bao gồm \`\`\`json\`\`\`,
+   KHÔNG có text giải thích trước/sau.
+
+CÁC TRƯỜNG CẦN TRÍCH XUẤT:
+- "Hovaten" — Họ và tên (text)
+- "Ngaysinh" — Ngày sinh (date, DD/MM/YYYY)
+- "Socccd"  — Số CCCD (number, chỉ chữ số)
+
+ĐỊNH DẠNG TRẢ VỀ (giữ nguyên thứ tự key):
+{
+  "Hovaten":  "<giá trị hoặc null>",
+  "Ngaysinh": "<giá trị hoặc null>",
+  "Socccd":   "<giá trị hoặc null>"
+}`;
 
 const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
@@ -543,11 +819,48 @@ const media = (p, c) => {
       </button>`).join('')}</div>` : ''}`;
 };
 
-const psr = (lbl, txt) => `
+const row = (lbl, body) => `
   <div class="psr__row">
     <div class="psr__lbl">${esc(lbl)}</div>
-    <p class="psr__txt">${esc(txt)}</p>
+    ${body}
   </div>`;
+
+const txt = t => `<p class="psr__txt">${esc(t)}</p>`;
+const flowLine = steps => `<div class="flow">${steps.map(s => `<span>${esc(s)}</span>`).join('<i>→</i>')}</div>`;
+
+function projectCard(p, c) {
+  const aiBlock = p.flow
+    ? row(c.lblAi, `${flowLine(p.flow)}${p.aiNote ? `<p class="psr__txt" style="margin-top:12px">${esc(p.aiNote)}</p>` : ''}`)
+    : '';
+  const more = p.more ? `
+    <details class="more">
+      <summary>${esc(c.lblMore)}</summary>
+      <p class="more__body">${esc(p.more)}</p>
+    </details>` : '';
+  return `
+    <article class="proj grid" data-reveal>
+      <div class="proj__media">${media(p, c)}</div>
+      <div class="proj__body">
+        <div class="proj__top">
+          <h3 class="proj__name">${esc(p.name)}</h3>
+          <span class="proj__year">${esc(p.year)}</span>
+        </div>
+        <p class="proj__tagline">${esc(p.tagline)}</p>
+        ${row(c.lblProblem, txt(p.problem))}
+        ${row(c.lblBuilt, `${txt(p.built)}${more}`)}
+        ${aiBlock}
+        ${row(c.lblRole, `<div class="roles">${p.role.map(r => `<span>${esc(r)}</span>`).join('')}</div>`)}
+        ${row(c.lblResult, txt(p.result))}
+        <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+        <div class="proj__links">
+          ${p.demo ? `<a class="proj__src" href="${esc(p.demo)}" target="_blank" rel="noopener">${esc(c.liveDemo)} →</a>` : ''}
+          ${p.github
+            ? `<a class="proj__src" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(c.viewCode)} →</a>`
+            : `<span class="proj__private">${esc(c.privateRepo)}</span>`}
+        </div>
+      </div>
+    </article>`;
+}
 
 function render() {
   const c = CONTENT[lang];
@@ -558,11 +871,8 @@ function render() {
 
   document.getElementById('hero-name').innerHTML = splitChars(c.name);
 
-  document.getElementById('statement').innerHTML = c.intro.split(' ')
+  document.getElementById('statement').innerHTML = c.statement.split(' ')
     .map(w => `<span class="w">${esc(w)} </span>`).join('');
-
-  document.getElementById('marquee').innerHTML =
-    (MARQUEE.concat(MARQUEE)).map(t => `<span class="marquee__item">${esc(t)}</span>`).join('');
 
   document.getElementById('stats').innerHTML = STATS[lang].map(s => `
     <div class="stat">
@@ -570,40 +880,77 @@ function render() {
       <div class="stat__l">${esc(s.label)}</div>
     </div>`).join('');
 
-  document.getElementById('projects').innerHTML = c.projects.map(p => `
-    <article class="proj grid" data-reveal>
-      <div class="proj__media">${media(p, c)}</div>
-      <div class="proj__body">
-        <div class="proj__top">
-          <h3 class="proj__name">${esc(p.name)}</h3>
-          <span class="proj__year">${esc(p.year)}</span>
-        </div>
-        <p class="proj__tagline">${esc(p.tagline)}</p>
-        <div class="psr">
-          ${psr(c.lblProblem, p.problem)}
-          ${psr(c.lblSolution, p.solution)}
-          ${psr(c.lblResult, p.result)}
-        </div>
-        <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
-        <div class="proj__links">
-          ${p.demo ? `<a class="proj__src" href="${esc(p.demo)}" target="_blank" rel="noopener">${esc(c.liveDemo)} →</a>` : ''}
-          ${p.github
-            ? `<a class="proj__src" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(c.viewCode)} →</a>`
-            : `<span class="proj__private">${esc(c.privateRepo)}</span>`}
-        </div>
-      </div>
-    </article>`).join('');
+  const aw = AWARD[lang];
+  document.getElementById('awards-body').innerHTML = `
+    <div class="awards__txt" data-reveal>
+      <div class="awards__year">2026</div>
+      <h3 class="awards__title">${esc(aw.t)}</h3>
+      <div class="awards__list">${aw.items.map(i => `<span>${esc(i)}</span>`).join('')}</div>
+      <p class="psr__txt" style="margin-top:16px">${esc(c.awardsLead)}</p>
+      <p class="psr__txt" style="margin-top:12px;color:var(--muted)">${esc(c.awardsWhat)}</p>
+      <a class="proj__src" href="https://app.senai.online" target="_blank" rel="noopener">SenAI — ${esc(c.liveDemo)} →</a>
+    </div>
+    <div class="awards__pics" data-reveal>
+      ${AWARD.pics.map(src => `<img src="${esc(src)}" alt="${esc(aw.t)}" loading="lazy">`).join('')}
+    </div>`;
 
-  document.getElementById('keys').innerHTML = c.skills.map(g => `
+  document.getElementById('projects').innerHTML = c.projects.map(p => projectCard(p, c)).join('');
+
+  document.getElementById('ai-flow').innerHTML =
+    c.aiFlow.map(s => `<span>${esc(s)}</span>`).join('<i>→</i>');
+
+  document.getElementById('caps').innerHTML = c.caps.map(k => `
+    <div class="cap" data-reveal>
+      <h3>${esc(k.t)}</h3>
+      <p>${esc(k.d)}</p>
+    </div>`).join('');
+
+  document.getElementById('case-body').innerHTML = `
+    <p class="proj__tagline">${esc(c.caseIntro)}</p>
+    ${c.caseBlocks.map(b => `
+      <div class="case__block">
+        <div class="case__lbl">${esc(b.l)}</div>
+        ${b.list
+          ? `<ul class="case__list">${b.list.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`
+          : `<p class="psr__txt">${esc(b.p)}</p>`}
+      </div>`).join('')}`;
+
+  document.getElementById('case-side').innerHTML = `
+    <div class="case__lbl">${esc(c.caseCodeLbl)}</div>
+    <pre class="code">${esc(CASE_CODE)}</pre>
+    <div class="note">${esc(c.caseNote)}</div>`;
+
+  document.getElementById('keys').innerHTML = c.stack.map(g => `
     <div class="key" data-reveal>
       <div class="key__lbl">${esc(g.label)}</div>
       <div class="key__set">${g.items.map(i => `<span class="chip">${esc(i)}</span>`).join('')}</div>
     </div>`).join('');
 
+  document.getElementById('hero-about').innerHTML =
+    c.about.map(p => `<p>${esc(p)}</p>`).join('');
+
   animateName();
   typeEyebrow(c.heroKicker);
   initMotion();
 }
+
+/* ─── scrollspy: đánh dấu mục đang xem trên menu ───────────── */
+(function () {
+  const links = Array.from(document.querySelectorAll('.bar__link'));
+  const map = new Map();
+  links.forEach(a => {
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) map.set(el, a);
+  });
+  if (!map.size) return;
+  const mark = el => links.forEach(a => a.setAttribute('aria-current', map.get(el) === a));
+  const io = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) mark(visible.target);
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: [0, .25, .5, 1] });
+  map.forEach((_, el) => io.observe(el));
+})();
 
 // one delegated listener survives every re-render
 document.addEventListener('click', e => {
@@ -705,15 +1052,6 @@ function initMotion() {
     });
     motionTriggers.push(tw.scrollTrigger);
   }
-
-  // parallax — project screenshots drift as you scroll
-  gsap.utils.toArray('.proj__media').forEach(el => {
-    const tw = gsap.fromTo(el, { yPercent: -10 }, {
-      yPercent: 10, ease: 'none',
-      scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-    motionTriggers.push(tw.scrollTrigger);
-  });
 
   // count-up stats
   gsap.utils.toArray('[data-count]').forEach(el => {
