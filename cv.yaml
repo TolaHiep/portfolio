@@ -1,10 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
-# Source of truth for assets/NguyenManhHiep_AI_Native_Dev_CV.pdf
+# Source of truth for assets/NguyenManhHiep_SE_CV.pdf
 # Render: python -m rendercv render cv.yaml
 # ponytail: no " - " inside any text — rendercv/typst turns it into a new bullet. Use "—" or ";".
 cv:
   name: Nguyen Manh Hiep
-  headline: AI-Native Full-Stack Developer
+  headline: Software Engineer · Full-Stack
   location: Hoang Mai, Ha Noi (Remote-ready)
   email: Hiep.work@outlook.com
   phone: "+84-978618337"
@@ -16,37 +16,39 @@ cv:
 
   sections:
     summary:
-      - AI-native full-stack developer who ships complete products, not prototypes. I drive the whole
-        lifecycle (requirements, architecture, frontend, backend, database, tests, deployment) with an
-        AI-first workflow — Claude Code, Cursor, ChatGPT, Gemini and Copilot as the primary build engine,
-        not an autocomplete helper. Latest proof is **SenAI**, a real-time Vietnamese–English meeting
-        interpreter built **in three weeks** as the main developer on the project team — frontend, backend,
-        CI/CD and deployment — live in production at [app.senai.online](https://app.senai.online), **3rd Prize +
-        Vietnam AI Stars at the Vietnam AI Innovation Challenge 2026 (AI Singapore)**.
+      # ponytail: folded block scalar — text contains ": ", which breaks a plain scalar.
+      - >-
+        Software Engineer focused on full-stack web development: UI, backend, database, deployment and
+        testing. Recent work includes real-time systems, document OCR, admin dashboards, workflow
+        automation, and AI/LLM integrations inside real product flows. Most recent project is **SenAI**,
+        a real-time Vietnamese–English meeting interpreter I built in **three weeks** as the main
+        developer on the project team (frontend, backend, CI/CD, deployment). It is live at
+        [app.senai.online](https://app.senai.online) and took **3rd Prize and the Vietnam AI Stars award
+        at the Vietnam AI Innovation Challenge 2026 (AI Singapore)**.
 
     Career Objective:
-      - Own products end-to-end as an AI-Native Full-Stack Developer — business document to deployed MVP
-        in weeks — and push the team's AI development workflow (prompt & context engineering, MCP, agent
-        guardrails) into something measurably faster and safer than hand-written delivery. Next, I am
-        deepening scalable real-time architecture and production LLM/ML integration (routing, evaluation,
-        cost and latency budgets), aiming to lead a small cross-functional team that turns AI-native
-        delivery into a repeatable engineering standard rather than a one-off experiment.
+      - >-
+        I am interested in Software Engineer or Full-stack Software Engineer roles where I can contribute
+        from technical design through implementation, deployment and product operations. Right now I am
+        going deeper into real-time architecture and production LLM integration: model routing,
+        evaluation, and latency and cost budgets. I work with short specs, code review and real,
+        non-mocked tests so features can be checked by system behaviour, not only by how the code looks.
 
     Selected Achievements:
       - bullet: "**3rd Prize + Vietnam AI Stars**, Vietnam AI Innovation Challenge 2026 (AI Singapore),
           for SenAI — a real-time Vietnamese–English meeting interpreter shipped to public production."
-      - bullet: "**4 systems delivered end-to-end** in ~12 months (SenAI, Notarex, EasySale, AKF Farm) —
-          each one carried from requirements through architecture, implementation, tests and deployment."
+      - bullet: "**3 systems delivered end-to-end** in ~12 months (SenAI, Notarex, AKF Farm) — each one
+          carried from requirements through architecture, implementation, tests and deployment."
       - bullet: "**Blank repo to live production in 3 weeks** on SenAI — frontend, backend, database,
           security, CI/CD and deployment, on a spec-driven AI workflow (**16 design specs + 16 plans**
           kept in the repo)."
-      - bullet: "**1,000+ automated / UAT test cases authored** across the four products (418 Notarex,
-          347 EasySale, 147 SenAI real non-mocked, 132 AKF Farm) — every AI-generated feature ships
-          behind a real test."
+      - bullet: "**697 automated / UAT test cases authored** across the three portfolio products (418
+          Notarex, 147 SenAI real non-mocked, 132 AKF Farm) — every AI-generated feature ships behind a
+          real test."
       - bullet: "**Sub-400 ms live translation** (~75 ms ASR + ~295 ms MT measured end-to-end) with zero
           errors up to concurrency 8, and runtime provider switching with no restart and no downtime."
 
-    AI-Native Development Workflow:
+    How I Work With AI:
       - label: Toolchain
         details: Claude Code (primary agent, subagents, custom skills), Cursor, ChatGPT, Gemini, GitHub
           Copilot; MCP servers (GitNexus code intelligence, browser automation) wired into the coding loop
@@ -63,13 +65,13 @@ cv:
     projects:
       - name: "SenAI — Real-time Vietnamese–English Meeting Interpreter ([app.senai.online](https://app.senai.online))"
         date: 2026
-        summary: AI-native platform for live bilingual meetings — per-speaker ASR, translation and voice
+        summary: Platform for live bilingual meetings — per-speaker ASR, translation and voice
           cloning, automatic minutes, on-prem or commercial model routing. Built for the Vietnam AI
           Innovation Challenge 2026 (AI Singapore) — **3rd Prize, Vietnam AI Stars Award and AI Singapore
           Award**. Main developer on the project team — the whole frontend, most of the backend behind it,
           the real-time meeting room, the translation pipeline, CI/CD and deployment.
         highlights:
-          - "**AI-native delivery:** blank repo to public production deployment in **3 weeks**, on a
+          - "**Delivery:** blank repo to public production deployment in **3 weeks**, on a
             spec-driven loop (design spec → plan → agent implementation → real UAT) with 16 design specs
             and 16 implementation plans kept in the repo."
           - "**Frontend ownership:** the entire Next.js 16 / React 19 / Tailwind v4 app — 7 feature screens
@@ -114,16 +116,6 @@ cv:
             Dockerized behind Nginx with GitHub Actions CI/CD.
           - "Delivered over 3.5 months and covered by **43 test modules / 418 automated test cases**;
             adding a new document type became configuration rather than code."
-
-      - name: "EasySale — Sales Lead Management & Automation"
-        date: 2026
-        summary: Automation platform that collects leads and nurtures them without manual follow-up.
-        highlights:
-          - Built a Chrome Extension that scrapes business leads from Google Maps straight into the system.
-          - Integrated the Zalo OA API for automated care messages and SendGrid for email campaigns.
-          - Delivered separate admin and customer portals behind a unified login, deployed with Docker + Nginx.
-          - "Covered by **19 test modules / 347 automated test cases** across campaigns, the lead list
-            and access control."
 
       - name: "AKF Farm — Agricultural Production Management (Web Admin + Mobile PWA)"
         date: 2026
