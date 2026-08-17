@@ -287,13 +287,22 @@ section{scroll-margin-top:72px}
 .about p:last-child{margin-bottom:0}
 
 /* ─── mục Thành tích ───────────────────────────────────────── */
-.awards__txt{grid-column:span 4}
-.awards__pics{grid-column:5 / span 8;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:calc(var(--u)*1.25);align-content:start}
-.awards__pics img{width:100%;height:100%;object-fit:contain;background:var(--panel);padding:6px;border-radius:12px;border:1px solid var(--line-strong);
-  aspect-ratio:4/3;transition:border-color .3s}
-.awards__pics img:first-child{grid-column:1 / -1;aspect-ratio:16/9}
-.awards__pics img:hover{border-color:rgba(34,211,238,.5)}
-@media (max-width:900px){.awards__txt,.awards__pics{grid-column:1/-1}.awards__pics{margin-top:calc(var(--u)*2)}}
+.awards__txt{grid-column:span 5}
+.awards__carousel{grid-column:7 / span 6;align-self:start}
+.awards__viewport{position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--line-strong);
+  background:var(--panel);aspect-ratio:16/10}
+.awards__track{height:100%;display:flex;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+.awards__track img{width:100%;height:100%;flex:0 0 100%;object-fit:contain;padding:8px}
+.awards__nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:999px;
+  border:1px solid var(--line-strong);background:rgba(5,8,17,.72);color:var(--ink);cursor:pointer;
+  display:grid;place-items:center;font-size:24px;line-height:1;backdrop-filter:blur(10px);transition:border-color .2s,color .2s,background .2s}
+.awards__nav:hover{border-color:var(--accent);color:var(--accent);background:rgba(5,8,17,.9)}
+.awards__nav--prev{left:10px}
+.awards__nav--next{right:10px}
+.awards__dots{display:flex;justify-content:center;gap:8px;margin-top:calc(var(--u)*1.25)}
+.awards__dot{width:9px;height:9px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;cursor:pointer;padding:0}
+.awards__dot[aria-current=true]{background:var(--accent);border-color:var(--accent)}
+@media (max-width:900px){.awards__txt,.awards__carousel{grid-column:1/-1}.awards__carousel{margin-top:calc(var(--u)*2)}}
 .awards__year{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);letter-spacing:.1em}
 .awards__title{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;margin:calc(var(--u)*1) 0 calc(var(--u)*2)}
 .awards__list{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75)}
@@ -334,8 +343,9 @@ section{scroll-margin-top:72px}
   .proj{padding:calc(var(--u)*3.5) 0}
   .thumbs{gap:6px}
   .thumb{width:60px;height:44px}
-  .awards__pics{gap:6px}
-  .awards__pics img{padding:4px;border-radius:8px}
+  .awards__viewport{border-radius:8px;aspect-ratio:4/3}
+  .awards__track img{padding:4px}
+  .awards__nav{width:36px;height:36px}
 }
 </style>
 </head>
@@ -797,6 +807,24 @@ CÁC TRƯỜNG CẦN TRÍCH XUẤT:
 
 const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
+let awardIndex = 0;
+let awardTimer = null;
+
+function updateAwardsCarousel(nextIndex = awardIndex) {
+  const track = document.getElementById('awards-track');
+  if (!track) return;
+  awardIndex = (nextIndex + AWARD.pics.length) % AWARD.pics.length;
+  track.style.transform = `translateX(${-awardIndex * 100}%)`;
+  document.querySelectorAll('.awards__dot').forEach((dot, i) => {
+    dot.setAttribute('aria-current', i === awardIndex);
+  });
+}
+
+function startAwardCarousel() {
+  window.clearInterval(awardTimer);
+  if (REDUCE) return;
+  awardTimer = window.setInterval(() => updateAwardsCarousel(awardIndex + 1), 4500);
+}
 
 // split into words (wrap, inline-block) then per-char spans for stagger animation
 const splitChars = text => text.split(' ')
@@ -888,9 +916,20 @@ function render() {
       <p class="psr__txt" style="margin-top:12px;color:var(--muted)">${esc(c.awardsWhat)}</p>
       <a class="proj__src" href="https://app.senai.online" target="_blank" rel="noopener">SenAI - ${esc(c.liveDemo)} →</a>
     </div>
-    <div class="awards__pics" data-reveal>
-      ${AWARD.pics.map(src => `<img src="${esc(src)}" alt="${esc(aw.t)}" loading="lazy">`).join('')}
+    <div class="awards__carousel" data-awards-carousel data-reveal>
+      <div class="awards__viewport">
+        <div class="awards__track" id="awards-track">
+          ${AWARD.pics.map((src, i) => `<img src="${esc(src)}" alt="${esc(aw.items[i] || aw.t)}" loading="${i ? 'lazy' : 'eager'}">`).join('')}
+        </div>
+        <button class="awards__nav awards__nav--prev" type="button" data-award-dir="-1" aria-label="Previous award">&lsaquo;</button>
+        <button class="awards__nav awards__nav--next" type="button" data-award-dir="1" aria-label="Next award">&rsaquo;</button>
+      </div>
+      <div class="awards__dots">
+        ${AWARD.pics.map((_, i) => `<button class="awards__dot" type="button" data-award-index="${i}" aria-label="Show award ${i + 1}"></button>`).join('')}
+      </div>
     </div>`;
+  updateAwardsCarousel(awardIndex);
+  startAwardCarousel();
 
   document.getElementById('projects').innerHTML = c.projects.map(p => projectCard(p, c)).join('');
 
@@ -954,6 +993,20 @@ function render() {
 document.addEventListener('click', e => {
   const langBtn = e.target.closest('.lang button');
   if (langBtn) { lang = langBtn.dataset.lang; localStorage.setItem('lang', lang); render(); return; }
+
+  const awardDir = e.target.closest('[data-award-dir]');
+  if (awardDir) {
+    updateAwardsCarousel(awardIndex + Number(awardDir.dataset.awardDir));
+    startAwardCarousel();
+    return;
+  }
+
+  const awardDot = e.target.closest('[data-award-index]');
+  if (awardDot) {
+    updateAwardsCarousel(Number(awardDot.dataset.awardIndex));
+    startAwardCarousel();
+    return;
+  }
 
   const thumb = e.target.closest('.thumb');
   if (!thumb) return;
