@@ -531,9 +531,9 @@ const SHOTS = {
 };
 
 /* Every number here has a source in a repository:
-   - 3 products: SenAI, Notarex (E25_OCR), AKF Farm
+   - 3 products: SenAI, Notarex (E25_OCR), ASC Farm
    - 3 awards: Giải Ba Chung cuộc, Vietnam AI Stars, AI Singapore (app.senai.online)
-   - 697 tests: 147 SenAI UAT + 418 E25_OCR + 132 AKF Farm
+   - 697 tests: 147 SenAI UAT + 418 E25_OCR + 132 ASC Farm
    TODO(Hiep): chưa có metric nghiệp vụ (số hồ sơ xử lý, thời gian nhập liệu tiết kiệm được,
    số cuộc họp đã dùng SenAI). Nếu xin được số thật từ phía khách hàng thì thêm vào đây. */
 /* Awards are shown as an achievement band, not as project screenshots.
@@ -606,7 +606,7 @@ const CONTENT = {
        stack:['Next.js 14','TypeScript','FastAPI','SQLAlchemy async','PostgreSQL 16','Celery','Redis','MinIO','OnlyOffice','Docker'],
        demo:null, github:null},
 
-      {id:'akf', name:'AKF Farm', year:'2026',
+      {id:'akf', name:'ASC Farm', year:'2026',
        tagline:'Quản lý sản xuất nông trại: web cho quản lý, PWA cho người làm ngoài đồng.',
        problem:'Việc ngoài đồng gồm nhiều bước phụ thuộc nhau và thường ở chỗ sóng yếu. Giao việc, theo dõi tiến độ và xác nhận công việc đã làm thật đều dựa vào giấy với tin nhắn.',
        built:'Backend Frappe v15 headless sinh việc theo bước, tần suất và điều kiện tiên quyết, rồi chia cho tổ trưởng theo tải hiện có. Người làm dùng PWA: chụp ảnh hoàn thành ngay trong app kèm GPS và watermark; mất sóng thì ghi vào hàng đợi offline idempotent, có sóng đồng bộ lại, không mất và không nhân đôi. Quản lý xem bản đồ nhiệt ảnh vệ tinh, lịch, thông báo và SOP từng bước.',
@@ -614,7 +614,7 @@ const CONTENT = {
        role:['Backend','Web admin','Mobile PWA','Cơ chế offline','Kiểm thử'],
        result:'Việc ngoài đồng ghi được cả khi mất sóng và không bị nhân đôi lúc đồng bộ lại. 132 test tự động xanh trên engine sinh việc, mô hình trạng thái và phân quyền.',
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
-       demo:null, github:'https://github.com/TolaHiep/afk-farm'}
+       demo:null, github:'https://github.com/TolaHiep/asc-farm'}
     ],
 
     aiIntro:'Tôi dùng AI như một phần trong quy trình kỹ thuật: phân tích yêu cầu, hỗ trợ viết code, review, tạo test và tích hợp LLM khi sản phẩm cần xử lý ngôn ngữ hoặc tài liệu. Khi đưa LLM vào sản phẩm, tôi bắt đầu bằng bốn câu hỏi: AI cần làm đúng việc gì, đầu vào có những gì, kết quả thế nào thì coi là đúng, và hệ thống xử lý ra sao khi kết quả sai.',
@@ -718,7 +718,7 @@ const CONTENT = {
        stack:['Next.js 14','TypeScript','FastAPI','SQLAlchemy async','PostgreSQL 16','Celery','Redis','MinIO','OnlyOffice','Docker'],
        demo:null, github:null},
 
-      {id:'akf', name:'AKF Farm', year:'2026',
+      {id:'akf', name:'ASC Farm', year:'2026',
        tagline:'Farm production management: a web app for managers, a PWA for field workers.',
        problem:'Field work is a chain of dependent steps, usually done where the signal is weak. Assigning work, tracking progress and confirming a task was really done all ran on paper and chat messages.',
        built:'A headless Frappe v15 backend generates tasks by step, frequency and prerequisite, then assigns them to team leads by current load. Workers use a PWA: completion photos are taken in-app with GPS and a watermark; with no signal the data goes into an idempotent offline queue and syncs later, so nothing is lost or duplicated. Managers get a satellite heatmap, a calendar, notifications and per-step SOPs.',
@@ -726,7 +726,7 @@ const CONTENT = {
        role:['Backend','Web admin','Mobile PWA','Offline sync','Testing'],
        result:'Field work still gets recorded when the signal drops, and nothing is duplicated once it syncs. 132 passing automated tests across the task engine, the status model and access control.',
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
-       demo:null, github:'https://github.com/TolaHiep/afk-farm'}
+       demo:null, github:'https://github.com/TolaHiep/asc-farm'}
     ],
 
     aiIntro:'I use AI as part of the engineering workflow: understanding requirements, writing code, reviewing, creating tests, and integrating LLMs when a product needs language or document processing. When an LLM goes into a product, I start with four questions: what exactly should the model do, what is in the input, what counts as a correct result, and what the system does when the result is wrong.',

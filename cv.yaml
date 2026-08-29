@@ -37,13 +37,13 @@ cv:
     Selected Achievements:
       - bullet: "**3rd Prize + Vietnam AI Stars**, Vietnam AI Innovation Challenge 2026 (AI Singapore),
           for SenAI — a real-time Vietnamese–English meeting interpreter shipped to public production."
-      - bullet: "**3 systems delivered end-to-end** in ~12 months (SenAI, Notarex, AKF Farm) — each one
+      - bullet: "**3 systems delivered end-to-end** in ~12 months (SenAI, Notarex, ASC Farm) — each one
           carried from requirements through architecture, implementation, tests and deployment."
       - bullet: "**Blank repo to live production in 3 weeks** on SenAI — frontend, backend, database,
           security, CI/CD and deployment, on a spec-driven AI workflow (**16 design specs + 16 plans**
           kept in the repo)."
       - bullet: "**697 automated / UAT test cases authored** across the three portfolio products (418
-          Notarex, 147 SenAI real non-mocked, 132 AKF Farm) — every AI-generated feature ships behind a
+          Notarex, 147 SenAI real non-mocked, 132 ASC Farm) — every AI-generated feature ships behind a
           real test."
       - bullet: "**Sub-400 ms live translation** (~75 ms ASR + ~295 ms MT measured end-to-end) with zero
           errors up to concurrency 8, and runtime provider switching with no restart and no downtime."
@@ -117,7 +117,7 @@ cv:
           - "Delivered over 3.5 months and covered by **43 test modules / 418 automated test cases**;
             adding a new document type became configuration rather than code."
 
-      - name: "AKF Farm — Agricultural Production Management (Web Admin + Mobile PWA)"
+      - name: "ASC Farm — Agricultural Production Management (Web Admin + Mobile PWA)"
         date: 2026
         summary: Production management for agriculture, built to stay reliable in low-connectivity fields.
         highlights:
