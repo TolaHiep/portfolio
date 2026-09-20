@@ -1,6 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
-# Source of truth for assets/NguyenManhHiep_SE_CV.pdf
-# Render: python -m rendercv render cv.yaml
+# KHÔNG còn là nguồn của assets/NguyenManhHiep_SE_CV.pdf (từ 2026-09-20).
+# Hai PDF trong assets/ giờ build từ repo ai-job-search-vn:
+#   EN: cv/main_hiep.tex   -> assets/NguyenManhHiep_SE_CV.pdf
+#   VI: cv/main_hiep_vn.tex -> assets/NguyenManhHiep_SE_CV_VI.pdf
+#   Build: lualatex -interaction=nonstopmode <file>.tex
+# File này giữ lại làm bản lưu của pipeline rendercv cũ; nội dung đã lỗi thời.
+# Render (nếu vẫn muốn dùng): python -m rendercv render cv.yaml
 # ponytail: no " - " inside any text — rendercv/typst turns it into a new bullet. Use "—" or ";".
 cv:
   name: Nguyen Manh Hiep
