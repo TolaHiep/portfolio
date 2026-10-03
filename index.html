@@ -261,10 +261,11 @@ section{scroll-margin-top:72px}
 @media (max-width:900px){.lead,.lead-side{grid-column:1/-1}}
 .cap{grid-column:span 6;padding:calc(var(--u)*3) 0;border-top:1px solid var(--line)}
 @media (max-width:900px){.cap{grid-column:1/-1}}
-.cap h3{font-size:var(--t-md);font-weight:700;letter-spacing:-.02em;margin:0 0 var(--u)}
-.cap p{font-size:var(--t-base);line-height:1.65;color:var(--muted);margin:0}
+.cap h3,.ai-side h3{font-size:var(--t-md);font-weight:700;letter-spacing:-.02em;margin:0 0 var(--u)}
+.cap p,.ai-side p{font-size:var(--t-base);line-height:1.65;color:var(--muted);margin:0}
 
 /* ─── case study ───────────────────────────────────────────── */
+#case{margin-top:calc(var(--u)*6)}
 .case{grid-column:span 7}
 .case__side{grid-column:9 / span 4}
 @media (max-width:900px){.case,.case__side{grid-column:1/-1}}
@@ -363,7 +364,6 @@ section{scroll-margin-top:72px}
         <a class="bar__link" href="#awards" data-t="awardsTitle"></a>
         <a class="bar__link" href="#work" data-t="navWork"></a>
         <a class="bar__link" href="#ai" data-t="navAi"></a>
-        <a class="bar__link" href="#case" data-t="navCase"></a>
         <a class="bar__link" href="#stack" data-t="navStack"></a>
         <a class="bar__link" href="#contact" data-t="navContact"></a>
       </div>
@@ -382,6 +382,7 @@ section{scroll-margin-top:72px}
       <div class="hero__eyebrow"><span id="typed"></span><span class="caret">_</span></div>
       <h1 class="hero__name" id="hero-name"></h1>
       <p class="hero__tagline" data-t="tagline"></p>
+      <div class="stats" id="stats"></div>
       <div class="hero__keys" data-t="heroKeys"></div>
       <div class="hero__about" id="about">
         <div class="key__lbl" data-t="aboutTitle"></div>
@@ -396,7 +397,6 @@ section{scroll-margin-top:72px}
         <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_SE_CV.pdf" download data-t="downloadCvEn"></a>
         <a class="btn btn--line" data-magnet href="assets/NguyenManhHiep_SE_CV_VI.pdf" download data-t="downloadCvVi"></a>
       </div>
-      <div class="stats" id="stats"></div>
     </div>
     <div class="hero__aside">
       <div class="portrait-box">
@@ -442,16 +442,9 @@ section{scroll-margin-top:72px}
         <p style="margin:0" data-t="aiIntro"></p>
         <div class="flow" id="ai-flow"></div>
       </div>
+      <div class="lead-side ai-side" data-reveal id="caps"></div>
     </div>
-    <div class="grid" id="caps"></div>
-  </section>
-
-  <section id="case" class="section">
-    <div class="head" data-reveal>
-      <span class="head__num">04</span>
-      <h2 data-t="caseTitle"></h2>
-    </div>
-    <div class="grid">
+    <div class="grid" id="case">
       <div class="case" data-reveal id="case-body"></div>
       <div class="case__side" data-reveal id="case-side"></div>
     </div>
@@ -459,7 +452,7 @@ section{scroll-margin-top:72px}
 
   <section id="stack" class="section">
     <div class="head" data-reveal>
-      <span class="head__num">05</span>
+      <span class="head__num">04</span>
       <h2 data-t="stackTitle"></h2>
     </div>
     <div class="grid" id="keys"></div>
@@ -468,7 +461,7 @@ section{scroll-margin-top:72px}
   <section id="contact" class="contact">
     <div class="grid">
       <div class="contact__body" data-reveal>
-        <div class="hero__eyebrow" style="color:var(--accent)">06 / <span data-t="navContact"></span></div>
+        <div class="hero__eyebrow" style="color:var(--accent)">05 / <span data-t="navContact"></span></div>
         <h2 class="contact__title" data-t="contactCta"></h2>
         <p class="contact__sub" data-t="contactSub"></p>
         <div class="contact__cta">
@@ -630,12 +623,6 @@ const CONTENT = {
     aiIntro:'Khi làm phần mềm, tôi dùng AI để phân tích yêu cầu, viết code, review và viết test. Trong sản phẩm, tôi tích hợp LLM khi có phần cần xử lý ngôn ngữ hoặc tài liệu. Trước khi đưa LLM vào, tôi trả lời bốn câu hỏi: AI cần làm đúng việc gì, đầu vào có những gì, kết quả thế nào thì coi là đúng, và hệ thống xử lý ra sao khi kết quả sai.',
     aiFlow:['Ngữ cảnh','Chỉ dẫn','Công cụ','Output có cấu trúc','Đánh giá','Lặp lại'],
     caps:[
-      {t:'Thiết kế prompt & ngữ cảnh',
-       d:'Chuyển yêu cầu nghiệp vụ thành ngữ cảnh, chỉ dẫn, ràng buộc và định dạng output cụ thể. Ở Notarex, prompt không viết tay cho từng loại giấy tờ mà sinh ra từ cấu hình biểu mẫu: tên trường, mô tả người dùng gõ, kiểu dữ liệu và danh sách key được phép trả về.'},
-      {t:'Output có cấu trúc',
-       d:'Model trả JSON đúng schema đã khai báo; không thấy thông tin thì trả null chứ không đoán. Phía sau vẫn có parser nhiều tầng để bóc JSON khi model kèm thêm chữ hoặc code fence, và luôn có bước người soát trước khi dữ liệu vào tài liệu chính thức.'},
-      {t:'Đánh giá & xử lý lỗi',
-       d:'Những kiểu output hỏng gặp thật được viết thành test: JSON bọc trong code fence, model nói thêm một câu trước JSON, thừa dấu phẩy, chèn comment. Một file lỗi không làm hỏng cả hồ sơ: job chuyển sang trạng thái "hoàn thành có lỗi" để người dùng sửa phần thiếu.'},
       {t:'AI trong quy trình làm việc',
        d:'Phân tích yêu cầu, phác kiến trúc, viết code, review, debug, viết test và tài liệu. Mỗi đợt làm bắt đầu bằng một spec ngắn trong repo và kết thúc bằng test chạy thật; ngữ cảnh dự án nằm trong CLAUDE.md / AGENTS.md của từng repo. AI giúp tôi làm nhanh hơn. Còn code có đúng không thì vẫn phải nhìn vào test và cách hệ thống chạy thật, không dựa vào cảm giác code trông ổn.'}
     ],
@@ -748,12 +735,6 @@ const CONTENT = {
     aiIntro:'I use AI while building software: to work through requirements, write code, review, and write tests. In products, I integrate LLMs when there is language or document processing to do. Before an LLM goes in, I answer four questions: what exactly should the model do, what is in the input, what counts as a correct result, and what the system does when the result is wrong.',
     aiFlow:['Context','Instructions','Tools','Structured output','Evaluation','Iteration'],
     caps:[
-      {t:'Prompt & context design',
-       d:'Turning a business requirement into concrete context, instructions, constraints and an output format. In Notarex the prompts are not hand-written per document type. They are generated from the template configuration: field names, the description the user typed, the data type, and the exact list of keys allowed in the response.'},
-      {t:'Structured outputs',
-       d:'The model returns JSON matching the declared schema, and returns null instead of guessing when a value is not visible. Behind it, a multi-tier parser still recovers the JSON when the model wraps it in prose or a code fence, and a person reviews the values before they reach an official document.'},
-      {t:'Evaluation & failure handling',
-       d:'The broken outputs I actually hit are written down as tests: JSON inside a code fence, a polite sentence before the JSON, trailing commas, injected comments. One bad file does not sink the whole record. The job moves to a "completed with errors" state and the user fills the gaps.'},
       {t:'AI in the workflow',
        d:'Requirement analysis, architecture exploration, implementation, review, debugging, tests and documentation. Each round starts with a short spec in the repo and ends with a real test run; project context lives in CLAUDE.md / AGENTS.md per repository. AI makes me faster. Whether the code is right is still decided by the tests and how the system actually behaves, not by whether the code looks fine.'}
     ],
@@ -869,11 +850,12 @@ function projectCard(p, c) {
   const aiBlock = p.flow
     ? row(c.lblAi, `${flowLine(p.flow)}${p.aiNote ? `<p class="psr__txt" style="margin-top:12px">${esc(p.aiNote)}</p>` : ''}`)
     : '';
-  const more = p.more ? `
+  const more = `
     <details class="more">
       <summary>${esc(c.lblMore)}</summary>
-      <p class="more__body">${esc(p.more)}</p>
-    </details>` : '';
+      ${row(c.lblBuilt, `${txt(p.built)}${p.more ? `<p class="more__body">${esc(p.more)}</p>` : ''}`)}
+      ${aiBlock}
+    </details>`;
   return `
     <article class="proj grid" data-reveal>
       <div class="proj__media">${media(p, c)}</div>
@@ -884,10 +866,9 @@ function projectCard(p, c) {
         </div>
         <p class="proj__tagline">${esc(p.tagline)}</p>
         ${row(c.lblProblem, txt(p.problem))}
-        ${row(c.lblBuilt, `${txt(p.built)}${more}`)}
-        ${aiBlock}
-        ${row(c.lblRole, `<div class="roles">${p.role.map(r => `<span>${esc(r)}</span>`).join('')}</div>`)}
         ${row(c.lblResult, txt(p.result))}
+        ${row(c.lblRole, `<div class="roles">${p.role.map(r => `<span>${esc(r)}</span>`).join('')}</div>`)}
+        ${more}
         <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
         <div class="proj__links">
           ${p.demo ? `<a class="proj__src" href="${esc(p.demo)}" target="_blank" rel="noopener">${esc(c.liveDemo)} →</a>` : ''}
@@ -948,12 +929,11 @@ function render() {
     c.aiFlow.map(s => `<span>${esc(s)}</span>`).join('<i>→</i>');
 
   document.getElementById('caps').innerHTML = c.caps.map(k => `
-    <div class="cap" data-reveal>
       <h3>${esc(k.t)}</h3>
-      <p>${esc(k.d)}</p>
-    </div>`).join('');
+      <p>${esc(k.d)}</p>`).join('');
 
   document.getElementById('case-body').innerHTML = `
+    <h3>${esc(c.caseTitle)}</h3>
     <p class="proj__tagline">${esc(c.caseIntro)}</p>
     ${c.caseBlocks.map(b => `
       <div class="case__block">
