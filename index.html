@@ -134,9 +134,9 @@ section{scroll-margin-top:72px}
 .stat__n{font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1;
   background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .stat__l{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:calc(var(--u)*1);text-transform:uppercase;letter-spacing:.08em}
-.portrait-box{position:relative;width:100%;max-width:300px;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);
+.portrait-box{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;border-radius:var(--r);
   background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 0 0 1px rgba(34,211,238,.05),0 24px 60px -24px rgba(34,211,238,.25)}
-.portrait-box img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s ease}
+.portrait-box img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s ease}
 .portrait-box:hover img{transform:none}
 .hero__contact{display:flex;flex-direction:column;font-family:var(--mono);font-size:var(--t-sm)}
 .hero__contact a,.hero__contact span{display:flex;align-items:center;min-height:var(--tap);
@@ -327,7 +327,7 @@ section{scroll-margin-top:72px}
   .proj{padding:calc(var(--u)*4) 0}
   .proj__body .psr__row:first-of-type{margin-top:calc(var(--u)*4)}
   .statement{padding:calc(var(--u)*8) calc(var(--u)*3)}
-  .portrait-box{max-width:260px}
+  .portrait-box{max-width:380px}
 }
 @media (max-width:600px){
   section,#about{scroll-margin-top:68px}
@@ -401,7 +401,7 @@ section{scroll-margin-top:72px}
     </div>
     <div class="hero__aside">
       <div class="portrait-box">
-        <img src="assets/portrait/nguyen-manh-hiep-portrait.jpg" alt="Nguyễn Mạnh Hiệp" width="1200" height="1800">
+        <img src="assets/portrait/nguyen-manh-hiep-portrait.jpg" alt="Nguyễn Mạnh Hiệp" width="1024" height="1024">
       </div>
       <div class="hero__contact">
         <span data-t="location"></span>
