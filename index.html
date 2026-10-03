@@ -117,7 +117,7 @@ section{scroll-margin-top:72px}
 .hero__eyebrow{font-family:var(--mono);font-size:var(--t-sm);font-weight:500;letter-spacing:.08em;
   color:var(--accent);margin-bottom:calc(var(--u)*2);min-height:1.4em}
 .caret{color:var(--accent)}
-.hero__name{font-size:clamp(46px,8.4vw,116px);font-weight:900;line-height:1.04;letter-spacing:-.03em;
+.hero__name{font-size:clamp(28px,4.6vw,68px);white-space:nowrap;font-weight:900;line-height:1.04;letter-spacing:-.03em;
   text-transform:uppercase;margin:0;perspective:600px}
 .hero__name .wd{display:inline-block}
 .hero__name .ch{display:inline-block;will-change:transform}
@@ -152,21 +152,17 @@ section{scroll-margin-top:72px}
 .btn--line{background:transparent;color:var(--ink)}
 .btn--line:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ─── statement ────────────────────────────────────────────── */
-.statement{max-width:1000px;margin:0 auto;padding:calc(var(--u)*10) calc(var(--u)*3)}
-.statement p{font-size:clamp(22px,3.1vw,38px);font-weight:600;line-height:1.35;letter-spacing:-.02em;margin:0}
-
 /* ─── section heads ────────────────────────────────────────── */
-.section{padding:calc(var(--u)*6) 0 calc(var(--u)*8)}
+.section{padding:calc(var(--u)*5) 0 calc(var(--u)*6)}
 .head{display:flex;align-items:baseline;gap:calc(var(--u)*2);
-  padding-bottom:calc(var(--u)*2);border-bottom:1px solid var(--line-strong);margin-bottom:calc(var(--u)*4)}
+  padding-bottom:calc(var(--u)*1.5);border-bottom:1px solid var(--line-strong);margin-bottom:calc(var(--u)*3)}
 .head__num{font-family:var(--mono);font-size:var(--t-sm);font-weight:600;
   background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .head h2{font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-.03em;margin:0;flex:1;line-height:.95}
 .head__count{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted)}
 
 /* ─── projects ─────────────────────────────────────────────── */
-.proj{padding:calc(var(--u)*5) 0;border-bottom:1px solid var(--line)}
+.proj{padding:calc(var(--u)*3) 0;border-bottom:1px solid var(--line)}
 .proj:last-child{border-bottom:0}
 .proj__media{grid-column:span 6;position:sticky;top:80px;align-self:start}
 .proj__body{grid-column:7 / span 6}
@@ -190,20 +186,20 @@ section{scroll-margin-top:72px}
 .proj__top{display:flex;justify-content:space-between;align-items:baseline;gap:var(--u);margin-bottom:calc(var(--u)*.5)}
 .proj__name{font-size:clamp(24px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;margin:0}
 .proj__year{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted)}
-.proj__tagline{font-size:var(--t-base);color:var(--muted);margin:0 0 calc(var(--u)*2)}
-.psr__row{padding:calc(var(--u)*1.5) 0;border-top:1px solid var(--line)}
+.proj__tagline{font-size:var(--t-base);line-height:1.5;color:var(--muted);margin:0 0 var(--u)}
+.psr__row{padding:var(--u) 0;border-top:1px solid var(--line)}
 .psr__lbl{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:calc(var(--u)*.5)}
-.psr__txt{font-size:var(--t-base);line-height:1.65;margin:0;color:#d7d8e0}
-.stack{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75);margin-top:calc(var(--u)*2)}
+  text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.psr__txt{font-size:15px;line-height:1.5;margin:0;color:#d7d8e0}
+.stack{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.6);margin-top:var(--u)}
 .chip{font-family:var(--mono);font-size:var(--t-xs);padding:5px 10px;border-radius:999px;
   background:var(--panel);color:var(--muted);border:1px solid var(--line);transition:border-color .2s,color .2s}
 .chip:hover{border-color:var(--accent);color:var(--accent)}
-.proj__src{display:inline-flex;align-items:center;gap:6px;min-height:var(--tap);margin-top:var(--u);
+.proj__src{display:inline-flex;align-items:center;gap:6px;min-height:var(--tap);
   font-family:var(--mono);font-size:var(--t-sm);font-weight:600;color:var(--accent);
   border-bottom:1px solid transparent;transition:border-color .2s}
 .proj__src:hover{border-color:var(--accent)}
-.proj__private{display:inline-flex;align-items:center;min-height:var(--tap);margin-top:var(--u);
+.proj__private{display:inline-flex;align-items:center;min-height:var(--tap);
   font-family:var(--mono);font-size:var(--t-sm);color:var(--muted)}
 .proj__links{display:flex;flex-wrap:wrap;gap:calc(var(--u)*3)}
 
@@ -251,40 +247,15 @@ section{scroll-margin-top:72px}
 .flow i{font-style:normal;color:var(--faint);font-size:var(--t-xs)}
 
 /* ─── role chips ───────────────────────────────────────────── */
-.roles{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.75);margin-top:calc(var(--u)*.5)}
+.roles{display:flex;flex-wrap:wrap;gap:calc(var(--u)*.6);margin-top:2px}
 .roles span{font-family:var(--mono);font-size:var(--t-xs);padding:4px 9px;border-radius:999px;
   border:1px solid var(--line-strong);color:var(--muted)}
 
-/* ─── AI section: intro + capability cards ─────────────────── */
-.lead{grid-column:span 7;font-size:var(--t-md);line-height:1.55;color:#d7d8e0;margin:0 0 calc(var(--u)*2)}
-.lead-side{grid-column:9 / span 4}
-@media (max-width:900px){.lead,.lead-side{grid-column:1/-1}}
-.cap{grid-column:span 6;padding:calc(var(--u)*3) 0;border-top:1px solid var(--line)}
-@media (max-width:900px){.cap{grid-column:1/-1}}
-.cap h3,.ai-side h3{font-size:var(--t-md);font-weight:700;letter-spacing:-.02em;margin:0 0 var(--u)}
-.cap p,.ai-side p{font-size:var(--t-base);line-height:1.65;color:var(--muted);margin:0}
-
-/* ─── case study ───────────────────────────────────────────── */
-#case{margin-top:calc(var(--u)*6)}
-.case{grid-column:span 7}
-.case__side{grid-column:9 / span 4}
-@media (max-width:900px){.case,.case__side{grid-column:1/-1}}
-.case h3{font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-.02em;margin:0 0 var(--u)}
-.case__block{padding:calc(var(--u)*2) 0;border-top:1px solid var(--line)}
-.case__lbl{font-family:var(--mono);font-size:var(--t-xs);font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--accent);margin-bottom:var(--u)}
-.case__list{margin:0;padding-left:1.1em;color:#d7d8e0}
-.case__list li{margin-bottom:calc(var(--u)*.75);line-height:1.6}
-.case__list li:last-child{margin-bottom:0}
-.code{margin:0;padding:calc(var(--u)*2);border-radius:12px;background:var(--panel);
-  border:1px solid var(--line-strong);overflow-x:auto;
-  font-family:var(--mono);font-size:var(--t-xs);line-height:1.7;color:#cfd3e6;white-space:pre}
-.note{font-family:var(--mono);font-size:var(--t-xs);color:var(--faint);margin-top:var(--u)}
-
 /* ─── about ────────────────────────────────────────────────── */
 .about{grid-column:span 7}
-.about p{font-size:var(--t-base);line-height:1.75;color:#d7d8e0;margin:0 0 calc(var(--u)*2);max-width:62ch}
+.about p{font-size:var(--t-base);line-height:1.6;color:#d7d8e0;margin:0 0 var(--u);max-width:62ch}
 .about p:last-child{margin-bottom:0}
+.psr__txt,.about p,.more__body,.proj__tagline,.contact__sub{text-align:justify;hyphens:auto}
 
 /* ─── mục Thành tích ───────────────────────────────────────── */
 .awards__txt{grid-column:span 5}
@@ -311,14 +282,14 @@ section{scroll-margin-top:72px}
   border:1px solid rgba(34,211,238,.3);color:#bdf3fb}
 
 /* ─── collapsible technical detail ─────────────────────────── */
-.more{margin-top:calc(var(--u)*1.5)}
+.more{margin-top:0}
 .more>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;
   min-height:var(--tap);font-family:var(--mono);font-size:var(--t-xs);font-weight:600;
   letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .more>summary::-webkit-details-marker{display:none}
 .more>summary::after{content:"+";font-size:var(--t-sm)}
 .more[open]>summary::after{content:"−"}
-.more__body{font-size:var(--t-base);line-height:1.65;color:var(--muted);margin:var(--u) 0 0;
+.more__body{font-size:15px;line-height:1.5;color:var(--muted);margin:var(--u) 0 0;
   padding-left:calc(var(--u)*2);border-left:1px solid var(--line-strong)}
 
 @media (max-width:900px){
@@ -326,17 +297,16 @@ section{scroll-margin-top:72px}
   .head{margin-bottom:calc(var(--u)*3)}
   .proj{padding:calc(var(--u)*4) 0}
   .proj__body .psr__row:first-of-type{margin-top:calc(var(--u)*4)}
-  .statement{padding:calc(var(--u)*8) calc(var(--u)*3)}
   .portrait-box{max-width:380px}
+  .hero__name{font-size:7vw}
 }
 @media (max-width:600px){
   section,#about{scroll-margin-top:68px}
   .hero{padding:calc(var(--u)*6) 0 calc(var(--u)*5)}
-  .hero__name{font-size:clamp(40px,15vw,62px)}
+  .hero__name{font-size:clamp(24px,7.6vw,40px)}
   .hero__tagline{font-size:clamp(18px,6vw,24px)}
-  .hero__about .about p,.psr__txt,.about p,.cap p,.case__list li{line-height:1.55}
+  .hero__about .about p,.psr__txt,.about p{line-height:1.55}
   .stats{gap:calc(var(--u)*2.5);margin-top:calc(var(--u)*12)}
-  .statement{padding:calc(var(--u)*6) calc(var(--u)*2)}
   .section{padding:calc(var(--u)*4) 0 calc(var(--u)*6)}
   .head{align-items:flex-start;gap:var(--u);margin-bottom:calc(var(--u)*2.5)}
   .head h2{font-size:clamp(28px,10vw,42px);line-height:1}
@@ -360,10 +330,9 @@ section{scroll-margin-top:72px}
     <a class="bar__id" href="#top">NMH <i>/</i> <span class="bar__role" data-t="barRole"></span></a>
     <nav class="bar__nav">
       <div class="bar__links">
-        <a class="bar__link" href="#about" data-t="aboutTitle"></a>
+        <a class="bar__link" href="#top" data-t="aboutTitle"></a>
         <a class="bar__link" href="#awards" data-t="awardsTitle"></a>
         <a class="bar__link" href="#work" data-t="navWork"></a>
-        <a class="bar__link" href="#ai" data-t="navAi"></a>
         <a class="bar__link" href="#stack" data-t="navStack"></a>
         <a class="bar__link" href="#contact" data-t="navContact"></a>
       </div>
@@ -381,16 +350,14 @@ section{scroll-margin-top:72px}
     <div class="hero__lead">
       <div class="hero__eyebrow"><span id="typed"></span><span class="caret">_</span></div>
       <h1 class="hero__name" id="hero-name"></h1>
-      <p class="hero__tagline" data-t="tagline"></p>
-      <div class="stats" id="stats"></div>
-      <div class="hero__keys" data-t="heroKeys"></div>
       <div class="hero__about" id="about">
-        <div class="key__lbl" data-t="aboutTitle"></div>
         <div class="about" id="hero-about"></div>
         <div class="hero__edu">
           <span data-t="eduSchool"></span> · <span data-t="eduDegree"></span> · <span data-t="eduYears"></span>
         </div>
       </div>
+      <div class="stats" id="stats"></div>
+      <div class="hero__keys" data-t="heroKeys"></div>
       <div class="hero__cta">
         <a class="btn btn--solid" data-magnet href="#work" data-t="ctaWork"></a>
         <a class="btn btn--line" data-magnet href="https://github.com/TolaHiep" target="_blank" rel="noopener">GitHub</a>
@@ -411,10 +378,6 @@ section{scroll-margin-top:72px}
     </div>
   </section>
 
-  <section class="statement" data-reveal>
-    <p id="statement"></p>
-  </section>
-
   <section id="awards" class="section">
     <div class="head" data-reveal>
       <span class="head__num">01</span>
@@ -432,27 +395,9 @@ section{scroll-margin-top:72px}
     <div id="projects"></div>
   </section>
 
-  <section id="ai" class="section">
-    <div class="head" data-reveal>
-      <span class="head__num">03</span>
-      <h2 data-t="aiTitle"></h2>
-    </div>
-    <div class="grid">
-      <div class="lead" data-reveal>
-        <p style="margin:0" data-t="aiIntro"></p>
-        <div class="flow" id="ai-flow"></div>
-      </div>
-      <div class="lead-side ai-side" data-reveal id="caps"></div>
-    </div>
-    <div class="grid" id="case">
-      <div class="case" data-reveal id="case-body"></div>
-      <div class="case__side" data-reveal id="case-side"></div>
-    </div>
-  </section>
-
   <section id="stack" class="section">
     <div class="head" data-reveal>
-      <span class="head__num">04</span>
+      <span class="head__num">03</span>
       <h2 data-t="stackTitle"></h2>
     </div>
     <div class="grid" id="keys"></div>
@@ -461,7 +406,7 @@ section{scroll-margin-top:72px}
   <section id="contact" class="contact">
     <div class="grid">
       <div class="contact__body" data-reveal>
-        <div class="hero__eyebrow" style="color:var(--accent)">05 / <span data-t="navContact"></span></div>
+        <div class="hero__eyebrow" style="color:var(--accent)">04 / <span data-t="navContact"></span></div>
         <h2 class="contact__title" data-t="contactCta"></h2>
         <p class="contact__sub" data-t="contactSub"></p>
         <div class="contact__cta">
@@ -551,18 +496,17 @@ const CONTENT = {
   vi: {
     name:'Nguyễn Mạnh Hiệp',
     barRole:'Software Engineer',
-    navWork:'Dự án', navAi:'Dùng AI', navCase:'Case study',
+    navWork:'Dự án',
     navStack:'Tech stack', navContact:'Liên hệ',
     heroKicker:'Software Engineer · Full-stack',
     tagline:'Software Engineer làm full-stack web, tập trung vào hệ thống real-time, tự động hoá nghiệp vụ và tích hợp AI/LLM vào sản phẩm.',
     heroKeys:'Full-stack web · Backend/API · Real-time · OCR & automation · AI/LLM integration',
-    statement:'Tôi hay làm những sản phẩm có nhiều phần phải chạy cùng nhau: giao diện người dùng, API, luồng dữ liệu real-time và job nền. Để biết hệ thống có đang chạy đúng hay không, tôi dựa vào test tự động và một quy trình deploy đơn giản.',
     location:'Hoàng Mai, Hà Nội',
     email:'Hiep.work@outlook.com',
     phone:'0978 618 337',
     linkedin:'linkedin.com/in/hiepnm2003',
     ctaWork:'Xem dự án', downloadCv:'Tải CV', downloadCvEn:'CV EN', downloadCvVi:'CV VI', viewCode:'Mã nguồn', liveDemo:'Bản chạy thật',
-    awardsTitle:'Thành tích', workTitle:'Dự án', aiTitle:'Cách tôi dùng AI khi làm phần mềm', caseTitle:'Case study: trích xuất dữ liệu từ giấy tờ',
+    awardsTitle:'Thành tích', workTitle:'Dự án',
     stackTitle:'Tôi làm việc với gì', aboutTitle:'Về tôi',
     lblMore:'Chi tiết kỹ thuật', lblProblem:'Vấn đề', lblBuilt:'Tôi đã xây gì', lblAi:'AI nằm ở đâu trong hệ thống', lblRole:'Việc tôi làm', lblResult:'Kết quả',
     noShot:'Chưa có ảnh chụp màn hình',
@@ -620,31 +564,8 @@ const CONTENT = {
        demo:'https://crm.e25.ai', github:null}
     ],
 
-    aiIntro:'Khi làm phần mềm, tôi dùng AI để phân tích yêu cầu, viết code, review và viết test. Trong sản phẩm, tôi tích hợp LLM khi có phần cần xử lý ngôn ngữ hoặc tài liệu. Trước khi đưa LLM vào, tôi trả lời bốn câu hỏi: AI cần làm đúng việc gì, đầu vào có những gì, kết quả thế nào thì coi là đúng, và hệ thống xử lý ra sao khi kết quả sai.',
-    aiFlow:['Ngữ cảnh','Chỉ dẫn','Công cụ','Output có cấu trúc','Đánh giá','Lặp lại'],
-    caps:[
-      {t:'AI trong quy trình làm việc',
-       d:'Phân tích yêu cầu, phác kiến trúc, viết code, review, debug, viết test và tài liệu. Mỗi đợt làm bắt đầu bằng một spec ngắn trong repo và kết thúc bằng test chạy thật; ngữ cảnh dự án nằm trong CLAUDE.md / AGENTS.md của từng repo. AI giúp tôi làm nhanh hơn. Còn code có đúng không thì vẫn phải nhìn vào test và cách hệ thống chạy thật, không dựa vào cảm giác code trông ổn.'}
-    ],
-
     awardsLead:'Vietnam AI Innovation Challenge 2026 là cuộc thi hackathon AI-native đầu tiên ở Việt Nam, đề bài lấy từ bài toán thật của doanh nghiệp. Hơn 300 đội tham dự; nhóm tôi vào top 3 chung cuộc và nhận thêm hai giải riêng của Vietnam AI Stars và AI Singapore.',
     awardsWhat:'Phần việc của tôi trong sản phẩm dự thi: toàn bộ frontend, phần lớn backend phía sau nó, phòng họp real-time, pipeline dịch, CI/CD và triển khai.',
-    caseIntro:'Lấy từ Notarex. Gọi model thì dễ. Phần khó là làm cho output đủ ổn định để phần còn lại của hệ thống và người soát hồ sơ dùng tiếp được.',
-    caseBlocks:[
-      {l:'Mục tiêu', p:'Nhận ảnh giấy tờ và trả về JSON có đúng những trường mà biểu mẫu Word cần, để nhân viên chỉ phải soát lại thay vì gõ lại.'},
-      {l:'Vấn đề gặp phải', p:'Bốn vấn đề xuất hiện ngay từ những lần chạy đầu. Với ảnh mờ hoặc thiếu thông tin, model tự bịa giá trị thay vì để trống. Với tài liệu công chứng, đây là lỗi nguy hiểm nhất. Định dạng output không ổn định: lúc là JSON thuần, lúc bọc trong code fence, lúc kèm một câu giải thích phía trước. Model còn trả về key không khớp với bên nào, vì cùng một prompt đang chứa hai bộ key khác nhau (key chuẩn của QR và key placeholder của file Word). Và vì mỗi văn phòng dùng biểu mẫu riêng, danh sách trường không thể hard-code.'},
-      {l:'Cách xử lý', list:[
-        'Prompt sinh từ cấu hình, để xử lý chuyện mỗi văn phòng một biểu mẫu: mỗi trường vào prompt kèm nhãn, mô tả người dùng tự gõ và gợi ý kiểu dữ liệu (ngày DD/MM/YYYY, số chỉ chữ số).',
-        'Chặn việc bịa và output lộn xộn bằng ràng buộc viết thẳng trong prompt: chỉ trả các key được liệt kê, không thấy thì null, không suy đoán, không giải thích, không code fence.',
-        'Gộp về một schema duy nhất để phần mô tả trường và khung JSON dùng chung một bộ key. Hai phần này lệch key chính là nguyên nhân của lỗi sai key.',
-        'Chỗ nào có nguồn chắc hơn thì không hỏi model: giấy tờ có QR được đọc từ QR và bỏ qua OCR.',
-        'Nhiều giấy tờ trong một hồ sơ chạy song song, mỗi giấy tờ một prompt, kết quả ghép lại theo đúng thứ tự.'
-      ]},
-      {l:'Đánh giá', p:'Sau khi gặp mỗi lỗi, tôi viết test cho nó: 11 test cho phần sinh prompt (đúng schema, chặn key lạ, có gợi ý kiểu dữ liệu, bỏ trường thiếu key) và 12 test cho parser, mỗi test tái hiện một kiểu output hỏng đã xảy ra thật.'},
-      {l:'Kết quả', p:'Thêm loại giấy tờ mới chỉ cần cấu hình, không đụng code, nên mỗi văn phòng tự thêm được biểu mẫu của mình. Khi model vẫn trả output sai, lỗi được khoanh vùng: bóc được thì bóc, không bóc được thì đánh dấu và chuyển cho người sửa, thay vì làm hỏng cả hồ sơ.'}
-    ],
-    caseCodeLbl:'Ràng buộc trong prompt (rút gọn từ mã nguồn)',
-    caseNote:'Nguồn: templatePrompt.ts, ocr/prompt.py, ocr/parser.py, ocr/orchestrator.py.',
 
     stack:[
       {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflow','RAG (pgvector)','vLLM self-host']},
@@ -663,18 +584,17 @@ const CONTENT = {
   en: {
     name:'Nguyen Manh Hiep',
     barRole:'Software Engineer',
-    navWork:'Work', navAi:'AI workflow', navCase:'Case study',
+    navWork:'Work',
     navStack:'Tech stack', navContact:'Contact',
     heroKicker:'Software Engineer · Full-stack',
     tagline:'Software Engineer working on full-stack web, real-time systems, workflow automation, and AI/LLM integrations inside real products.',
     heroKeys:'Full-stack web · Backend/API · Real-time · OCR & automation · AI/LLM integration',
-    statement:'I mostly build products with a lot of parts that have to work together: the UI, the API, real-time data flows and background jobs. To know whether the system is actually working, I rely on automated tests and a simple deploy pipeline.',
     location:'Hoang Mai, Hanoi',
     email:'Hiep.work@outlook.com',
     phone:'+84 978 618 337',
     linkedin:'linkedin.com/in/hiepnm2003',
     ctaWork:'View work', downloadCv:'Download CV', downloadCvEn:'CV EN', downloadCvVi:'CV VI', viewCode:'Source', liveDemo:'Live site',
-    awardsTitle:'Achievements', workTitle:'Selected work', aiTitle:'How I work with AI', caseTitle:'Case study: structured document extraction',
+    awardsTitle:'Achievements', workTitle:'Selected work',
     stackTitle:'What I work with', aboutTitle:'About',
     lblMore:'Technical detail', lblProblem:'Problem', lblBuilt:'What I built', lblAi:'AI in the system', lblRole:'My role', lblResult:'Result',
     noShot:'No screenshots yet',
@@ -732,31 +652,8 @@ const CONTENT = {
        demo:'https://crm.e25.ai', github:null}
     ],
 
-    aiIntro:'I use AI while building software: to work through requirements, write code, review, and write tests. In products, I integrate LLMs when there is language or document processing to do. Before an LLM goes in, I answer four questions: what exactly should the model do, what is in the input, what counts as a correct result, and what the system does when the result is wrong.',
-    aiFlow:['Context','Instructions','Tools','Structured output','Evaluation','Iteration'],
-    caps:[
-      {t:'AI in the workflow',
-       d:'Requirement analysis, architecture exploration, implementation, review, debugging, tests and documentation. Each round starts with a short spec in the repo and ends with a real test run; project context lives in CLAUDE.md / AGENTS.md per repository. AI makes me faster. Whether the code is right is still decided by the tests and how the system actually behaves, not by whether the code looks fine.'}
-    ],
-
     awardsLead:'Vietnam AI Innovation Challenge 2026 was the first AI-native hackathon in Vietnam, run on real problems from real companies. More than 300 teams entered; ours finished top 3 overall and took two separate awards, from Vietnam AI Stars and AI Singapore.',
     awardsWhat:'My part in the competing product: the whole frontend, most of the backend behind it, the real-time meeting room, the translation pipeline, CI/CD and deployment.',
-    caseIntro:'Taken from Notarex. Calling the model was easy. The hard part was getting the output stable enough for the rest of the system, and the staff reviewing it, to work with.',
-    caseBlocks:[
-      {l:'Goal', p:'Take a photo of a document and return JSON with exactly the fields the Word template needs, so staff only have to review instead of retype.'},
-      {l:'What went wrong first', p:'Four problems showed up in the first runs. On blurry or incomplete scans the model invented values instead of leaving them empty. For a notarised document, that is the worst kind of failure. The output format was unstable: sometimes plain JSON, sometimes fenced, sometimes preceded by an explanation. The model also returned keys that matched neither side, because one prompt carried two different key sets (the QR canonical keys and the Word placeholder keys). And since every office uses its own templates, the field list could not be hard-coded.'},
-      {l:'Approach', list:[
-        'Prompts generated from configuration, to handle every office having its own templates: each field enters the prompt with its label, the description the user typed and a type hint (dates as DD/MM/YYYY, numbers as digits only).',
-        'Invented values and messy output are blocked by constraints stated in the prompt: return only the listed keys, null when the value is not visible, no guessing, no explanation, no code fence.',
-        'Collapse to a single schema so the field list and the JSON skeleton share one key set. That mismatch was the actual cause of the wrong keys.',
-        'Where a more reliable source exists, don\'t ask the model: documents with a QR code are read from the QR and skip OCR.',
-        'Several documents in one record run in parallel, one prompt each, and the results are stitched together in slot order.'
-      ]},
-      {l:'Evaluation', p:'After hitting each failure, I wrote a test for it: 11 tests on prompt generation (schema matches the declared keys, extra keys forbidden, type hints present, fields without a key dropped) and 12 tests on the parser, each reproducing a shape of broken output that actually occurred.'},
-      {l:'Result', p:'A new document type is configuration, not code, so each office can add its own templates. When the model still returns bad output, the damage stays contained: recoverable JSON is recovered, unrecoverable JSON is flagged and handed to a person, instead of failing the whole record.'}
-    ],
-    caseCodeLbl:'Prompt constraints (condensed from the source)',
-    caseNote:'Source: templatePrompt.ts, ocr/prompt.py, ocr/parser.py, ocr/orchestrator.py.',
 
     stack:[
       {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflows','RAG (pgvector)','vLLM self-hosting']},
@@ -775,28 +672,6 @@ const CONTENT = {
 
 /* The prompt rules below are quoted (condensed) from the real source in
    E25_OCR/frontend/lib/templatePrompt.ts - do not embellish them. */
-const CASE_CODE = `QUY TẮC BẮT BUỘC:
-1. CHỈ trả về JSON với ĐÚNG các key liệt kê bên dưới
-   - KHÔNG thêm bất kỳ key nào khác.
-2. KHÔNG bịa, KHÔNG suy đoán. Nếu không thấy rõ
-   thông tin trong ảnh, trả null cho key đó.
-3. Lấy nguyên văn giá trị từ ảnh; chỉ chuẩn hoá
-   theo type quy định cho từng trường.
-4. Trả thuần JSON, KHÔNG bao gồm \`\`\`json\`\`\`,
-   KHÔNG có text giải thích trước/sau.
-
-CÁC TRƯỜNG CẦN TRÍCH XUẤT:
-- "Hovaten" - Họ và tên (text)
-- "Ngaysinh" - Ngày sinh (date, DD/MM/YYYY)
-- "Socccd"  - Số CCCD (number, chỉ chữ số)
-
-ĐỊNH DẠNG TRẢ VỀ (giữ nguyên thứ tự key):
-{
-  "Hovaten":  "<giá trị hoặc null>",
-  "Ngaysinh": "<giá trị hoặc null>",
-  "Socccd":   "<giá trị hoặc null>"
-}`;
-
 const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
 let awardIndex = 0;
@@ -889,9 +764,6 @@ function render() {
 
   document.getElementById('hero-name').innerHTML = splitChars(c.name);
 
-  document.getElementById('statement').innerHTML = c.statement.split(' ')
-    .map(w => `<span class="w">${esc(w)} </span>`).join('');
-
   document.getElementById('stats').innerHTML = STATS[lang].map(s => `
     <div class="stat">
       <div class="stat__n"><span data-count="${s.n}">${s.n}</span>${s.suffix || ''}</div>
@@ -924,29 +796,6 @@ function render() {
   startAwardCarousel();
 
   document.getElementById('projects').innerHTML = c.projects.map(p => projectCard(p, c)).join('');
-
-  document.getElementById('ai-flow').innerHTML =
-    c.aiFlow.map(s => `<span>${esc(s)}</span>`).join('<i>→</i>');
-
-  document.getElementById('caps').innerHTML = c.caps.map(k => `
-      <h3>${esc(k.t)}</h3>
-      <p>${esc(k.d)}</p>`).join('');
-
-  document.getElementById('case-body').innerHTML = `
-    <h3>${esc(c.caseTitle)}</h3>
-    <p class="proj__tagline">${esc(c.caseIntro)}</p>
-    ${c.caseBlocks.map(b => `
-      <div class="case__block">
-        <div class="case__lbl">${esc(b.l)}</div>
-        ${b.list
-          ? `<ul class="case__list">${b.list.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`
-          : `<p class="psr__txt">${esc(b.p)}</p>`}
-      </div>`).join('')}`;
-
-  document.getElementById('case-side').innerHTML = `
-    <div class="case__lbl">${esc(c.caseCodeLbl)}</div>
-    <pre class="code">${esc(CASE_CODE)}</pre>
-    <div class="note">${esc(c.caseNote)}</div>`;
 
   document.getElementById('keys').innerHTML = c.stack.map(g => `
     <div class="key" data-reveal>
@@ -1046,7 +895,7 @@ function heroIntro() {
   heroPlayed = true;
   gsap.timeline({ defaults: { ease: 'power3.out' } })
     .from('.hero__eyebrow', { autoAlpha: 0, y: 12, duration: 0.6 }, 0.2)
-    .from('.hero__tagline', { autoAlpha: 0, y: 16, duration: 0.7 }, 0.45)
+    .from('.hero__about', { autoAlpha: 0, y: 16, duration: 0.7 }, 0.45)
     .from('.hero__cta > *', { autoAlpha: 0, y: 16, duration: 0.6, stagger: 0.1 }, 0.55)
     .from('.stats', { autoAlpha: 0, y: 16, duration: 0.6 }, 0.7)
     .from('.hero__aside', { autoAlpha: 0, y: 24, duration: 0.8 }, 0.6);
@@ -1084,17 +933,6 @@ function initMotion() {
     onEnter: b => gsap.to(b, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out', overwrite: true }),
     onLeaveBack: b => gsap.set(b, { autoAlpha: 0, y: 60, overwrite: true })
   }));
-
-  // statement: words light up from faint to solid, scrubbed to scroll
-  const words = gsap.utils.toArray('#statement .w');
-  if (words.length) {
-    // faint start is set here, not in CSS, so no-JS / reduced-motion visitors see solid text
-    const tw = gsap.fromTo(words, { opacity: .16 }, {
-      opacity: 1, stagger: 0.5, ease: 'none',
-      scrollTrigger: { trigger: '#statement', start: 'top 78%', end: 'bottom 60%', scrub: true }
-    });
-    motionTriggers.push(tw.scrollTrigger);
-  }
 
   // count-up stats: runs once, then the real number stays (no reset to 0 on scroll back)
   gsap.utils.toArray('[data-count]').forEach(el => {
