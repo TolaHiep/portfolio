@@ -164,26 +164,13 @@ section{scroll-margin-top:72px}
 /* ─── projects ─────────────────────────────────────────────── */
 .proj{padding:calc(var(--u)*3) 0;border-bottom:1px solid var(--line)}
 .proj:last-child{border-bottom:0}
-.proj__media{grid-column:span 6;position:sticky;top:80px;align-self:start}
-.proj__body{grid-column:7 / span 6}
-@media (max-width:900px){.proj__media,.proj__body{grid-column:1/-1;position:static}.proj__body{margin-top:calc(var(--u)*3)}}
-.shot-wrap{border-radius:var(--r);overflow:hidden;border:1px solid var(--line-strong);background:var(--panel);transition:box-shadow .3s,border-color .3s}
-.shot-wrap:hover{border-color:rgba(34,211,238,.5);box-shadow:0 0 40px -8px rgba(34,211,238,.4)}
-.shot{aspect-ratio:36/25;width:100%;object-fit:contain;transition:transform .7s ease}
-.shot-wrap:hover .shot{transform:none}
-.thumbs{display:flex;flex-wrap:wrap;gap:var(--u);margin-top:var(--u)}
-.thumb{padding:0;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer;
-  width:74px;height:52px;overflow:hidden;transition:border-color .2s,transform .2s}
-.thumb img{width:100%;height:100%;object-fit:contain;object-position:center;background:#050811;opacity:.85;transition:opacity .2s}
-.thumb:hover{border-color:var(--line-strong);transform:translateY(-2px)}
-.thumb:hover img{opacity:1}
-.thumb[aria-current=true]{border-color:var(--accent);border-width:2px}
-.thumb[aria-current=true] img{opacity:1}
-.shot__cap{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:var(--u);min-height:16px}
-.proj__noshot{aspect-ratio:36/25;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);text-align:center;padding:var(--u)}
-.proj__top{display:flex;justify-content:space-between;align-items:baseline;gap:var(--u);margin-bottom:calc(var(--u)*.5)}
+.proj__meta{grid-column:span 3;display:flex;flex-direction:column;gap:var(--u);align-self:start;position:sticky;top:80px}
+.proj__no{font-family:var(--mono);font-size:var(--t-sm);font-weight:700;color:var(--accent)}
+.proj__meta .proj__links{flex-direction:column;gap:0}
+.proj__body{grid-column:4 / -1}
+@media (max-width:900px){.proj__meta{grid-column:1/-1;position:static;flex-direction:row;flex-wrap:wrap;align-items:center;gap:var(--u) calc(var(--u)*2)}
+  .proj__meta .proj__links{flex-direction:row;gap:calc(var(--u)*2)}.proj__body{grid-column:1/-1}}
+.proj__top{margin-bottom:calc(var(--u)*.5)}
 .proj__name{font-size:clamp(24px,2.6vw,30px);font-weight:700;letter-spacing:-.02em;margin:0}
 .proj__year{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted)}
 .proj__tagline{font-size:var(--t-base);line-height:1.5;color:var(--muted);margin:0 0 var(--u)}
@@ -224,7 +211,7 @@ section{scroll-margin-top:72px}
 .contact__body{grid-column:span 7}
 .contact__side{grid-column:9 / span 4}
 @media (max-width:900px){.contact__body,.contact__side{grid-column:1 / -1}}
-.contact__title{font-size:clamp(34px,6vw,72px);font-weight:900;line-height:.98;letter-spacing:-.035em;margin:0 0 calc(var(--u)*3);max-width:14ch}
+.contact__title{font-size:clamp(34px,6vw,72px);font-weight:900;line-height:1.12;letter-spacing:-.01em;word-spacing:.08em;margin:0 0 calc(var(--u)*3);max-width:14ch}
 .contact__sub{font-size:var(--t-base);line-height:1.7;color:var(--muted);margin:0 0 calc(var(--u)*4);max-width:52ch}
 .contact__cta{display:flex;flex-wrap:wrap;gap:var(--u)}
 .contact__list{display:flex;flex-direction:column;font-family:var(--mono);font-size:var(--t-sm)}
@@ -296,7 +283,6 @@ section{scroll-margin-top:72px}
   .section{padding:calc(var(--u)*5) 0 calc(var(--u)*7)}
   .head{margin-bottom:calc(var(--u)*3)}
   .proj{padding:calc(var(--u)*4) 0}
-  .proj__body .psr__row:first-of-type{margin-top:calc(var(--u)*4)}
   .portrait-box{max-width:380px}
   .hero__name{font-size:7vw}
 }
@@ -311,8 +297,6 @@ section{scroll-margin-top:72px}
   .head{align-items:flex-start;gap:var(--u);margin-bottom:calc(var(--u)*2.5)}
   .head h2{font-size:clamp(28px,10vw,42px);line-height:1}
   .proj{padding:calc(var(--u)*3.5) 0}
-  .thumbs{gap:6px}
-  .thumb{width:60px;height:44px}
   .awards__viewport{border-radius:8px;aspect-ratio:4/3}
   .awards__track img{padding:4px}
   .awards__nav{width:36px;height:36px}
@@ -331,8 +315,8 @@ section{scroll-margin-top:72px}
     <nav class="bar__nav">
       <div class="bar__links">
         <a class="bar__link" href="#top" data-t="aboutTitle"></a>
-        <a class="bar__link" href="#awards" data-t="awardsTitle"></a>
         <a class="bar__link" href="#work" data-t="navWork"></a>
+        <a class="bar__link" href="#awards" data-t="awardsTitle"></a>
         <a class="bar__link" href="#stack" data-t="navStack"></a>
         <a class="bar__link" href="#contact" data-t="navContact"></a>
       </div>
@@ -378,21 +362,21 @@ section{scroll-margin-top:72px}
     </div>
   </section>
 
-  <section id="awards" class="section">
-    <div class="head" data-reveal>
-      <span class="head__num">01</span>
-      <h2 data-t="awardsTitle"></h2>
-    </div>
-    <div class="grid" id="awards-body"></div>
-  </section>
-
   <section id="work" class="section">
     <div class="head" data-reveal>
-      <span class="head__num">02</span>
+      <span class="head__num">01</span>
       <h2 data-t="workTitle"></h2>
       <span class="head__count" id="work-count"></span>
     </div>
     <div id="projects"></div>
+  </section>
+
+  <section id="awards" class="section">
+    <div class="head" data-reveal>
+      <span class="head__num">02</span>
+      <h2 data-t="awardsTitle"></h2>
+    </div>
+    <div class="grid" id="awards-body"></div>
   </section>
 
   <section id="stack" class="section">
@@ -436,37 +420,6 @@ section{scroll-margin-top:72px}
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script>
-/* screenshots live outside the language objects so the paths aren't duplicated */
-const SHOTS = {
-  senai: [
-    {src:'assets/screenshots/senai/senai-landing.png',     vi:'Trang chủ sản phẩm',                 en:'Product landing page'},
-    {src:'assets/screenshots/senai/sec-giaiphap.png',      vi:'Ba chế độ dịch',                     en:'Three translation modes'},
-    {src:'assets/screenshots/senai/sec-cachhoatdong.png',  vi:'Đường đi của một câu nói',           en:'The path of one sentence'},
-    {src:'assets/screenshots/senai/sec-kientruc.png',      vi:'Bốn tầng kiến trúc',                 en:'Four architecture layers'},
-    {src:'assets/screenshots/senai/sec-trienkhai.png',     vi:'Lựa chọn triển khai',                en:'Deployment options'},
-    {src:'assets/screenshots/senai/senai-app-login.png',   vi:'Đăng nhập ứng dụng',                 en:'App sign-in'}
-  ],
-  notarex: [
-    {src:'assets/screenshots/Notarex/e25-admin-dashboard.png',    vi:'Bảng điều khiển admin',        en:'Admin dashboard'},
-    {src:'assets/screenshots/Notarex/e25-document-templates.png', vi:'Cấu hình biểu mẫu',            en:'Template configuration'},
-    {src:'assets/screenshots/Notarex/e25-employee-dashboard.png', vi:'Bảng điều khiển nhân viên',    en:'Employee dashboard'},
-    {src:'assets/screenshots/Notarex/e25-employee-dossiers.png',  vi:'Danh sách hồ sơ',              en:'Dossier list'},
-    {src:'assets/screenshots/Notarex/e25-employee-documents.png', vi:'Tài liệu của nhân viên',       en:'Employee documents'},
-    {src:'assets/screenshots/Notarex/e25-employee-templates.png', vi:'Biểu mẫu của nhân viên',       en:'Employee templates'}
-  ],
-  akf: [
-    {src:'assets/screenshots/akf-farm/akf-farm-heatmap.png',       vi:'Bản đồ nhiệt ảnh vệ tinh',    en:'Satellite heatmap'},
-    {src:'assets/screenshots/akf-farm/akf-farm-dashboard.png',     vi:'Bảng điều khiển',             en:'Dashboard'},
-    {src:'assets/screenshots/akf-farm/akf-farm-zones.png',         vi:'Vùng & lô',                   en:'Zones & plots'},
-    {src:'assets/screenshots/akf-farm/akf-farm-processes.png',     vi:'Quy trình sản xuất',          en:'Production processes'},
-    {src:'assets/screenshots/akf-farm/akf-farm-calendar.png',      vi:'Lịch công việc',              en:'Task calendar'},
-    {src:'assets/screenshots/akf-farm/akf-farm-kpi.png',           vi:'KPI tổ trưởng',               en:'Team-lead KPI'},
-    {src:'assets/screenshots/akf-farm/akf-farm-notifications.png', vi:'Thông báo',                   en:'Notifications'},
-    {src:'assets/screenshots/akf-farm/akf-farm-settings.png',      vi:'Cài đặt',                     en:'Settings'},
-    {src:'assets/screenshots/akf-farm/akf-farm-mobile-tasks.png',  vi:'Mobile PWA - danh sách việc', en:'Mobile PWA - task list'}
-  ]
-};
-
 /* Every number here has a source in a repository:
    - 4 products: SenAI, Notarex (E25_OCR), ASC Farm, EazySale (crm.e25.ai)
    - 3 awards: Giải Ba Chung cuộc, Vietnam AI Stars, AI Singapore (app.senai.online)
@@ -509,13 +462,12 @@ const CONTENT = {
     awardsTitle:'Thành tích', workTitle:'Dự án',
     stackTitle:'Tôi làm việc với gì', aboutTitle:'Về tôi',
     lblMore:'Chi tiết kỹ thuật', lblProblem:'Vấn đề', lblBuilt:'Tôi đã xây gì', lblAi:'AI nằm ở đâu trong hệ thống', lblRole:'Việc tôi làm', lblResult:'Kết quả',
-    noShot:'Chưa có ảnh chụp màn hình',
     privateRepo:'Mã nguồn riêng tư',
     countFmt:n => n + ' dự án',
     eduSchool:'Đại học Bách khoa Hà Nội (HUST)',
     eduDegree:'Cử nhân Khoa học Máy tính',
     eduYears:'2021 – 2026',
-    contactCta:'Có việc phù hợp? Nhắn tôi.',
+    contactCta:'Liên hệ công việc?',
     contactSub:'Tôi đang tìm vị trí Software Engineer hoặc Full-stack Software Engineer, nơi tôi được tham gia từ thiết kế kỹ thuật tới triển khai và vận hành sản phẩm.',
 
     projects:[
@@ -597,13 +549,12 @@ const CONTENT = {
     awardsTitle:'Achievements', workTitle:'Selected work',
     stackTitle:'What I work with', aboutTitle:'About',
     lblMore:'Technical detail', lblProblem:'Problem', lblBuilt:'What I built', lblAi:'AI in the system', lblRole:'My role', lblResult:'Result',
-    noShot:'No screenshots yet',
     privateRepo:'Private repository',
     countFmt:n => n + ' projects',
     eduSchool:'Hanoi University of Science and Technology (HUST)',
     eduDegree:'B.Sc. in Computer Science',
     eduYears:'2021 – 2026',
-    contactCta:'Hiring? Send me a message.',
+    contactCta:'Contact for work?',
     contactSub:'I\'m looking for Software Engineer or Full-stack Software Engineer roles where I can work on a product from technical design through deployment and operations.',
 
     projects:[
@@ -698,20 +649,6 @@ const splitChars = text => text.split(' ')
   .map(w => `<span class="wd">${w.split('').map(c => `<span class="ch">${esc(c)}</span>`).join('')}</span>`)
   .join(' ');
 
-const media = (p, c) => {
-  const shots = SHOTS[p.id] || [];
-  if (!shots.length) return `<div class="proj__noshot">${esc(c.noShot)}</div>`;
-  return `
-    <div class="shot-wrap"><img class="shot" id="shot-${p.id}" src="${esc(shots[0].src)}"
-         alt="${esc(p.name)} - ${esc(shots[0][lang])}" width="1440" height="1000" loading="lazy"></div>
-    <div class="shot__cap" id="cap-${p.id}">${esc(shots[0][lang])}</div>
-    ${shots.length > 1 ? `<div class="thumbs" data-gallery="${esc(p.id)}">${shots.map((s, i) => `
-      <button class="thumb" type="button" data-i="${i}" aria-current="${i === 0}"
-              aria-label="${esc(s[lang])}">
-        <img src="${esc(s.src)}" alt="" loading="lazy">
-      </button>`).join('')}</div>` : ''}`;
-};
-
 const row = (lbl, body) => `
   <div class="psr__row">
     <div class="psr__lbl">${esc(lbl)}</div>
@@ -721,7 +658,7 @@ const row = (lbl, body) => `
 const txt = t => `<p class="psr__txt">${esc(t)}</p>`;
 const flowLine = steps => `<div class="flow">${steps.map(s => `<span>${esc(s)}</span>`).join('<i>→</i>')}</div>`;
 
-function projectCard(p, c) {
+function projectCard(p, c, i) {
   const aiBlock = p.flow
     ? row(c.lblAi, `${flowLine(p.flow)}${p.aiNote ? `<p class="psr__txt" style="margin-top:12px">${esc(p.aiNote)}</p>` : ''}`)
     : '';
@@ -733,24 +670,27 @@ function projectCard(p, c) {
     </details>`;
   return `
     <article class="proj grid" data-reveal>
-      <div class="proj__media">${media(p, c)}</div>
-      <div class="proj__body">
-        <div class="proj__top">
-          <h3 class="proj__name">${esc(p.name)}</h3>
-          <span class="proj__year">${esc(p.year)}</span>
-        </div>
-        <p class="proj__tagline">${esc(p.tagline)}</p>
-        ${row(c.lblProblem, txt(p.problem))}
-        ${row(c.lblResult, txt(p.result))}
-        ${row(c.lblRole, `<div class="roles">${p.role.map(r => `<span>${esc(r)}</span>`).join('')}</div>`)}
-        ${more}
-        <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+      <aside class="proj__meta">
+        <div class="proj__no">/${String(i + 1).padStart(2, '0')}</div>
+        <span class="proj__year">${esc(p.year)}</span>
+        <div><div class="psr__lbl">${esc(c.lblRole)}</div>
+        <div class="roles">${p.role.map(r => `<span>${esc(r)}</span>`).join('')}</div></div>
         <div class="proj__links">
           ${p.demo ? `<a class="proj__src" href="${esc(p.demo)}" target="_blank" rel="noopener">${esc(c.liveDemo)} →</a>` : ''}
           ${p.github
             ? `<a class="proj__src" href="${esc(p.github)}" target="_blank" rel="noopener">${esc(c.viewCode)} →</a>`
             : `<span class="proj__private">${esc(c.privateRepo)}</span>`}
         </div>
+      </aside>
+      <div class="proj__body">
+        <div class="proj__top">
+          <h3 class="proj__name">${esc(p.name)}</h3>
+        </div>
+        <p class="proj__tagline">${esc(p.tagline)}</p>
+        ${row(c.lblProblem, txt(p.problem))}
+        ${row(c.lblResult, txt(p.result))}
+        ${more}
+        <div class="stack">${p.stack.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
       </div>
     </article>`;
 }
@@ -795,7 +735,7 @@ function render() {
   updateAwardsCarousel(awardIndex);
   startAwardCarousel();
 
-  document.getElementById('projects').innerHTML = c.projects.map(p => projectCard(p, c)).join('');
+  document.getElementById('projects').innerHTML = c.projects.map((p, i) => projectCard(p, c, i)).join('');
 
   document.getElementById('keys').innerHTML = c.stack.map(g => `
     <div class="key" data-reveal>
@@ -847,17 +787,6 @@ document.addEventListener('click', e => {
     startAwardCarousel();
     return;
   }
-
-  const thumb = e.target.closest('.thumb');
-  if (!thumb) return;
-  const gallery = thumb.closest('[data-gallery]');
-  const id = gallery.dataset.gallery;
-  const shot = SHOTS[id][+thumb.dataset.i];
-  const img = document.getElementById('shot-' + id);
-  img.src = shot.src;
-  img.alt = img.alt.split(' - ')[0] + ' - ' + shot[lang];
-  document.getElementById('cap-' + id).textContent = shot[lang];
-  gallery.querySelectorAll('.thumb').forEach(t => t.setAttribute('aria-current', t === thumb));
 });
 
 /* ─── GSAP motion ──────────────────────────────────────────── */
