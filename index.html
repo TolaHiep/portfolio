@@ -421,7 +421,7 @@ section{scroll-margin-top:72px}
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script>
 /* Every number here has a source in a repository:
-   - 4 products: SenAI, Notarex (E25_OCR), ASC Farm, EazySale (crm.e25.ai)
+   - 4 products: SenAI, Notarex (E25_OCR), ASC Farm, EazySale
    - 3 awards: Giải Ba Chung cuộc, Vietnam AI Stars, AI Singapore (app.senai.online)
    - 697 tests: 147 SenAI UAT + 418 E25_OCR + 132 ASC Farm
    TODO(Hiep): chưa có metric nghiệp vụ (số hồ sơ xử lý, thời gian nhập liệu tiết kiệm được,
@@ -511,9 +511,9 @@ const CONTENT = {
        more:'Yêu cầu khó nhất là gửi đúng giờ mà không bao giờ gửi trùng, nên bộ lên lịch chạy hai lớp: job hẹn giờ trong bộ nhớ để gửi đúng phút, cộng một vòng quét DB mỗi 60 giây làm lưới an toàn cho các job bị mất khi backend restart. Khi hai lớp cùng chạm tới một tin nhắn, SELECT FOR UPDATE NOWAIT quyết định bên nào được gửi. Trạng thái email đến từ webhook SendGrid; endpoint này không có auth nên được xác thực bằng chữ ký ECDSA, và vì SendGrid gửi lặp, sai thứ tự, trạng thái chỉ được cập nhật khi mức mới cao hơn mức hiện tại (delivered - opened - clicked - bounced). Zalo OA nằm sau một interface chung với hai bản cài đặt mock và thật, đổi bằng biến môi trường và tự quay về mock khi thiếu token, nên môi trường dev không phụ thuộc vào tài khoản OA; token OA tự làm mới ở nền. Về hạ tầng, Nginx định tuyến theo path trên một domain, SSL Let\'s Encrypt tự gia hạn, toàn bộ chạy trên Docker Compose và deploy qua GitHub Actions.',
        flow:null, aiNote:null,
        role:['Kiến trúc hệ thống','Backend FastAPI','Ba frontend React','Tích hợp Zalo OA & SendGrid','CI/CD & triển khai VPS'],
-       result:'Đang chạy thật tại crm.e25.ai. Từ danh sách Excel tới tin nhắn đã gửi giờ là một luồng tự động: dữ liệu trùng được báo trước khi gửi, và trạng thái từng email cập nhật theo thời gian thực nên đội sale biết khách nào đã nhận, đã mở. Bên dưới là 20 bảng dữ liệu, 23 nhóm API và một hàng đợi gửi tin không nhân đôi kể cả khi backend khởi động lại.',
+       result:'Từ danh sách Excel tới tin nhắn đã gửi giờ là một luồng tự động: dữ liệu trùng được báo trước khi gửi, và trạng thái từng email cập nhật theo thời gian thực nên đội sale biết khách nào đã nhận, đã mở. Bên dưới là 20 bảng dữ liệu, 23 nhóm API và một hàng đợi gửi tin không nhân đôi kể cả khi backend khởi động lại.',
        stack:['React 18','TypeScript','Ant Design','FastAPI','PostgreSQL 15','SQLAlchemy + Alembic','APScheduler','MinIO','Zalo OA API','SendGrid','Docker','Nginx','GitHub Actions'],
-       demo:'https://crm.e25.ai', github:null}
+       demo:null, github:null}
     ],
 
     awardsLead:'Vietnam AI Innovation Challenge 2026 là cuộc thi hackathon AI-native đầu tiên ở Việt Nam, đề bài lấy từ bài toán thật của doanh nghiệp. Hơn 300 đội tham dự; nhóm tôi vào top 3 chung cuộc và nhận thêm hai giải riêng của Vietnam AI Stars và AI Singapore.',
@@ -598,9 +598,9 @@ const CONTENT = {
        more:'The hardest requirement was sending on time without ever sending twice, so the scheduler runs in two layers: in-memory date-triggered jobs for minute-accurate sending, plus a 60-second DB sweep as a safety net for jobs lost to a backend restart. When both layers reach the same message, SELECT FOR UPDATE NOWAIT decides which one sends it. Email status comes from the SendGrid event webhook; the endpoint has no auth by design, so it verifies the ECDSA signature, and because SendGrid replays events out of order, a status only moves forward when the incoming one outranks the stored one (delivered - opened - clicked - bounced). Zalo OA sits behind one provider interface with mock and real implementations, switched by environment variable and falling back to mock when credentials are missing, so development never depends on a live OA account; OA tokens refresh in the background. On the infrastructure side, Nginx does path-based routing on one domain with auto-renewing Let\'s Encrypt SSL, everything runs on Docker Compose, and deploys go out through GitHub Actions.',
        flow:null, aiNote:null,
        role:['System architecture','FastAPI backend','Three React frontends','Zalo OA & SendGrid integration','CI/CD & VPS deployment'],
-       result:'Running in production at crm.e25.ai. An Excel list to a sent message is now one automated flow: duplicates are flagged before sending, and per-email status updates in real time, so the sales team can see which customers received and opened each message. Underneath are 20 data tables, 23 API groups, and a send queue that does not duplicate even across a backend restart.',
+       result:'An Excel list to a sent message is now one automated flow: duplicates are flagged before sending, and per-email status updates in real time, so the sales team can see which customers received and opened each message. Underneath are 20 data tables, 23 API groups, and a send queue that does not duplicate even across a backend restart.',
        stack:['React 18','TypeScript','Ant Design','FastAPI','PostgreSQL 15','SQLAlchemy + Alembic','APScheduler','MinIO','Zalo OA API','SendGrid','Docker','Nginx','GitHub Actions'],
-       demo:'https://crm.e25.ai', github:null}
+       demo:null, github:null}
     ],
 
     awardsLead:'Vietnam AI Innovation Challenge 2026 was the first AI-native hackathon in Vietnam, run on real problems from real companies. More than 300 teams entered; ours finished top 3 overall and took two separate awards, from Vietnam AI Stars and AI Singapore.',
