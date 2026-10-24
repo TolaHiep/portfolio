@@ -129,11 +129,6 @@ section{scroll-margin-top:72px}
 .hero__edu{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:calc(var(--u)*2);
   padding-top:calc(var(--u)*1.5);border-top:1px solid var(--line)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:var(--u);margin-top:calc(var(--u)*3)}
-.stats{display:flex;flex-wrap:wrap;gap:calc(var(--u)*4);margin-top:calc(var(--u)*4);
-  padding-top:calc(var(--u)*2);border-top:1px solid var(--line)}
-.stat__n{font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1;
-  background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.stat__l{font-family:var(--mono);font-size:var(--t-xs);color:var(--muted);margin-top:calc(var(--u)*1);text-transform:uppercase;letter-spacing:.08em}
 .portrait-box{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;border-radius:var(--r);
   background:var(--panel);border:1px solid var(--line-strong);box-shadow:0 0 0 1px rgba(34,211,238,.05),0 24px 60px -24px rgba(34,211,238,.25)}
 .portrait-box img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s ease}
@@ -292,7 +287,6 @@ section{scroll-margin-top:72px}
   .hero__name{font-size:clamp(24px,7.6vw,40px)}
   .hero__tagline{font-size:clamp(18px,6vw,24px)}
   .hero__about .about p,.psr__txt,.about p{line-height:1.55}
-  .stats{gap:calc(var(--u)*2.5);margin-top:calc(var(--u)*12)}
   .section{padding:calc(var(--u)*4) 0 calc(var(--u)*6)}
   .head{align-items:flex-start;gap:var(--u);margin-bottom:calc(var(--u)*2.5)}
   .head h2{font-size:clamp(28px,10vw,42px);line-height:1}
@@ -340,7 +334,6 @@ section{scroll-margin-top:72px}
           <span data-t="eduSchool"></span> · <span data-t="eduDegree"></span> · <span data-t="eduYears"></span>
         </div>
       </div>
-      <div class="stats" id="stats"></div>
       <div class="hero__keys" data-t="heroKeys"></div>
       <div class="hero__cta">
         <a class="btn btn--solid" data-magnet href="#work" data-t="ctaWork"></a>
@@ -440,11 +433,6 @@ const AWARD = {
        items:['Third Prize', 'Vietnam AI Stars Award', 'AI Singapore Award']}
 };
 
-const STATS = {
-  vi:[{n:3,label:'Sản phẩm đã bàn giao'},{n:3,label:'Giải thưởng VAIC 2026'},{n:1071,label:'Test tự động'}],
-  en:[{n:3,label:'Products delivered'},{n:3,label:'Awards at VAIC 2026'},{n:1071,label:'Automated tests'}]
-};
-
 const CONTENT = {
   vi: {
     name:'Nguyễn Mạnh Hiệp',
@@ -534,6 +522,17 @@ const CONTENT = {
        role:['Cấu hình agent','Viết skill','Tự động hoá trình duyệt','Cron job','Script giám sát'],
        result:'Các việc lặp lại hằng ngày chạy tự động. Quy trình thao tác trình duyệt (chụp snapshot trước khi bấm, mỗi việc một tab có nhãn riêng) được ghi thành quy tắc để agent làm ổn định trên Gmail, Messenger và Drive.',
        stack:['OpenClaw','Telegram','Chrome DevTools Protocol','Custom skills','PowerShell'],
+       demo:null, github:null},
+
+      {id:'ely-agent', name:'Ely v2 - Agent AI tự kiếm tiền', year:'2026',
+       tagline:'Agent AI tự trị chạy 24/7 trên VM GCP, tự tìm cách kiếm tiền ở thị trường Việt Nam: nghiên cứu sản phẩm, làm video, đăng bài lên Facebook, TikTok, YouTube Shorts và tự rút kinh nghiệm.',
+       problem:'Khác với trợ lý cá nhân chỉ làm việc khi được giao, agent này phải tự quyết định hôm nay làm gì để có thu nhập, tự chịu chi phí chạy máy, và tự sửa khi một nền tảng đổi giao diện. Khó nhất là để nó tự vận hành lâu dài mà vẫn có ranh giới an toàn với tiền và cấu hình.',
+       built:'Tôi fork Conway Automaton (runtime agent tự trị mã nguồn mở, TypeScript) và mở rộng cho thị trường Việt Nam. Ely điều khiển Chrome thật qua Playwright và Chrome DevTools Protocol để đăng bài lên ba nền tảng, tự dựng video ngắn, nghiên cứu thị trường, ghi sổ thu chi theo VND và viết nhật ký công khai. Lịch chạy dùng heartbeat theo cron, và Ely tự đặt lịch riêng cho các khung giờ vàng. Tôi nhận báo cáo và giao việc qua Telegram.',
+       flow:['Telegram (creator)','vòng lặp agent (Gemini)','nghiên cứu & làm video','trình duyệt: FB / TikTok / YouTube','sổ thu chi & nhật ký'],
+       aiNote:'Ely được tự sửa mã nguồn của mình: mỗi lần sửa phải build thành công rồi mới commit và push lên GitHub. VM tự kéo bản mới và khởi động lại sau khoảng 2 phút, nên mọi thay đổi đều có lịch sử và hoàn tác được. Các module chạm tới tiền, cấu hình, Telegram và chính cơ chế tự sửa bị khoá. Bài học Ely rút ra, cùng những gì tôi dặn "nhớ" qua Telegram, được ghi thành skill để dùng lại; 22h mỗi ngày Ely tự đánh giá lại ngày làm việc.',
+       role:['Kiến trúc agent','Tự động hoá trình duyệt (Playwright/CDP)','Tự sửa code & CI/CD','Lịch chạy & cron','Hạ tầng GCP'],
+       result:'Đang chạy 24/7 trên VM GCP, tự đăng video lên Facebook, TikTok và YouTube Shorts. Kịch bản đăng bài kiểm tra lại từng bước (tiêu đề, chế độ công khai, link bài) và gửi ảnh chụp qua Telegram khi kẹt, thay vì báo đăng thành công giả.',
+       stack:['TypeScript','Node.js','Conway Automaton','Gemini (Vertex AI)','Playwright','Chrome DevTools Protocol','SQLite','Telegram Bot API','GCP','GitHub Actions'],
        demo:null, github:null}
     ],
 
@@ -642,6 +641,17 @@ const CONTENT = {
        role:['Agent configuration','Skill authoring','Browser automation','Cron jobs','Supervisor script'],
        result:'Recurring daily chores run on their own. The browser workflow (snapshot before every click, one labelled tab per task) is written down as rules so the agent works reliably on Gmail, Messenger and Drive.',
        stack:['OpenClaw','Telegram','Chrome DevTools Protocol','Custom skills','PowerShell'],
+       demo:null, github:null},
+
+      {id:'ely-agent', name:'Ely v2 - autonomous money-making AI agent', year:'2026',
+       tagline:'An autonomous AI agent running 24/7 on a GCP VM that works out how to earn money in the Vietnamese market on its own: it researches products, makes videos, posts to Facebook, TikTok and YouTube Shorts, and learns from its mistakes.',
+       problem:'Unlike a personal assistant that only acts when given a task, this agent has to decide for itself what to do today to bring in income, cover its own running costs, and fix itself when a platform changes its UI. The hard part is letting it run on its own for a long time while keeping safe boundaries around money and configuration.',
+       built:'I forked Conway Automaton (an open-source autonomous agent runtime in TypeScript) and extended it for the Vietnamese market. Ely drives a real Chrome through Playwright and the Chrome DevTools Protocol to post on three platforms, builds short videos, does market research, keeps a ledger in VND and writes a public diary. A cron-based heartbeat schedules its work, and Ely sets its own schedules for peak hours. I get reports and assign work over Telegram.',
+       flow:['Telegram (creator)','agent loop (Gemini)','research & video','browser: FB / TikTok / YouTube','ledger & diary'],
+       aiNote:'Ely can edit its own source: every edit must build before it is committed and pushed to GitHub. The VM pulls the new version and restarts within about 2 minutes, so every change has history and can be rolled back. Modules that touch money, configuration, Telegram and the self-modification mechanism itself are locked. Lessons Ely draws, and anything I tell it to "remember" over Telegram, are written into skills it reuses; at 22:00 every day Ely reviews its own day.',
+       role:['Agent architecture','Browser automation (Playwright/CDP)','Self-modification & CI/CD','Scheduling & cron','GCP infrastructure'],
+       result:'Running 24/7 on a GCP VM and posting videos to Facebook, TikTok and YouTube Shorts on its own. The posting scripts verify each step (title, public visibility, post link) and send a screenshot over Telegram when stuck, instead of reporting a fake success.',
+       stack:['TypeScript','Node.js','Conway Automaton','Gemini (Vertex AI)','Playwright','Chrome DevTools Protocol','SQLite','Telegram Bot API','GCP','GitHub Actions'],
        demo:null, github:null}
     ],
 
@@ -745,12 +755,6 @@ function render() {
   document.getElementById('work-count').textContent = c.countFmt(c.projects.length);
 
   document.getElementById('hero-name').innerHTML = splitChars(c.name);
-
-  document.getElementById('stats').innerHTML = STATS[lang].map(s => `
-    <div class="stat">
-      <div class="stat__n"><span data-count="${s.n}">${s.n}</span>${s.suffix || ''}</div>
-      <div class="stat__l">${esc(s.label)}</div>
-    </div>`).join('');
 
   const aw = AWARD[lang];
   document.getElementById('awards-body').innerHTML = `
@@ -868,7 +872,6 @@ function heroIntro() {
     .from('.hero__eyebrow', { autoAlpha: 0, y: 12, duration: 0.6 }, 0.2)
     .from('.hero__about', { autoAlpha: 0, y: 16, duration: 0.7 }, 0.45)
     .from('.hero__cta > *', { autoAlpha: 0, y: 16, duration: 0.6, stagger: 0.1 }, 0.55)
-    .from('.stats', { autoAlpha: 0, y: 16, duration: 0.6 }, 0.7)
     .from('.hero__aside', { autoAlpha: 0, y: 24, duration: 0.8 }, 0.6);
 }
 
@@ -904,17 +907,6 @@ function initMotion() {
     onEnter: b => gsap.to(b, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out', overwrite: true }),
     onLeaveBack: b => gsap.set(b, { autoAlpha: 0, y: 60, overwrite: true })
   }));
-
-  // count-up stats: runs once, then the real number stays (no reset to 0 on scroll back)
-  gsap.utils.toArray('[data-count]').forEach(el => {
-    const end = +el.dataset.count, obj = { v: 0 };
-    el.textContent = '0';
-    const st = ScrollTrigger.create({
-      trigger: el, start: 'top 92%', once: true,
-      onEnter: () => gsap.to(obj, { v: end, duration: 1.4, ease: 'power2.out', onUpdate: () => el.textContent = Math.round(obj.v) })
-    });
-    motionTriggers.push(st);
-  });
 
   ScrollTrigger.refresh();
 }
