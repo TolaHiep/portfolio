@@ -36,7 +36,7 @@ cv:
 
     experience:
       - company: ChimAI JSC
-        position: "Software Engineer, Notarex: notarial document digitization platform"
+        position: "Software Engineer, ChimAI | Notarex: notarial document digitization platform"
         start_date: 2026-03
         end_date: 2026-09
         summary: >-
@@ -56,28 +56,6 @@ cv:
           - "**Requirements and delivery:** Collected requirements directly with notary offices, scoped each
             release in sprints in a 2 to 3 person team with no dedicated PM, and shipped on Docker behind
             Nginx with MinIO storage and GitHub Actions CI/CD."
-
-      - company: ChimAI JSC
-        position: "Software Engineer, EazySale: sales lead generation and outreach SaaS"
-        start_date: 2026-03
-        end_date: 2026-08
-        summary: >-
-          A SaaS for sales lead management and automated customer outreach over Zalo and email. I owned the
-          FastAPI backend, three React dashboards and the infrastructure. React 18, TypeScript, FastAPI,
-          SQLAlchemy, Alembic, PostgreSQL 15, APScheduler, Zalo OA API, SendGrid, Docker.
-        highlights:
-          - "**Zalo OA integration:** Built the Zalo OA ZNS API channel with template management, HMAC-SHA256
-            webhook verification and delivery metrics, plus a mock provider with a tunable failure rate for
-            testing without spending quota."
-          - "**Scheduled campaign delivery:** Paired APScheduler date triggers with a 60-second database poll
-            that recovers jobs lost to a restart, using SELECT FOR UPDATE NOWAIT so each message is sent
-            exactly once."
-          - "**Email event tracking:** Made the public SendGrid event webhook idempotent with in-batch
-            deduplication and a status-priority guard inside the UPDATE, so out-of-order and repeated events
-            cannot roll a delivery state backwards."
-          - "**Architecture and delivery:** Designed a path-routed Nginx deployment on one domain, RBAC across
-            129 REST endpoints, and a GitHub Actions pipeline deploying four images with migrations and zero
-            downtime."
 
       - company: Freelance
         position: "Software Engineer, sole developer, ASC Farm: farm production management system"
@@ -101,6 +79,28 @@ cv:
             across 65 API endpoints, packaged as a one-command Docker Compose stack."
 
     projects:
+      - name: "SmartSales: sales platform for small online shops"
+        date: 2026
+        summary: >-
+          Solo developer. Sales software for small Vietnamese shops that puts Zalo chat, orders, calls and
+          livestream selling in one place. I built it alone, from the architecture to the UI and the AI.
+          Node.js 22, Express, PostgreSQL 16 + pgvector, Redis, Socket.IO, zca-js, JsSIP (SIP over WebRTC),
+          Docker Compose, PM2.
+        highlights:
+          - "**Modular architecture:** Split the system into 7 staff modules on one PostgreSQL database. Each
+            module writes only to its own schema but can join across the others, so one customer profile pulls
+            in orders, chats and calls; all modules share one sign-in and one UI frame."
+          - "**AI gateway and RAG:** Routed every AI call through one gateway that picks a model per task from
+            .env (Gemini, OpenAI, Groq) and falls back to the next provider on failure. Documents and products
+            sit in a RAG index searched by vectors and keywords together, which feeds reply suggestions and the
+            shop chatbot."
+          - "**Zalo and call integration:** Wrote a CLI on the open-source zca-js to connect personal Zalo
+            accounts, replacing a licensed tool. Calls are recorded on two channels so the transcript knows who
+            said what, and the AI scores staff attitude on 7 criteria."
+          - "**Security and testing:** Kept 76 test files and an end-to-end smoke test that rerun on every
+            change, fixed all 61 issues found in two security reviews, and put session, CSRF and Socket.IO
+            checks in one shared layer that every module mounts."
+
       - name: "SenAI: real-time multilingual meeting translation ([app.senai.online](https://app.senai.online))"
         start_date: 2026
         end_date: present
@@ -146,8 +146,8 @@ cv:
       - label: Frontend
         details: React 19/18, Next.js 16/14, TypeScript, Vite, Tailwind v4, Zustand, PWA / offline-first
       - label: Backend
-        details: FastAPI, Python, Frappe v15, REST API design, Node.js / NestJS, Spring Boot, WebSocket,
-          LiveKit, Celery, Redis queues, JWT / OAuth, RBAC, webhooks
+        details: FastAPI, Python, Frappe v15, REST API design, Node.js / Express / NestJS, Spring Boot,
+          WebSocket / Socket.IO, LiveKit, Celery, Redis queues, JWT / OAuth, RBAC, webhooks
       - label: Databases
         details: PostgreSQL (+ pgvector), MariaDB, MySQL, SQLite, SQLAlchemy 2.0 async, MinIO (S3)
       - label: DevOps and Cloud
