@@ -75,7 +75,7 @@ cv:
           - "**Offline-first field app:** Built an idempotent offline queue keyed by a client UUID, a
             service-worker app shell, and in-app completion photos stamped with GPS and a watermark as proof
             of work."
-          - "**Testing and delivery:** Covered the engine, status model and permissions with 139 backend tests
+          - "**Testing and delivery:** Covered the engine, status model and permissions with backend tests
             across 65 API endpoints, packaged as a one-command Docker Compose stack."
 
     projects:
@@ -120,8 +120,8 @@ cv:
             LLM-written minutes with an assistant that answers questions about them, and per-speaker voiced
             translation with ElevenLabs."
           - "**Delivery and security:** Deployed through GitHub Actions over SSH with a forced command that
-            skips API restarts for doc-only commits, revoked refresh tokens on logout, and kept 37 UAT suites
-            with 147 real, non-mocked tests."
+            skips API restarts for doc-only commits, revoked refresh tokens on logout, and ran UAT suites
+            against the real system with no mocks."
 
       - name: "Ely: personal AI assistant built on OpenClaw"
         date: 2026

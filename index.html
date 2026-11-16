@@ -417,7 +417,7 @@ section{scroll-margin-top:72px}
 /* Every number here has a source in a repository:
    - 4 products: SenAI, Notarex (E25_OCR), ASC Farm, EazySale
    - 3 awards: Giải Ba Chung cuộc, Vietnam AI Stars, AI Singapore (app.senai.online)
-   - 697 tests: 147 SenAI UAT + 418 E25_OCR + 132 ASC Farm
+   - test counts are deliberately not shown (owner, 2026-11-16): describe how testing works, keep only performance and usage numbers
    TODO(Hiep): chưa có metric nghiệp vụ (số hồ sơ xử lý, thời gian nhập liệu tiết kiệm được,
    số cuộc họp đã dùng SenAI). Nếu xin được số thật từ phía khách hàng thì thêm vào đây. */
 /* Awards are shown as an achievement band, not as project screenshots.
@@ -480,7 +480,7 @@ const CONTENT = {
        flow:['giọng nói','ASR','dịch nhanh','LLM refine theo glossary','phụ đề + đọc lại','biên bản tóm tắt'],
        aiNote:'Dịch chạy theo hai lane: bản nháp nhanh phát ra khi người nói còn đang nói, rồi LLM biên tập bất đồng bộ và thay đúng câu đó tại chỗ. Một Model Router tách hệ thống theo năng lực, nên đổi nhà cung cấp lúc đang chạy không phải sửa code, và thiếu key hay nhà cung cấp lỗi thì tự quay về model self-host. Cũng nhờ cách tách này mà một sản phẩm chạy được cả on-premise lẫn qua API thương mại. Thuật ngữ và tài liệu người dùng tải lên được nhúng vào pgvector, làm glossary cho bản dịch và để sửa lỗi ASR theo phiên âm.',
        role:['Toàn bộ frontend','Backend & dữ liệu','Phòng họp real-time','Pipeline dịch & tích hợp LLM','Viết spec & tài liệu kỹ thuật','CI/CD & triển khai VPS'],
-       result:'Cùng nhóm dự án, chúng tôi đi từ repo trắng tới bản chạy công khai tại app.senai.online trong ba tuần. Từ lúc người nói dứt câu tới lúc bản dịch hiện lên mất khoảng 220ms, đo trên pipeline thật. 37 bộ UAT với 147 test chạy trên hệ thống thật, không mock. Pipeline deploy bỏ qua bước restart API khi commit chỉ sửa tài liệu, để cuộc họp đang chạy không bị rớt.',
+       result:'Cùng nhóm dự án, chúng tôi đi từ repo trắng tới bản chạy công khai tại app.senai.online trong ba tuần. Từ lúc người nói dứt câu tới lúc bản dịch hiện lên mất khoảng 220ms, đo trên pipeline thật. Bộ UAT chạy trên hệ thống thật, không mock. Pipeline deploy bỏ qua bước restart API khi commit chỉ sửa tài liệu, để cuộc họp đang chạy không bị rớt.',
        stack:['Next.js 16','React 19','TypeScript','FastAPI','PostgreSQL + pgvector','LiveKit','vLLM','Soniox','ElevenLabs','Docker','Nginx'],
        demo:'https://app.senai.online', github:null},
 
@@ -491,7 +491,7 @@ const CONTENT = {
        flow:['ảnh / scan','prompt riêng theo loại giấy tờ','AI OCR','JSON đúng schema','parser + người soát','điền vào biểu mẫu Word'],
        aiNote:'Prompt cho từng loại giấy tờ được sinh từ chính cấu hình biểu mẫu (tên trường, mô tả người dùng gõ, kiểu dữ liệu), nên model luôn có đúng ngữ cảnh nghiệp vụ vừa khai báo. Với CCCD, hệ thống đọc thẳng mã QR và bỏ qua model, vì nguồn đó chắc chắn hơn.',
        role:['Phân tích yêu cầu','Thiết kế kiến trúc','Backend','Frontend','Thiết kế prompt & luồng OCR','Hàng đợi xử lý nền','Triển khai'],
-       result:'Thêm một loại giấy tờ mới giờ chỉ cần cấu hình. Job nền chạy trên hàng đợi Celery + Redis, tự phát hiện và chạy lại job treo nên hồ sơ không bị kẹt giữa chừng. 418 test tự động phủ luồng OCR, phân quyền và sinh tài liệu.',
+       result:'Thêm một loại giấy tờ mới giờ chỉ cần cấu hình. Job nền chạy trên hàng đợi Celery + Redis, tự phát hiện và chạy lại job treo nên hồ sơ không bị kẹt giữa chừng. Test tự động phủ luồng OCR, phân quyền và sinh tài liệu.',
        stack:['Next.js 14','TypeScript','FastAPI','SQLAlchemy async','PostgreSQL 16','Celery','Redis','MinIO','OnlyOffice','Docker'],
        demo:null, github:null},
 
@@ -501,7 +501,7 @@ const CONTENT = {
        built:'Tôi dựng backend Frappe v15 chạy headless làm engine sinh việc: việc được tạo theo bước, tần suất và điều kiện tiên quyết, rồi chia cho tổ trưởng theo tải hiện có. Người làm dùng PWA và chụp ảnh hoàn thành ngay trong app, kèm GPS và watermark. Khi mất sóng, dữ liệu vào một hàng đợi offline idempotent và đồng bộ lại khi có mạng, không mất và không bị nhân đôi. Người quản lý có bản đồ nhiệt ảnh vệ tinh, lịch, thông báo và SOP cho từng bước.',
        flow:null, aiNote:null,
        role:['Backend','Web admin','Mobile PWA','Cơ chế đồng bộ offline','Kiểm thử tự động'],
-       result:'Mỗi việc hoàn thành giờ đi kèm ảnh chụp trong app có GPS và watermark, nên người quản lý kiểm chứng được. App vẫn ghi nhận khi mất sóng và đồng bộ lại sau. 139 test tự động phủ những phần dễ sai nhất: engine sinh việc, mô hình trạng thái và phân quyền.',
+       result:'Mỗi việc hoàn thành giờ đi kèm ảnh chụp trong app có GPS và watermark, nên người quản lý kiểm chứng được. App vẫn ghi nhận khi mất sóng và đồng bộ lại sau. Test tự động phủ những phần dễ sai nhất: engine sinh việc, mô hình trạng thái và phân quyền.',
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
        demo:null, github:'https://github.com/TolaHiep/asc-farm'},
 
@@ -523,7 +523,7 @@ const CONTENT = {
        flow:['từ người dùng import','outbox offline','Edge Function','Gemini phân loại & kiểm duyệt','deck Cộng đồng'],
        aiNote:'Từ người dùng import được đẩy lên server qua một outbox, tự thử lại khi có mạng. Gemini 2.5 Flash phân loại cấp độ, chủ đề và lọc nội dung rác trước khi từ vào deck Cộng đồng dùng chung. Các endpoint public được khoá theo kiểu fail-closed: server chưa đặt khoá thì trả 503, để không ai rút được quota LLM.',
        role:['Thiết kế sản phẩm','App desktop (Tauri + Svelte)','Lịch ôn FSRS','Backend Supabase','Tích hợp Gemini','Đóng gói installer'],
-       result:'Người dùng ôn từ ngay trên màn hình làm việc, không cần mở app hay có mạng. Bản installer Windows đã đóng gói xong; gói nội dung và đề thi khoảng 3MB được tải lazy nên bundle chính nhẹ. 367 test tự động (Vitest).',
+       result:'Người dùng ôn từ ngay trên màn hình làm việc, không cần mở app hay có mạng. Bản installer Windows đã đóng gói xong; gói nội dung và đề thi khoảng 3MB được tải lazy nên bundle chính nhẹ. Có test tự động bằng Vitest.',
        stack:['Tauri 2','Svelte 5','TypeScript','SQLite','ts-fsrs','Supabase Edge Functions','Gemini API','Vitest'],
        demo:null, github:null},
 
@@ -600,7 +600,7 @@ const CONTENT = {
        flow:['speech','ASR','fast translation','LLM refine with glossary','subtitles + spoken output','summary minutes'],
        aiNote:'Translation runs in two lanes: a fast draft goes out while the person is still talking, then an LLM edits it asynchronously and replaces that exact line in place. A model router splits the system by capability, so providers can be swapped at runtime without code changes, and a missing key or a failing provider falls back to the self-hosted model. That split is also how one product runs both on-premise and on commercial APIs. Domain terms and uploaded documents are embedded into pgvector and used as the translation glossary and for correcting ASR errors phonetically.',
        role:['Entire frontend','Backend & data','Real-time meeting room','Translation pipeline & LLM integration','Specs & technical docs','CI/CD & VPS deployment'],
-       result:'With the project team, we went from an empty repo to a public deployment at app.senai.online in three weeks. A translation reaches the screen about 220 ms after the speaker finishes a sentence, measured on the real pipeline. 37 UAT suites with 147 tests run against the real system, with no mocks. The deploy pipeline skips the API restart when a commit only touches docs, so a meeting in progress is not cut off.',
+       result:'With the project team, we went from an empty repo to a public deployment at app.senai.online in three weeks. A translation reaches the screen about 220 ms after the speaker finishes a sentence, measured on the real pipeline. UAT suites run against the real system, with no mocks. The deploy pipeline skips the API restart when a commit only touches docs, so a meeting in progress is not cut off.',
        stack:['Next.js 16','React 19','TypeScript','FastAPI','PostgreSQL + pgvector','LiveKit','vLLM','Soniox','ElevenLabs','Docker','Nginx'],
        demo:'https://app.senai.online', github:null},
 
@@ -611,7 +611,7 @@ const CONTENT = {
        flow:['photo / scan','per-document prompt','AI OCR','JSON matching the schema','parser + human check','filled Word template'],
        aiNote:'The prompt for each document type is generated from the template configuration (field names, the description the admin typed, the data type), so the model always gets the business context the user just declared. For national ID cards, the system reads the QR code directly and skips the model, because that source is more reliable.',
        role:['Requirement analysis','System architecture','Backend','Frontend','Prompt & OCR flow design','Background job queue','Deployment'],
-       result:'Adding a new document type is now configuration. Background jobs run on a Celery + Redis queue that detects and retries stuck jobs, so records do not stall halfway. 418 automated tests cover the OCR flow, permissions and document generation.',
+       result:'Adding a new document type is now configuration. Background jobs run on a Celery + Redis queue that detects and retries stuck jobs, so records do not stall halfway. Automated tests cover the OCR flow, permissions and document generation.',
        stack:['Next.js 14','TypeScript','FastAPI','SQLAlchemy async','PostgreSQL 16','Celery','Redis','MinIO','OnlyOffice','Docker'],
        demo:null, github:null},
 
@@ -621,7 +621,7 @@ const CONTENT = {
        built:'I built a headless Frappe v15 backend as the task engine: tasks are generated by step, frequency and prerequisite, then assigned to team leads by current load. Workers use a PWA and take completion photos in the app, with GPS and a watermark. With no signal, data goes into an idempotent offline queue and syncs when the connection returns, without losing or duplicating anything. Managers get a satellite heatmap, a calendar, notifications and per-step SOPs.',
        flow:null, aiNote:null,
        role:['Backend','Web admin','Mobile PWA','Offline sync','Automated testing'],
-       result:'Every completed task now comes with an in-app photo carrying GPS and a watermark, so managers can verify it. The app keeps recording with no signal and syncs later. 139 automated tests cover the parts most likely to break: the task engine, the status model and access control.',
+       result:'Every completed task now comes with an in-app photo carrying GPS and a watermark, so managers can verify it. The app keeps recording with no signal and syncs later. Automated tests cover the parts most likely to break: the task engine, the status model and access control.',
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
        demo:null, github:'https://github.com/TolaHiep/asc-farm'},
 
@@ -643,7 +643,7 @@ const CONTENT = {
        flow:['user-imported words','offline outbox','Edge Function','Gemini classification & moderation','Community deck'],
        aiNote:'Words a user imports go to the server through an outbox that retries when the connection returns. Gemini 2.5 Flash classifies level and topic and filters junk before a word reaches the shared Community deck. Public endpoints are locked with a shared key and fail closed: with no key set the server returns 503, so nobody can drain the LLM quota.',
        role:['Product design','Desktop app (Tauri + Svelte)','FSRS scheduling','Supabase backend','Gemini integration','Installer packaging'],
-       result:'Users review words right on their work screen, without opening an app or needing a connection. The Windows installer is packaged, and about 3 MB of content packs and practice tests load lazily to keep the main bundle small. 367 automated tests (Vitest).',
+       result:'Users review words right on their work screen, without opening an app or needing a connection. The Windows installer is packaged, and about 3 MB of content packs and practice tests load lazily to keep the main bundle small. Automated tests run on Vitest.',
        stack:['Tauri 2','Svelte 5','TypeScript','SQLite','ts-fsrs','Supabase Edge Functions','Gemini API','Vitest'],
        demo:null, github:null},
 
