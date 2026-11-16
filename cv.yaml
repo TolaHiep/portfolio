@@ -54,7 +54,7 @@ cv:
             atomic active-counter, plus heartbeat reconciliation that detects and reruns zombie jobs so no
             record gets stuck mid-OCR."
           - "**Requirements and delivery:** Collected requirements directly with notary offices, scoped each
-            release in sprints in a 2 to 3 person team with no dedicated PM, and shipped on Docker behind
+            release in sprints, and shipped on Docker behind
             Nginx with MinIO storage and GitHub Actions CI/CD."
 
       - company: Freelance
@@ -82,8 +82,8 @@ cv:
       - name: "SmartSales: sales platform for small online shops"
         date: 2026
         summary: >-
-          Solo developer. Sales software for small Vietnamese shops that puts Zalo chat, orders, calls and
-          livestream selling in one place. I built it alone, from the architecture to the UI and the AI.
+          Full-stack developer. Sales software for small Vietnamese shops that puts Zalo chat, orders, calls and
+          livestream selling in one place.
           Node.js 22, Express, PostgreSQL 16 + pgvector, Redis, Socket.IO, zca-js, JsSIP (SIP over WebRTC),
           Docker Compose, PM2.
         highlights:
