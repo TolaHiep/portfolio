@@ -97,9 +97,11 @@ cv:
           - "**Zalo and call integration:** Wrote a CLI on the open-source zca-js to connect personal Zalo
             accounts, replacing a licensed tool. Calls are recorded on two channels so the transcript knows who
             said what, and the AI scores staff attitude on 7 criteria."
-          - "**Security and testing:** Kept 76 test files and an end-to-end smoke test that rerun on every
-            change, fixed all 61 issues found in two security reviews, and put session, CSRF and Socket.IO
-            checks in one shared layer that every module mounts."
+          - "**Testing and security:** CI starts the full Docker stack and runs every module's tests on each
+            push, deploying only when they pass; end-to-end business-flow scripts run against a mock AI, Zalo
+            and Graph API; a checker has Postgres parse every SQL string in the code. Source-code security
+            reviews run in rounds, each finding fixed in its own commit; session, CSRF and Socket.IO checks
+            live in one shared layer every module mounts."
 
       - name: "SenAI: real-time multilingual meeting translation ([app.senai.online](https://app.senai.online))"
         start_date: 2026
