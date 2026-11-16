@@ -96,7 +96,7 @@ cv:
             shop chatbot."
           - "**Zalo and call integration:** Wrote a CLI on the open-source zca-js to connect personal Zalo
             accounts. Calls are recorded on two channels so the transcript knows who
-            said what, and the AI scores staff attitude on 7 criteria."
+            said what, and the AI reviews call quality on 7 criteria."
           - "**Testing and security:** CI starts the full Docker stack and runs every module's tests on each
             push, deploying only when they pass; end-to-end business-flow scripts run against a mock AI, Zalo
             and Graph API; a checker has Postgres parse every SQL string in the code. Source-code security
@@ -123,7 +123,7 @@ cv:
             skips API restarts for doc-only commits, revoked refresh tokens on logout, and ran UAT suites
             against the real system with no mocks."
 
-      - name: "Ely: personal AI assistant built on OpenClaw"
+      - name: "Personal AI assistant built on OpenClaw"
         date: 2026
         summary: >-
           Extended the open-source OpenClaw agent with Telegram commands, CDP browser automation, cron jobs
