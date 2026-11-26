@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nguyễn Mạnh Hiệp - Software Engineer</title>
-<meta name="description" content="Nguyễn Mạnh Hiệp - Software Engineer, làm full-stack: giao diện, backend, dữ liệu, tích hợp AI/LLM và triển khai. Phiên dịch cuộc họp real-time, số hoá hồ sơ giấy, quản lý sản xuất.">
+<title>Nguyen Manh Hiep - Full-stack AI Engineer</title>
+<meta name="description" content="Nguyen Manh Hiep - Full-stack AI Engineer: frontend, backend, data, AI/LLM and agent integration, deployment. Real-time meeting interpretation, paperwork digitisation, AI agents in real products.">
 <link rel="canonical" href="https://nguyenmanhhiep.info/">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://nguyenmanhhiep.info/">
-<meta property="og:title" content="Nguyễn Mạnh Hiệp - Software Engineer">
-<meta property="og:description" content="Software Engineer thích xây sản phẩm chạy được thật: phòng họp phiên dịch real-time, số hoá hồ sơ giấy, quản lý sản xuất ngoài hiện trường.">
+<meta property="og:title" content="Nguyen Manh Hiep - Full-stack AI Engineer">
+<meta property="og:description" content="Full-stack AI Engineer who builds products that run for real: real-time interpreted meetings, paperwork digitisation, AI agents for sales and personal finance.">
 <meta property="og:image" content="https://nguyenmanhhiep.info/assets/portrait/nguyen-manh-hiep-portrait.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/fonts/fonts.css">
@@ -415,7 +415,7 @@ section{scroll-margin-top:72px}
 <script src="assets/vendor/ScrollTrigger.min.js"></script>
 <script>
 /* Every number here has a source in a repository:
-   - 4 products: SenAI, Notarex (E25_OCR), ASC Farm, EazySale
+   - products: SmartSale, SenAI, Notarex (E25_OCR), ASC Farm, LexiPet, Ely Finance
    - 3 awards: Giải Ba Chung cuộc, Vietnam AI Stars, AI Singapore (app.senai.online)
    - test counts are deliberately not shown (owner, 2026-11-16): describe how testing works, keep only performance and usage numbers
    TODO(Hiep): chưa có metric nghiệp vụ (số hồ sơ xử lý, thời gian nhập liệu tiết kiệm được,
@@ -437,11 +437,11 @@ const AWARD = {
 const CONTENT = {
   vi: {
     name:'Nguyễn Mạnh Hiệp',
-    barRole:'Software Engineer',
+    barRole:'Full-stack AI Engineer',
     navWork:'Dự án',
     navStack:'Tech stack', navContact:'Liên hệ',
-    heroKicker:'Software Engineer · Full-stack',
-    tagline:'Software Engineer làm full-stack web, tập trung vào hệ thống real-time, tự động hoá nghiệp vụ và tích hợp AI/LLM, AI agent vào sản phẩm.',
+    heroKicker:'Full-stack AI Engineer · LLM & Agents',
+    tagline:'Full-stack AI Engineer làm web full-stack, tập trung vào hệ thống real-time, tự động hoá nghiệp vụ và tích hợp AI/LLM, AI agent vào sản phẩm.',
     heroKeys:'Full-stack web · Backend/API · Real-time · OCR & automation · AI/LLM & agents',
     location:'Hoàng Mai, Hà Nội',
     email:'Hiep.work@outlook.com',
@@ -457,7 +457,7 @@ const CONTENT = {
     eduDegree:'Cử nhân Khoa học Máy tính',
     eduYears:'2021 – 2026',
     contactCta:'Liên hệ công việc?',
-    contactSub:'Tôi đang tìm vị trí Software Engineer, Full-stack Software Engineer hoặc AI Application / AI Agent Engineer, nơi tôi được tham gia từ thiết kế kỹ thuật tới triển khai và vận hành sản phẩm.',
+    contactSub:'Tôi đang tìm vị trí Full-stack AI Engineer, Software Engineer hoặc AI Application / AI Agent Engineer, nơi tôi được tham gia từ thiết kế kỹ thuật tới triển khai và vận hành sản phẩm.',
 
     projects:[
       {id:'smartsales', name:'SmartSale', year:'2026',
@@ -505,17 +505,6 @@ const CONTENT = {
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
        demo:null, github:'https://github.com/TolaHiep/asc-farm'},
 
-      {id:'eazysale', name:'EazySale', year:'2026',
-       tagline:'CRM tự động hoá bán hàng: từ danh sách khách trong Excel tới tin nhắn Zalo OA và email gửi đúng giờ.',
-       problem:'Đội sale tìm khách trên Google Maps, chép tay từng số điện thoại sang Excel, rồi nhắn Zalo và gửi email cho từng người một. Danh sách đầy số trùng, lịch chăm sóc bị quên, và không ai biết tin nhắn đã thực sự tới tay khách hay chưa.',
-       built:'Tôi thiết kế kiến trúc, viết backend FastAPI và ba ứng dụng React chạy chung một tên miền (cổng đăng nhập, dashboard admin, dashboard khách hàng). Người dùng upload Excel, hệ thống báo trùng trước khi gửi, cá nhân hoá nội dung cho từng người rồi lên lịch gửi Zalo OA và email.',
-       more:'Yêu cầu khó nhất là gửi đúng giờ mà không bao giờ gửi trùng. Bộ lên lịch chạy hai lớp: job hẹn giờ trong bộ nhớ để gửi đúng phút, và một vòng quét DB mỗi 60 giây để vớt các job bị mất khi backend restart; khi cả hai cùng chạm tới một tin, SELECT FOR UPDATE NOWAIT quyết định bên nào gửi. Webhook SendGrid không có auth nên tôi xác thực bằng chữ ký ECDSA, và vì SendGrid gửi lặp, sai thứ tự, trạng thái chỉ cập nhật khi mức mới cao hơn mức hiện tại, theo thứ tự delivered, opened, clicked, bounced. Zalo OA nằm sau một interface có hai bản mock và thật, tự dùng mock khi thiếu token, nên môi trường dev không cần tài khoản OA.',
-       flow:null, aiNote:null,
-       role:['Kiến trúc hệ thống','Backend FastAPI','Ba frontend React','Tích hợp Zalo OA & SendGrid','CI/CD & triển khai VPS'],
-       result:'Từ danh sách Excel tới tin nhắn đã gửi giờ là một luồng tự động. Dữ liệu trùng được báo trước khi gửi, và trạng thái từng email cập nhật theo thời gian thực nên đội sale biết khách nào đã nhận, đã mở. Hàng đợi gửi tin không nhân đôi kể cả khi backend khởi động lại.',
-       stack:['React 18','TypeScript','Ant Design','FastAPI','PostgreSQL 15','SQLAlchemy + Alembic','APScheduler','MinIO','Zalo OA API','SendGrid','Docker','Nginx','GitHub Actions'],
-       demo:null, github:null},
-
       {id:'lexipet', name:'LexiPet', year:'2026',
        tagline:'App desktop học từ vựng: một chú pet chạy trên màn hình, thỉnh thoảng hỏi bạn một từ sắp đến hạn ôn, rồi biến mất để bạn làm việc tiếp.',
        problem:'Người đi làm muốn học ngoại ngữ nhưng hiếm khi tự mở app flashcard. Ôn hiệu quả nhất là ôn đúng lúc sắp quên, từng câu ngắn rải trong ngày, nên app phải nhẹ, học được khi không có mạng và không cản chuột khi người dùng đang làm việc khác.',
@@ -527,14 +516,16 @@ const CONTENT = {
        stack:['Tauri 2','Svelte 5','TypeScript','SQLite','ts-fsrs','Supabase Edge Functions','Gemini API','Vitest'],
        demo:null, github:null},
 
-      {id:'ely', name:'Trợ lý AI cá nhân (OpenClaw)', year:'2026',
-       tagline:'Trợ lý AI chạy trên máy tôi, dựng trên OpenClaw (mã nguồn mở): nhận việc qua Telegram, thao tác trình duyệt và chạy việc định kỳ thay tôi.',
-       problem:'Nhiều việc lặp lại hằng ngày như đăng bài fanpage, đặt đồ ăn trưa, chuyển file scan hay chụp màn hình gửi đi tốn thời gian mà không cần suy nghĩ. Tôi muốn giao chúng cho một agent, với điều kiện agent chạy ổn định và tự hồi phục khi lỗi.',
-       built:'Tôi cấu hình và mở rộng OpenClaw thành trợ lý cá nhân: nhận lệnh qua Telegram, điều khiển trình duyệt qua Chrome DevTools Protocol với hai profile tách biệt, và chạy việc định kỳ bằng cron. Tôi viết thêm skill để trợ lý điều phối và giám sát task của Claude Code, kiểm soát release trên GitHub, và chụp màn hình gửi qua Telegram. Một script PowerShell giám sát gateway và tự khởi động lại khi nó dừng.',
-       flow:null, aiNote:null,
-       role:['Cấu hình agent','Viết skill','Tự động hoá trình duyệt','Cron job','Script giám sát'],
-       result:'Trợ lý tự đăng bài fanpage sáng và tối, và tự đặt đồ ăn trưa vào các ngày thường. Quy trình thao tác trình duyệt (chụp snapshot trước khi bấm, mỗi việc một tab có nhãn riêng) được ghi thành quy tắc, nên agent làm ổn định trên Gmail, Messenger và Drive.',
-       stack:['OpenClaw','Telegram','Chrome DevTools Protocol','Custom skills','PowerShell'],
+      {id:'ely-finance', name:'Ely Finance', year:'2026',
+       tagline:'Trợ lý tài chính cá nhân trên Telegram cho người không rành tài chính: làm quen bằng một cuộc phỏng vấn, lập kế hoạch riêng cho từng người, tự ghi chi tiêu từ biên lai ngân hàng và mỗi tối hỏi lại các khoản trong ngày.',
+       problem:'Người không rành tài chính thường bỏ app quản lý chi tiêu sau vài tuần vì phải tự nhập từng khoản, còn lời khuyên chung chung kiểu "để dành 20% thu nhập" không khớp với thu nhập, nợ và thói quen của họ. Trợ lý muốn có ích thì phải tự lấy dữ liệu, hiểu hoàn cảnh từng người và không bao giờ tính sai tiền.',
+       built:'Tôi viết toàn bộ bằng Python 3.12, chỉ dùng thư viện chuẩn, không cài gói nào và không có bước build. Ba lớp dùng chung một sổ cái SQLite. Lớp sổ cái giữ mọi phép tính tiền: số tiền luôn là số nguyên VND, ngày và tháng tính theo giờ Việt Nam, tiền chuyển giữa các tài khoản của chính người dùng không bị tính là chi. Bot Telegram là vòng agent tôi tự viết trên Gemini function calling; ban đầu tôi dựng trên OpenClaw nhưng nó quá nặng cho VM nhỏ nên tôi thay bằng harness riêng. Mỗi 10 phút, một job đọc email biên lai Vietcombank qua IMAP ở chế độ chỉ đọc và chống trùng theo số lệnh. Dashboard PWA mở sổ cái ở chế độ read-only và chỉ vào được qua Tailscale.',
+       more:'Người mới được phỏng vấn 8 phần bằng câu nói tự nhiên: thu nhập, chi cố định, tiêu vào đâu, tiền đang để đâu, nợ, khoản không đều trong năm, "mất việc thì sống được mấy tháng". Dừng giữa chừng thì lần sau hỏi tiếp đúng chỗ, vì tiến độ được kiểm tra từ dữ liệu đã lưu chứ không dựa vào lịch sử chat. Số dư được tự tính: lấy số dư người dùng báo làm mốc rồi cộng trừ theo giao dịch, tối Chủ Nhật hỏi xác nhận số thật. Lịch chạy bằng systemd timer theo giờ Việt Nam: check-in 22:00, ngày lương, báo cáo mùng 1, bản tin Chủ Nhật, sao lưu mỗi đêm.',
+       flow:['biên lai VCB / tin Telegram','sổ cái SQLite (code tính tiền)','vòng agent Gemini (function calling)','kế hoạch, check-in, báo cáo','trả lời trên Telegram'],
+       aiNote:'Model không bao giờ tự cộng trừ: mọi con số đi qua tool gọi vào sổ cái, và tool luôn trả về kết quả hoặc lỗi chứ không làm vỡ vòng agent. Kế hoạch được cá nhân hoá mà không có ngưỡng cứng trong code: Ely tự nghĩ phương án cho từng người (để dành bao nhiêu, cắt nhóm nào, quỹ dự phòng), code mô phỏng hệ quả (cuối tháng dư hay âm, bao giờ đạt mục tiêu), và ngân sách chỉ được ghi khi người dùng chốt. Research thị trường (lãi suất, vàng, tỷ giá) dùng Google Search grounding của Gemini, luôn kèm nguồn, có giới hạn lượt mỗi ngày và chặn link trỏ vào địa chỉ nội bộ. Trí nhớ dài hạn: mỗi đêm cuộc trò chuyện được nén thành nhật ký và nhúng bằng gemini-embedding-001, tìm lại bằng độ tương đồng vector cộng điểm từ khoá. Bản ghi nhớ viết lại mỗi đêm bị từ chối nếu mất cấu trúc bắt buộc, và bản cũ luôn được giữ lại.',
+       role:['Thiết kế sản phẩm','Sổ cái & logic tài chính','Vòng agent & tool','Đọc email ngân hàng','Bộ nhớ dài hạn','Hạ tầng GCP & systemd'],
+       result:'Bot chạy 24/7 trên một VM GCE e2-micro khoảng $12/tháng, SSH qua IAP và không mở cổng public. Chi tiêu từ Vietcombank được ghi tự động và không trùng kể cả khi email lặp; bot lưu vị trí tin nhắn trước khi xử lý nên khởi động lại không chạy lại tin cũ. Service account chỉ có quyền gọi Vertex AI và ghi bucket sao lưu, bí mật chỉ nằm trong .env. Test tự động phủ parser biên lai (chạy trên một email thật đã che thông tin), sổ cái, mô phỏng kế hoạch, bộ nhớ và vòng agent.',
+       stack:['Python 3.12 (stdlib)','SQLite','Telegram Bot API','Gemini (Vertex AI)','Function calling','Google Search grounding','Embeddings','IMAP','PWA','GCE + systemd','Tailscale'],
        demo:null, github:null}
     ],
 
@@ -542,26 +533,26 @@ const CONTENT = {
     awardsWhat:'Phần việc của tôi trong sản phẩm dự thi: toàn bộ frontend, phần lớn backend phía sau nó, phòng họp real-time, pipeline dịch, CI/CD và triển khai.',
 
     stack:[
-      {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflow','RAG (pgvector)','vLLM self-host','AI agent (OpenClaw)','Speech API (Soniox, ElevenLabs)']},
+      {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflow','RAG (pgvector)','vLLM self-host','AI agent (function calling)','Speech API (Soniox, ElevenLabs)']},
       {label:'Ứng dụng', items:['TypeScript','React','Next.js','Svelte','Tauri 2 (desktop)','Python','FastAPI','REST API','WebSocket']},
       {label:'Dữ liệu', items:['PostgreSQL','pgvector','MariaDB','SQLite','Supabase','Redis','MinIO']},
       {label:'Triển khai', items:['Docker','Nginx','CI/CD (GitHub Actions)','Testing (pytest / UAT)','VPS + systemd + TLS']}
     ],
 
     about:[
-      'Tôi là Nguyễn Mạnh Hiệp, Software Engineer chuyên phát triển ứng dụng web full-stack và tích hợp AI vào sản phẩm. Tôi có thể nhận một sản phẩm từ ý tưởng ban đầu và đưa nó tới lúc vận hành thực tế: phân tích yêu cầu, thiết kế kiến trúc, phát triển backend và frontend, triển khai lên server và theo dõi hệ thống sau khi đưa vào sử dụng.',
-      'Các hệ thống tôi đã xây gồm phòng họp trực tuyến có phiên dịch theo thời gian thực, dashboard quản trị nhiều chức năng, luồng OCR tự động điền hồ sơ và các tính năng LLM gắn vào quy trình nghiệp vụ. Tôi làm chủ yếu với Next.js, React và TypeScript ở frontend; FastAPI và Node.js ở backend; PostgreSQL và Redis cho dữ liệu; Docker và GitHub Actions cho triển khai. Bên cạnh đó, tôi tự phát triển một số dự án cá nhân: SmartSale, phần mềm bán hàng gom chat Zalo, đơn hàng, cuộc gọi và livestream của shop nhỏ vào một nơi; LexiPet, app desktop học từ vựng; và một trợ lý AI cá nhân trên OpenClaw để tự động hoá công việc hằng ngày.',
+      'Tôi là Nguyễn Mạnh Hiệp, Full-stack AI Engineer chuyên phát triển ứng dụng web full-stack và tích hợp AI vào sản phẩm. Tôi có thể nhận một sản phẩm từ ý tưởng ban đầu và đưa nó tới lúc vận hành thực tế: phân tích yêu cầu, thiết kế kiến trúc, phát triển backend và frontend, triển khai lên server và theo dõi hệ thống sau khi đưa vào sử dụng.',
+      'Các hệ thống tôi đã xây gồm phòng họp trực tuyến có phiên dịch theo thời gian thực, dashboard quản trị nhiều chức năng, luồng OCR tự động điền hồ sơ và các tính năng LLM gắn vào quy trình nghiệp vụ. Tôi làm chủ yếu với Next.js, React và TypeScript ở frontend; FastAPI và Node.js ở backend; PostgreSQL và Redis cho dữ liệu; Docker và GitHub Actions cho triển khai. Bên cạnh đó, tôi tự phát triển một số dự án cá nhân: SmartSale, phần mềm bán hàng gom chat Zalo, đơn hàng, cuộc gọi và livestream của shop nhỏ vào một nơi; LexiPet, app desktop học từ vựng; và Ely Finance, trợ lý tài chính cá nhân trên Telegram tự ghi chi tiêu từ biên lai ngân hàng và lập kế hoạch riêng cho từng người.',
       'Khi xây một hệ thống, tôi chú trọng những yếu tố giúp nó chạy ổn định khi có người dùng thật: API rõ ràng, dữ liệu nhất quán, có phương án dự phòng khi một thành phần gặp lỗi, và bộ test tự động đủ tin cậy để mỗi lần cập nhật không làm hỏng tính năng cũ.'
     ]
   },
 
   en: {
     name:'Nguyen Manh Hiep',
-    barRole:'Software Engineer',
+    barRole:'Full-stack AI Engineer',
     navWork:'Work',
     navStack:'Tech stack', navContact:'Contact',
-    heroKicker:'Software Engineer · Full-stack',
-    tagline:'Software Engineer working on full-stack web, real-time systems, workflow automation, and AI/LLM and agent integrations inside real products.',
+    heroKicker:'Full-stack AI Engineer · LLM & Agents',
+    tagline:'Full-stack AI Engineer working on full-stack web, real-time systems, workflow automation, and AI/LLM and agent integrations inside real products.',
     heroKeys:'Full-stack web · Backend/API · Real-time · OCR & automation · AI/LLM & agents',
     location:'Hoang Mai, Hanoi',
     email:'Hiep.work@outlook.com',
@@ -577,7 +568,7 @@ const CONTENT = {
     eduDegree:'B.Sc. in Computer Science',
     eduYears:'2021 – 2026',
     contactCta:'Contact for work?',
-    contactSub:'I\'m looking for Software Engineer, Full-stack Software Engineer or AI Application / AI Agent Engineer roles where I can work on a product from technical design through deployment and operations.',
+    contactSub:'I\'m looking for Full-stack AI Engineer, Software Engineer or AI Application / AI Agent Engineer roles where I can work on a product from technical design through deployment and operations.',
 
     projects:[
       {id:'smartsales', name:'SmartSale', year:'2026',
@@ -625,17 +616,6 @@ const CONTENT = {
        stack:['React 18','Vite','TypeScript','Tailwind v4','Leaflet + Esri','Frappe v15','MariaDB','Redis','Docker Compose'],
        demo:null, github:'https://github.com/TolaHiep/asc-farm'},
 
-      {id:'eazysale', name:'EazySale', year:'2026',
-       tagline:'Sales automation CRM: from a customer list in Excel to Zalo OA messages and emails sent on schedule.',
-       problem:'Sales staff found prospects on Google Maps, copied each phone number into a spreadsheet by hand, then messaged and emailed them one at a time. Lists filled up with duplicates, follow-ups were forgotten, and nobody could tell whether a message had actually reached the customer.',
-       built:'I designed the architecture and built the FastAPI backend and three React apps behind one domain (a login portal, an admin dashboard and a customer dashboard). Users upload an Excel list, the system flags duplicates before sending, personalises each message, then schedules the Zalo OA and email sends.',
-       more:'The hardest requirement was sending on time without ever sending twice. The scheduler runs in two layers: in-memory timed jobs for minute-accurate sending, and a 60-second DB sweep that picks up jobs lost to a backend restart; when both reach the same message, SELECT FOR UPDATE NOWAIT decides which one sends it. The SendGrid webhook has no auth, so I verify its ECDSA signature, and because SendGrid replays events out of order, a status only changes when the new one outranks the stored one, in the order delivered, opened, clicked, bounced. Zalo OA sits behind one interface with mock and real implementations and falls back to mock without a token, so development needs no OA account.',
-       flow:null, aiNote:null,
-       role:['System architecture','FastAPI backend','Three React frontends','Zalo OA & SendGrid integration','CI/CD & VPS deployment'],
-       result:'An Excel list to a sent message is now one automated flow. Duplicates are flagged before sending, and each email\'s status updates in real time, so the sales team can see who received and opened it. The send queue does not duplicate messages even across a backend restart.',
-       stack:['React 18','TypeScript','Ant Design','FastAPI','PostgreSQL 15','SQLAlchemy + Alembic','APScheduler','MinIO','Zalo OA API','SendGrid','Docker','Nginx','GitHub Actions'],
-       demo:null, github:null},
-
       {id:'lexipet', name:'LexiPet', year:'2026',
        tagline:'A desktop vocabulary app: a pet wanders across your screen, now and then asks you a word that is due for review, then gets out of the way.',
        problem:'Working people want to learn a language but rarely open a flashcard app on their own. Review works best right before you forget, in short questions spread through the day, so the app has to be light, work offline and never block the mouse while you do something else.',
@@ -647,14 +627,16 @@ const CONTENT = {
        stack:['Tauri 2','Svelte 5','TypeScript','SQLite','ts-fsrs','Supabase Edge Functions','Gemini API','Vitest'],
        demo:null, github:null},
 
-      {id:'ely', name:'Personal AI assistant (OpenClaw)', year:'2026',
-       tagline:'An AI assistant running on my own machine, built on OpenClaw (open source): it takes tasks over Telegram, drives the browser and runs scheduled jobs for me.',
-       problem:'Daily chores such as posting to a fan page, ordering lunch, moving scanned files or sending screenshots take time without needing thought. I wanted an agent to handle them, as long as it ran reliably and recovered on its own.',
-       built:'I configured and extended OpenClaw into a personal assistant: it takes commands over Telegram, drives the browser through the Chrome DevTools Protocol with two separate profiles, and runs scheduled jobs with cron. I wrote extra skills so it can dispatch and supervise Claude Code tasks, gate GitHub releases, and capture the screen and send it over Telegram. A PowerShell script supervises the gateway and restarts it when it stops.',
-       flow:null, aiNote:null,
-       role:['Agent configuration','Skill authoring','Browser automation','Cron jobs','Supervisor script'],
-       result:'The assistant now posts to the fan page every morning and evening and orders lunch on weekdays. The browser workflow (snapshot before every click, one labelled tab per task) is written down as rules, so the agent works reliably on Gmail, Messenger and Drive.',
-       stack:['OpenClaw','Telegram','Chrome DevTools Protocol','Custom skills','PowerShell'],
+      {id:'ely-finance', name:'Ely Finance', year:'2026',
+       tagline:'A personal finance assistant on Telegram for people who are not good with money: it gets to know you through an interview, builds a plan for you, logs spending from bank receipts on its own and checks in every evening about the day.',
+       problem:'People who are not good with money tend to drop budgeting apps within weeks because every expense has to be typed in, and generic advice like "save 20% of your income" ignores their actual income, debts and habits. To be useful, an assistant has to collect the data itself, understand each person\'s situation and never get the money wrong.',
+       built:'I wrote it all in Python 3.12 using only the standard library: no packages to install and no build step. Three layers share one SQLite ledger. The ledger layer owns all money math: amounts are always integer VND, days and months are computed in Vietnam time, and transfers between the user\'s own accounts never count as spending. The Telegram bot is my own agent loop on Gemini function calling; I first built it on OpenClaw, but it was too heavy for a small VM, so I replaced it with a lean harness. Every 10 minutes a job reads Vietcombank receipt emails over read-only IMAP and dedupes them by order number. A PWA dashboard opens the ledger read-only and is reachable only over Tailscale.',
+       more:'New users go through an 8-part interview in plain conversation: income, fixed costs, where money goes, where savings sit, debts, irregular yearly costs, "how many months could you live without a job". Stop halfway and it picks up at the right spot next time, because progress is checked against stored data rather than chat history. Balances are computed, not asked: the last balance the user reported is the anchor, transactions move it, and every Sunday evening the bot asks to confirm the real number. Jobs run on systemd timers in Vietnam time: 22:00 check-in, payday, a report on the 1st, a Sunday digest and a nightly backup.',
+       flow:['VCB receipts / Telegram messages','SQLite ledger (code does the math)','Gemini agent loop (function calling)','plan, check-ins, reports','reply on Telegram'],
+       aiNote:'The model never adds or subtracts: every number comes from a tool that calls the ledger, and tools always return a result or an error instead of crashing the loop. Plans are personal without hard-coded thresholds: Ely drafts options for each person (how much to save, which categories to cut, an emergency fund), code simulates the consequences (surplus or deficit at month end, when each goal is reached), and budgets are written only after the user confirms. Market research (interest rates, gold, exchange rates) uses Gemini\'s Google Search grounding, always cites sources, has a daily cap and rejects links that point at internal addresses. For long-term memory, each day\'s chat is compacted into a journal overnight and embedded with gemini-embedding-001, then recalled by vector similarity plus keyword hits. The nightly rewrite of the memory file is rejected if it loses its required structure, and the previous version is always kept.',
+       role:['Product design','Ledger & finance logic','Agent loop & tools','Bank email parsing','Long-term memory','GCP infrastructure & systemd'],
+       result:'The bot runs 24/7 on a GCE e2-micro VM for about $12 a month, with SSH over IAP and no public ports. Vietcombank spending is logged automatically with no duplicates even when emails repeat, and the bot saves its message offset before handling a message, so a restart never replays old messages. The service account can only call Vertex AI and write to the backup bucket, and secrets live only in .env. Automated tests cover the receipt parser (run against a redacted real email), the ledger, plan simulation, memory and the agent loop.',
+       stack:['Python 3.12 (stdlib)','SQLite','Telegram Bot API','Gemini (Vertex AI)','Function calling','Google Search grounding','Embeddings','IMAP','PWA','GCE + systemd','Tailscale'],
        demo:null, github:null}
     ],
 
@@ -662,15 +644,15 @@ const CONTENT = {
     awardsWhat:'My part in the competing product: the whole frontend, most of the backend behind it, the real-time meeting room, the translation pipeline, CI/CD and deployment.',
 
     stack:[
-      {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflows','RAG (pgvector)','vLLM self-hosting','AI agents (OpenClaw)','Speech APIs (Soniox, ElevenLabs)']},
+      {label:'AI & LLM', items:['Claude / Claude Code','ChatGPT','Gemini','Prompt design','Context engineering','Structured output','AI workflows','RAG (pgvector)','vLLM self-hosting','AI agents (function calling)','Speech APIs (Soniox, ElevenLabs)']},
       {label:'Application', items:['TypeScript','React','Next.js','Svelte','Tauri 2 (desktop)','Python','FastAPI','REST APIs','WebSocket']},
       {label:'Data', items:['PostgreSQL','pgvector','MariaDB','SQLite','Supabase','Redis','MinIO']},
       {label:'Delivery', items:['Docker','Nginx','CI/CD (GitHub Actions)','Testing (pytest / UAT)','VPS + systemd + TLS']}
     ],
 
     about:[
-      'I am Nguyen Manh Hiep, a Software Engineer specialising in full-stack web applications and AI integration. I can take a product from the first idea to day-to-day operation: analysing requirements, designing the architecture, building the backend and frontend, deploying to servers and monitoring the system once it is in use.',
-      'The systems I have built include an online meeting room with real-time interpretation, multi-feature admin dashboards, an OCR pipeline that fills in paperwork automatically, and LLM features built into business workflows. I work mainly with Next.js, React and TypeScript on the frontend; FastAPI and Node.js on the backend; PostgreSQL and Redis for data; and Docker and GitHub Actions for deployment. I also build my own projects: SmartSale, sales software that brings a small shop\'s Zalo chat, orders, calls and livestream selling into one place; LexiPet, a desktop vocabulary app; and a personal AI assistant on OpenClaw that automates daily tasks.',
+      'I am Nguyen Manh Hiep, a Full-stack AI Engineer specialising in full-stack web applications and AI integration. I can take a product from the first idea to day-to-day operation: analysing requirements, designing the architecture, building the backend and frontend, deploying to servers and monitoring the system once it is in use.',
+      'The systems I have built include an online meeting room with real-time interpretation, multi-feature admin dashboards, an OCR pipeline that fills in paperwork automatically, and LLM features built into business workflows. I work mainly with Next.js, React and TypeScript on the frontend; FastAPI and Node.js on the backend; PostgreSQL and Redis for data; and Docker and GitHub Actions for deployment. I also build my own projects: SmartSale, sales software that brings a small shop\'s Zalo chat, orders, calls and livestream selling into one place; LexiPet, a desktop vocabulary app; and Ely Finance, a personal finance assistant on Telegram that logs spending from bank receipts and builds a plan for each user.',
       'When I build a system, I focus on what keeps it stable once real users arrive: clear APIs, consistent data, a fallback when a component fails, and automated tests reliable enough that each update does not break existing features.'
     ]
   }
@@ -679,7 +661,7 @@ const CONTENT = {
 /* The prompt rules below are quoted (condensed) from the real source in
    E25_OCR/frontend/lib/templatePrompt.ts - do not embellish them. */
 const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'vi';
+let lang = localStorage.getItem('lang') === 'vi' ? 'vi' : 'en';
 let awardIndex = 0;
 let awardTimer = null;
 
